@@ -176,6 +176,21 @@
 
                 <!-- Input Controls Area -->
                 <div class="bg-slate-950/40 border border-slate-800/60 rounded-2xl p-5 flex flex-col justify-between space-y-6">
+                    <!-- Historical Baseline Stats -->
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="baseline_header">Historical Reference (14 Days)</h4>
+                        <div class="grid grid-cols-2 gap-3 text-center">
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
+                                <p class="text-[10px] text-slate-400 font-semibold" data-i18n="stat_daily_avg">Daily Average</p>
+                                <p id="val-daily-avg" class="text-sm font-mono font-bold text-slate-200 mt-1">--</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
+                                <p class="text-[10px] text-slate-400 font-semibold" data-i18n="stat_normal_total">Normal 14d Total</p>
+                                <p id="val-normal-total" class="text-sm font-mono font-bold text-slate-200 mt-1">--</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Presets Selection (Stage 1 Only) -->
                     <div id="presets-container" class="space-y-3">
                         <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="presets_header">Select Baseline Guess</h4>
