@@ -328,23 +328,23 @@
                     </div>
                 </div>
 
-                <!-- Financial Budget Diff Card -->
+                <!-- Stock Status Card -->
                 <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
-                    <span id="img-cost-icon" class="text-4xl">💰</span>
+                    <span id="img-stock-icon" class="text-4xl">📦</span>
                     <div class="flex-1">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-cost-header">Procurement Cost Diff</p>
-                        <h3 id="lbl-cost-value" class="text-base font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
-                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Compared to Naive Baseline.</p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-stock-header" data-i18n="stock_status_header">Stock Quantity Status</p>
+                        <h3 id="lbl-stock-status" class="text-base font-mono font-bold text-slate-100 mt-1">0 Doses</h3>
+                        <p id="lbl-stock-desc" class="text-xs text-slate-300 mt-0.5">Inventory stock level vs demand.</p>
                     </div>
                 </div>
 
-                <!-- Surplus / Waste Card -->
+                <!-- Procurement Cost Diff Card -->
                 <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
-                    <span id="img-waste-icon" class="text-4xl">📉</span>
+                    <span id="img-cost-icon" class="text-4xl">💰</span>
                     <div class="flex-1">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-waste-header">Medication Wastage</p>
-                        <h3 id="lbl-waste-value" class="text-base font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
-                        <p id="lbl-waste-desc" class="text-xs text-slate-300 mt-0.5">Losses from excess ordering.</p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-cost-header" data-i18n="cost_impact_header">Procurement Cost Diff</p>
+                        <h3 id="lbl-cost-value" class="text-base font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
+                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Compared to Naive Baseline.</p>
                     </div>
                 </div>
             </div>
@@ -510,6 +510,8 @@
                 btn_back: "Back",
                 stat_forecast_error: "Forecast Error",
                 impact_patients_header: "Patient Treatment Impact",
+                stock_status_header: "Stock Quantity Status",
+                cost_impact_header: "Procurement Cost Diff",
                 btn_next: "Next",
                 chart_title: "Medication Consumption (Daily Doses)",
                 chart_hint: "Solid: History | Dashed: Your Forecast",
@@ -569,6 +571,8 @@
                 btn_back: "Kembali",
                 stat_forecast_error: "Ralat Ramalan",
                 impact_patients_header: "Impak Rawatan Pesakit",
+                stock_status_header: "Status Kuantiti Stok",
+                cost_impact_header: "Perbezaan Kos Perolehan",
                 btn_next: "Seterusnya",
                 chart_title: "Penggunaan Ubat-ubatan (Dos Harian)",
                 chart_hint: "Garis Padu: Sejarah | Garis Putus-putus: Ramalan Anda",
@@ -1186,62 +1190,115 @@
                 sound.playAlert();
             }
             
-            // Patients Shortage Card text
+            const actualTotal = getActualForecastTotal();
+            const unitCost = currentScenario.unit_cost;
+            const predicted = stage === 1 ? playerState.stage1_pred : playerState.stage2_pred;
+            const shortage_qty = Math.max(0, actualTotal - predicted);
+            const surplus_qty = Math.max(0, predicted - actualTotal);
+            const shortage_pct = (shortage_qty / actualTotal) * 100;
+            const surplus_pct = (surplus_qty / actualTotal) * 100;
+
+            // Column 1: Patient Treatment Impact
             const patientsStatus = document.getElementById('lbl-patients-status');
             const patientsDesc = document.getElementById('lbl-patients-desc');
             const patientsIcon = document.getElementById('img-patients-icon');
             
             if (patients > 0) {
-                patientsStatus.textContent = i18n[currentLang].patients_shortage;
+                const pctNotServed = shortage_pct.toFixed(1);
+                patientsStatus.textContent = currentLang === 'en' ? `${pctNotServed}% Not Served` : `${pctNotServed}% Tidak Dilayani`;
                 patientsStatus.className = "text-base font-bold text-red-400 mt-1";
                 patientsDesc.textContent = i18n[currentLang].patients_shortage_desc
-                    .replace('{q}', Math.round(quantityShort).toLocaleString())
+                    .replace('{q}', Math.round(shortage_qty).toLocaleString())
                     .replace('{p}', Math.round(patients).toLocaleString());
                 patientsIcon.textContent = "⚠️";
             } else {
-                patientsStatus.textContent = i18n[currentLang].patients_served_ok;
+                patientsStatus.textContent = currentLang === 'en' ? "100% Covered" : "100% Liputan";
                 patientsStatus.className = "text-base font-bold text-emerald-400 mt-1";
+                patientsDesc.textContent = currentLang === 'en' ? "No shortages detected. Patient medication needs are fully secured." : "Tiada kekurangan dikesan. Keperluan ubat pesakit dijamin sepenuhnya.";
                 patientsIcon.textContent = "🏥";
-                if (waste > 0) {
-                    patientsDesc.textContent = i18n[currentLang].patients_surplus_desc;
-                } else {
-                    patientsDesc.textContent = i18n[currentLang].patients_served_ok_desc;
-                }
             }
 
-            // Procurement Cost & Naive Difference display
+            // Column 2: Stock Quantity Status
+            const stockStatus = document.getElementById('lbl-stock-status');
+            const stockDesc = document.getElementById('lbl-stock-desc');
+            const stockIcon = document.getElementById('img-stock-icon');
+            
+            if (shortage_qty > 0) {
+                stockStatus.textContent = `-${Math.round(shortage_qty).toLocaleString()} Doses`;
+                if (currentLang !== 'en') stockStatus.textContent = `-${Math.round(shortage_qty).toLocaleString()} Dos`;
+                stockStatus.className = "text-base font-mono font-bold text-red-400 mt-1";
+                stockDesc.textContent = currentLang === 'en' 
+                    ? "Under-stocked. Order fell short of actual demand during the flood." 
+                    : "Kekurangan stok. Pesanan kurang daripada permintaan sebenar semasa banjir.";
+                stockIcon.textContent = "📉";
+            } else if (surplus_pct > 5) {
+                stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Doses`;
+                if (currentLang !== 'en') stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Dos`;
+                stockStatus.className = "text-base font-mono font-bold text-amber-500 mt-1";
+                stockDesc.textContent = currentLang === 'en'
+                    ? `Over-stocked. Excess stock (+${surplus_pct.toFixed(1)}%) exceeds safety buffer, creating storage waste.`
+                    : `Stok berlebihan. Lebihan (+${surplus_pct.toFixed(1)}%) melebihi penimbal keselamatan, mewujudkan pembaziran.`;
+                stockIcon.textContent = "📦";
+            } else {
+                stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Doses`;
+                if (currentLang !== 'en') stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Dos`;
+                stockStatus.className = "text-base font-mono font-bold text-emerald-400 mt-1";
+                stockDesc.textContent = currentLang === 'en'
+                    ? `Optimal stock level. Safety buffer (+${surplus_pct.toFixed(1)}%) kept patients safe with minimal surplus.`
+                    : `Tahap stok optimum. Penimbal keselamatan (+${surplus_pct.toFixed(1)}%) memastikan pesakit selamat dengan lebihan minimum.`;
+                stockIcon.textContent = "🛡️";
+            }
+
+            // Column 3: Cost Impact (Savings / Losses compared to Naive)
             const costHeader = document.getElementById('lbl-cost-header');
             const costValue = document.getElementById('lbl-cost-value');
             const costDesc = document.getElementById('lbl-cost-desc');
             const costIcon = document.getElementById('img-cost-icon');
             
             const naiveTotal = currentScenario.forecast.reduce((a, b) => a + b.naive, 0);
-            const actualTotal = getActualForecastTotal();
-            const unitCost = currentScenario.unit_cost;
             let costNaive = naiveTotal * unitCost + (naiveTotal < actualTotal ? (actualTotal - naiveTotal) * unitCost * 2.5 : 0);
             
-            const costDiff = costNaive - cost; // Positive means Player saved money, Negative means Player spent more
+            const costDiff = costNaive - cost; // Positive means Player saved money
+            const shortagePenalty = shortage_qty * unitCost * 1.5; // Extra 1.5x paid on top of 1.0x normal
+            const wasteCost = surplus_qty * unitCost;
 
             if (costDiff >= 0) {
-                costHeader.textContent = i18n[currentLang].lbl_waste_header_saved;
+                costHeader.textContent = currentLang === 'en' ? "Savings vs Naive" : "Penjimatan vs Naif";
                 costValue.textContent = "+" + formatCurrency(costDiff);
-                costValue.className = "text-base font-mono font-bold text-emerald-400 mt-1";
-                costDesc.textContent = currentLang === 'en' ? "Savings compared to traditional Monthly Baseline order." : "Penjimatan berbanding pesanan Bulanan Garis Asas.";
                 costIcon.textContent = "📈";
+                
+                // Color it Orange/Red if we saved money overall but caused a shortage/high waste
+                if (shortage_qty > 0) {
+                    costValue.className = "text-base font-mono font-bold text-amber-500 mt-1";
+                    costDesc.textContent = currentLang === 'en'
+                        ? `Saved RM ${costDiff.toFixed(2)} overall, but incurred RM ${shortagePenalty.toFixed(2)} in emergency shortage penalty.`
+                        : `Jimat RM ${costDiff.toFixed(2)} keseluruhan, tetapi menanggung penalti kekurangan kecemasan RM ${shortagePenalty.toFixed(2)}.`;
+                } else if (surplus_pct > 5) {
+                    costValue.className = "text-base font-mono font-bold text-amber-500 mt-1";
+                    costDesc.textContent = currentLang === 'en'
+                        ? `Saved RM ${costDiff.toFixed(2)} overall, but lost RM ${wasteCost.toFixed(2)} in wasted surplus.`
+                        : `Jimat RM ${costDiff.toFixed(2)} keseluruhan, tetapi rugi RM ${wasteCost.toFixed(2)} dalam pembaziran lebihan.`;
+                } else {
+                    costValue.className = "text-base font-mono font-bold text-emerald-400 mt-1";
+                    costDesc.textContent = currentLang === 'en'
+                        ? "Optimal cost. Saved money compared to traditional Monthly Baseline."
+                        : "Kos optimum. Menjimatkan wang berbanding Garis Asas Bulanan tradisional.";
+                }
             } else {
-                costHeader.textContent = currentLang === 'en' ? "Budget Exceeded" : "Bajet Terlebih";
+                costHeader.textContent = currentLang === 'en' ? "Loss vs Naive" : "Kerugian vs Naif";
                 costValue.textContent = "-" + formatCurrency(Math.abs(costDiff));
                 costValue.className = "text-base font-mono font-bold text-red-400 mt-1";
-                costDesc.textContent = currentLang === 'en' ? "Spent extra due to emergency markup/medication waste." : "Belanja lebih kerana markup kecemasan/pembaziran ubat.";
                 costIcon.textContent = "⚠️";
-            }
-            
-            // Wastage card
-            document.getElementById('lbl-waste-value').textContent = formatCurrency(waste);
-            if (waste > 0) {
-                document.getElementById('lbl-waste-desc').textContent = currentLang === 'en' ? "Inventory expired or spoiled in flood." : "Inventori tamat tempoh/rosak akibat banjir.";
-            } else {
-                document.getElementById('lbl-waste-desc').textContent = currentLang === 'en' ? "Zero waste achieved." : "Sifar pembaziran dicapai.";
+                
+                if (shortage_qty > 0) {
+                    costDesc.textContent = currentLang === 'en'
+                        ? `Exceeded budget by RM ${Math.abs(costDiff).toFixed(2)} due to RM ${shortagePenalty.toFixed(2)} emergency purchase penalty.`
+                        : `Melebihi bajet sebanyak RM ${Math.abs(costDiff).toFixed(2)} kerana penalti pembelian kecemasan RM ${shortagePenalty.toFixed(2)}.`;
+                } else {
+                    costDesc.textContent = currentLang === 'en'
+                        ? `Exceeded budget by RM ${Math.abs(costDiff).toFixed(2)} due to RM ${wasteCost.toFixed(2)} of wasted surplus.`
+                        : `Melebihi bajet sebanyak RM ${Math.abs(costDiff).toFixed(2)} kerana lebihan pembaziran RM ${wasteCost.toFixed(2)}.`;
+                }
             }
             
             if (stage === 1) {
