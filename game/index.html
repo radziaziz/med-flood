@@ -206,47 +206,47 @@
                         <h4 class="text-xs font-bold text-blue-400 uppercase tracking-wider" data-i18n="ai_models_header">AI Models Suggestions</h4>
                         <div class="space-y-2 max-h-[180px] overflow-y-auto pr-1">
                             <!-- TFT Card -->
-                            <button id="btn-ai-tft" class="w-full text-left p-2 rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-colors flex items-center justify-between">
+                            <button id="btn-ai-tft" class="w-full text-left p-3 rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-colors flex items-center justify-between">
                                 <div class="flex-1 pr-2">
-                                    <p class="text-[10px] font-bold text-blue-400">TFT (SOTA DL)</p>
-                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Best accuracy (<2% err). Cons: High GPU training cost.</p>
+                                    <p class="text-xs font-bold text-blue-400">TFT Model</p>
+                                    <p class="text-[9px] text-slate-400 font-medium" data-i18n="model_tft_badge">SOTA Deep Learning</p>
                                 </div>
                                 <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-tft" class="text-xs font-bold text-slate-200">--</p>
-                                    <span class="text-[9px] text-emerald-400 font-bold bg-emerald-500/10 px-1 rounded">1.8% Err</span>
+                                    <span class="text-[9px] text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">1.8% Err</span>
                                 </div>
                             </button>
                             <!-- LSTM Card -->
-                            <button id="btn-ai-lstm" class="w-full text-left p-2 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 transition-colors flex items-center justify-between">
+                            <button id="btn-ai-lstm" class="w-full text-left p-3 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 transition-colors flex items-center justify-between">
                                 <div class="flex-1 pr-2">
-                                    <p class="text-[10px] font-bold text-violet-400">LSTM (RNN)</p>
-                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Captures sequential history. Cons: Computationally heavy.</p>
+                                    <p class="text-xs font-bold text-violet-400">LSTM Model</p>
+                                    <p class="text-[9px] text-slate-400 font-medium" data-i18n="model_lstm_badge">Recurrent Network</p>
                                 </div>
                                 <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-lstm" class="text-xs font-bold text-slate-200">--</p>
-                                    <span class="text-[9px] text-emerald-400/90 font-bold bg-emerald-500/10 px-1 rounded">2.4% Err</span>
+                                    <span class="text-[9px] text-emerald-400/90 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">2.4% Err</span>
                                 </div>
                             </button>
                             <!-- XGBoost Card -->
-                            <button id="btn-ai-xgb" class="w-full text-left p-2 rounded-xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 transition-colors flex items-center justify-between">
+                            <button id="btn-ai-xgb" class="w-full text-left p-3 rounded-xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 transition-colors flex items-center justify-between">
                                 <div class="flex-1 pr-2">
-                                    <p class="text-[10px] font-bold text-amber-400">XGBoost (Light ML)</p>
-                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Lightweight, fast CPU. Cons: Moderate error (~12%).</p>
+                                    <p class="text-xs font-bold text-amber-400">XGBoost Model</p>
+                                    <p class="text-[9px] text-slate-400 font-medium" data-i18n="model_xgb_badge">Machine Learning</p>
                                 </div>
                                 <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-xgb" class="text-xs font-bold text-slate-200">--</p>
-                                    <span class="text-[9px] text-amber-400 font-bold bg-amber-500/10 px-1 rounded">12.6% Err</span>
+                                    <span class="text-[9px] text-amber-400 font-bold bg-amber-500/10 px-1.5 py-0.5 rounded">12.6% Err</span>
                                 </div>
                             </button>
                             <!-- Chronos Card -->
-                            <button id="btn-ai-chr" class="w-full text-left p-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors flex items-center justify-between">
+                            <button id="btn-ai-chr" class="w-full text-left p-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors flex items-center justify-between">
                                 <div class="flex-1 pr-2">
-                                    <p class="text-[10px] font-bold text-emerald-400">Chronos (TSFM)</p>
-                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Zero-shot (no training). Cons: Slower inference.</p>
+                                    <p class="text-xs font-bold text-emerald-400">Chronos Model</p>
+                                    <p class="text-[9px] text-slate-400 font-medium" data-i18n="model_chr_badge">Foundation Model</p>
                                 </div>
                                 <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-chr" class="text-xs font-bold text-slate-200">--</p>
-                                    <span class="text-[9px] text-amber-400/90 font-bold bg-amber-500/10 px-1 rounded">12.7% Err</span>
+                                    <span class="text-[9px] text-amber-400/90 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">12.7% Err</span>
                                 </div>
                             </button>
                         </div>
@@ -481,6 +481,75 @@
         </p>
     </footer>
 
+    <!-- AI Assist Intro Dialog Modal -->
+    <div id="modal-ai-intro" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-xl p-6 md:p-8 space-y-6 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="text-center space-y-2 shrink-0">
+                <span class="text-3xl">🤖</span>
+                <h3 class="text-xl font-extrabold text-blue-400" data-i18n="modal_title">AI Forecasting Models Assist</h3>
+                <p class="text-xs text-slate-400" data-i18n="modal_intro">We are introducing 4 AI models to assist you in making a climate-resilient forecasting decision.</p>
+            </div>
+            
+            <div class="space-y-4 overflow-y-auto pr-1 flex-1 py-2 font-sans text-xs">
+                <!-- TFT Model -->
+                <div class="border border-blue-500/20 bg-blue-500/5 rounded-2xl p-3.5 space-y-1.5 text-left">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-blue-400 text-sm">TFT (Temporal Fusion Transformer)</span>
+                        <span class="px-2 py-0.5 text-[10px] font-bold bg-blue-500/10 text-blue-300 rounded border border-blue-500/20 animate-pulse text-right" data-i18n="model_tft_badge">SOTA Deep Learning</span>
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed" data-i18n="modal_tft_desc">Advanced multi-horizon neural network designed for high-precision time series forecasting.</p>
+                    <div class="grid grid-cols-2 gap-2 pt-1 text-[11px] leading-relaxed">
+                        <div class="text-slate-400" data-i18n="modal_tft_pros"><strong>Pros:</strong> Best accuracy (<2% error rate); captures complex seasonal trends during disasters.</div>
+                        <div class="text-slate-400" data-i18n="modal_tft_cons"><strong>Cons:</strong> Computationally expensive; requires high-end GPUs for training.</div>
+                    </div>
+                </div>
+
+                <!-- LSTM Model -->
+                <div class="border border-violet-500/20 bg-violet-500/5 rounded-2xl p-3.5 space-y-1.5 text-left">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-violet-400 text-sm">LSTM (Long Short-Term Memory)</span>
+                        <span class="px-2 py-0.5 text-[10px] font-bold bg-violet-500/10 text-violet-300 rounded border border-violet-500/20 text-right" data-i18n="model_lstm_badge">Recurrent Network</span>
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed" data-i18n="modal_lstm_desc">A class of RNN designed to model sequence history and temporal dependencies.</p>
+                    <div class="grid grid-cols-2 gap-2 pt-1 text-[11px] leading-relaxed">
+                        <div class="text-slate-400" data-i18n="modal_lstm_pros"><strong>Pros:</strong> Excellent at tracking historical sequence context and local patterns.</div>
+                        <div class="text-slate-400" data-i18n="modal_lstm_cons"><strong>Cons:</strong> Slow sequence training; struggles with extremely long dependency ranges.</div>
+                    </div>
+                </div>
+
+                <!-- XGBoost Model -->
+                <div class="border border-amber-500/20 bg-amber-500/5 rounded-2xl p-3.5 space-y-1.5 text-left">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-amber-400 text-sm">XGBoost (eXtreme Gradient Boosting)</span>
+                        <span class="px-2 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-300 rounded border border-amber-500/20 text-right" data-i18n="model_xgb_badge">Machine Learning</span>
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed" data-i18n="modal_xgb_desc">Highly optimized tree-boosting algorithm used widely for tabular data forecasting.</p>
+                    <div class="grid grid-cols-2 gap-2 pt-1 text-[11px] leading-relaxed">
+                        <div class="text-slate-400" data-i18n="modal_xgb_pros"><strong>Pros:</strong> Very lightweight; executes quickly on standard CPUs; moderate accuracy.</div>
+                        <div class="text-slate-400" data-i18n="modal_xgb_cons"><strong>Cons:</strong> Requires extensive tabular feature engineering; moderate error margin (~12.6%).</div>
+                    </div>
+                </div>
+
+                <!-- Chronos Model -->
+                <div class="border border-emerald-500/20 bg-emerald-500/5 rounded-2xl p-3.5 space-y-1.5 text-left">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-emerald-400 text-sm">Chronos (Chronos-2-Base)</span>
+                        <span class="px-2 py-0.5 text-[10px] font-bold bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20 text-right" data-i18n="model_chr_badge">Time Series Foundation Model</span>
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed" data-i18n="modal_chr_desc">Next-generation language transformer adapted for forecasting numerical patterns.</p>
+                    <div class="grid grid-cols-2 gap-2 pt-1 text-[11px] leading-relaxed">
+                        <div class="text-slate-400" data-i18n="modal_chr_pros"><strong>Pros:</strong> Zero-shot generalization; works out-of-the-box on new datasets without training.</div>
+                        <div class="text-slate-400" data-i18n="modal_chr_cons"><strong>Cons:</strong> Slower inference speed; higher computational overhead than XGBoost.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-2 shrink-0">
+                <button id="btn-close-ai-modal" class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.01]" data-i18n="modal_btn_ok">OK, Show Models</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Load Scenarios Data -->
     <script src="data/scenarios.js"></script>
 
@@ -517,6 +586,51 @@
                 chart_hint: "Solid: History | Dashed: Your Forecast",
                 buffer_tip_title: "Logistics Safety Buffer Tip",
                 buffer_tip_desc: "AI models forecast actual usage. In pharmacy logistics, it is safer to order a little extra (e.g. +5% buffer) to avoid shortage risk during spikes. Try adjusting the slider slightly above the model suggestion!",
+                
+                // Model Badges
+                model_tft_badge: "SOTA Deep Learning",
+                model_lstm_badge: "Recurrent Network",
+                model_xgb_badge: "Machine Learning",
+                model_chr_badge: "Foundation Model",
+
+                // AI Assist Modal
+                modal_title: "AI Forecasting Models Assist",
+                modal_intro: "We are introducing 4 AI models to assist you in making a climate-resilient forecasting decision.",
+                modal_btn_ok: "OK, Show Models",
+                modal_tft_desc: "Advanced multi-horizon neural network designed for high-precision time series forecasting.",
+                modal_tft_pros: "<strong>Pros:</strong> Best accuracy (&lt;2% error rate); captures complex seasonal trends during disasters.",
+                modal_tft_cons: "<strong>Cons:</strong> Computationally expensive; requires high-end GPUs for training.",
+                modal_lstm_desc: "A class of RNN designed to model sequence history and temporal dependencies.",
+                modal_lstm_pros: "<strong>Pros:</strong> Excellent at tracking historical sequence context and local patterns.",
+                modal_lstm_cons: "<strong>Cons:</strong> Slow sequence training; struggles with extremely long dependency ranges.",
+                modal_xgb_desc: "Highly optimized tree-boosting algorithm used widely for tabular data forecasting.",
+                modal_xgb_pros: "<strong>Pros:</strong> Very lightweight; executes quickly on standard CPUs; moderate accuracy.",
+                modal_xgb_cons: "<strong>Cons:</strong> Requires extensive tabular feature engineering; moderate error margin (~12.6%).",
+                modal_chr_desc: "Next-generation language transformer adapted for forecasting numerical patterns.",
+                modal_chr_pros: "<strong>Pros:</strong> Zero-shot generalization; works out-of-the-box on new datasets without training.",
+                modal_chr_cons: "<strong>Cons:</strong> Slower inference speed; higher computational overhead than XGBoost.",
+
+                // Cost Column Statuses
+                cost_status_savings: "Savings vs Naive",
+                cost_status_loss: "Loss vs Naive",
+                cost_status_emergency: "Emergency Purchase",
+                cost_status_wastage: "Wastage Loss",
+
+                // Stock Column Statuses
+                stock_status_shortage: "Shortage by {qty} Doses",
+                stock_status_wastage: "Wastage by {qty} Doses",
+                stock_status_okay: "Okay (Safe Margin)",
+                stock_status_perfect: "Okay (Perfect Stock)",
+                stock_status_shortage_desc: "Under-stocked. Order fell short of actual demand by {pct}%.",
+                stock_status_wastage_desc: "Over-stocked. Excess stock (+{pct}%) exceeds 5% safe margin.",
+                stock_status_okay_desc: "Optimal stock level. Safety buffer (+{pct}%) kept patients safe with minimal surplus.",
+                stock_status_perfect_desc: "Stock quantity exactly matches actual demand.",
+
+                // Patient Column Statuses
+                patient_status_all: "All Served (0 Doses Short)",
+                patient_status_short: "{pct}% Not Served",
+                patient_desc_all: "100% of patient medication demand was fully met.",
+                patient_desc_short: "{qty} Doses Short. Left approximately {patients} patients unserved.",
                 
                 // Dynamic translation fields
                 alert_desc: "A flood warning has been issued for this clinic. Historically, floods disrupt supply. Predict medication needs for the next 14 days.",
@@ -578,6 +692,51 @@
                 chart_hint: "Garis Padu: Sejarah | Garis Putus-putus: Ramalan Anda",
                 buffer_tip_title: "Tip Penimbal Keselamatan Logistik",
                 buffer_tip_desc: "Model AI meramal penggunaan sebenar. Dalam logistik farmasi, adalah lebih selamat untuk memesan lebih sedikit (cth. penimbal +5%) untuk mengelakkan risiko kekurangan semasa lonjakan. Cuba laras gelangsar sedikit di atas cadangan AI!",
+                
+                // Model Badges
+                model_tft_badge: "Deep Learning SOTA",
+                model_lstm_badge: "Rangkaian Berulang",
+                model_xgb_badge: "Pembelajaran Mesin",
+                model_chr_badge: "Model Asas",
+
+                // AI Assist Modal
+                modal_title: "Bantuan Model Ramalan AI",
+                modal_intro: "Kami memperkenalkan 4 model AI untuk membantu anda membuat keputusan ramalan yang resilien terhadap iklim.",
+                modal_btn_ok: "OK, Tunjukkan Model",
+                modal_tft_desc: "Rangkaian neural multi-horizon lanjutan yang direka untuk ramalan siri masa ketepatan tinggi.",
+                modal_tft_pros: "<strong>Pro:</strong> Ketepatan terbaik (kadar ralat &lt;2%); menangkap trend bermusim yang kompleks semasa bencana.",
+                modal_tft_cons: "<strong>Kontra:</strong> Pengiraan yang mahal; memerlukan GPU mewah untuk latihan.",
+                modal_lstm_desc: "Satu kelas RNN yang direka untuk memodelkan sejarah jujukan dan kebergantungan temporal.",
+                modal_lstm_pros: "<strong>Pro:</strong> Cemerlang dalam menjejaki konteks jujukan sejarah dan corak tempatan.",
+                modal_lstm_cons: "<strong>Kontra:</strong> Latihan jujukan yang lambat; bergelut dengan julat kebergantungan yang sangat panjang.",
+                modal_xgb_desc: "Algoritma tree-boosting yang sangat dioptimumkan digunakan secara meluas untuk ramalan data jadual.",
+                modal_xgb_pros: "<strong>Pro:</strong> Sangat ringan; dilaksanakan dengan cepat pada CPU standard; ketepatan sederhana.",
+                modal_xgb_cons: "<strong>Kontra:</strong> Memerlukan kejuruteraan ciri jadual yang meluas; margin ralat sederhana (~12.6%).",
+                modal_chr_desc: "Transformer bahasa generasi seterusnya yang disesuaikan untuk meramal corak berangka.",
+                modal_chr_pros: "<strong>Pro:</strong> Generalisasi zero-shot; berfungsi terus pada set data baharu tanpa latihan.",
+                modal_chr_cons: "<strong>Kontra:</strong> Kelajuan inferens yang lebih perlahan; overhed pengiraan yang lebih tinggi berbanding XGBoost.",
+
+                // Cost Column Statuses
+                cost_status_savings: "Penjimatan vs Naif",
+                cost_status_loss: "Kerugian vs Naif",
+                cost_status_emergency: "Pembelian Kecemasan",
+                cost_status_wastage: "Kerugian Pembaziran",
+
+                // Stock Column Statuses
+                stock_status_shortage: "Kekurangan sebanyak {qty} Dos",
+                stock_status_wastage: "Pembaziran sebanyak {qty} Dos",
+                stock_status_okay: "Okay (Margin Selamat)",
+                stock_status_perfect: "Okay (Stok Sempurna)",
+                stock_status_shortage_desc: "Kekurangan stok. Pesanan kurang daripada permintaan sebenar sebanyak {pct}%.",
+                stock_status_wastage_desc: "Stok berlebihan. Lebihan (+{pct}%) melebihi margin selamat 5%.",
+                stock_status_okay_desc: "Tahap stok optimum. Penimbal keselamatan (+{pct}%) memastikan pesakit selamat dengan lebihan minimum.",
+                stock_status_perfect_desc: "Jumlah stok sepadan dengan permintaan sebenar secara tepat.",
+
+                // Patient Column Statuses
+                patient_status_all: "Semua Dilayani (Kekurangan 0 Dos)",
+                patient_status_short: "{pct}% Tidak Dilayani",
+                patient_desc_all: "100% keperluan ubat pesakit telah dipenuhi sepenuhnya.",
+                patient_desc_short: "Kekurangan {qty} Dos. Menyebabkan sekitar {patients} pesakit tidak dilayani.",
                 
                 // Dynamic translation fields
                 alert_desc: "Amaran banjir dikeluarkan untuk klinik ini. Secara sejarahnya, banjir mengganggu bekalan. Ramal keperluan ubat untuk 14 hari akan datang.",
@@ -767,7 +926,11 @@
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[currentLang][key]) {
-                    el.textContent = i18n[currentLang][key];
+                    if (key.includes('modal_') && (key.includes('_pros') || key.includes('_cons') || key.includes('_desc') || key.includes('_intro'))) {
+                        el.innerHTML = i18n[currentLang][key];
+                    } else {
+                        el.textContent = i18n[currentLang][key];
+                    }
                 }
             });
             document.getElementById('lang-text').textContent = currentLang === 'en' ? 'BM' : 'EN';
@@ -805,6 +968,13 @@
             sound.playClick();
             updateTranslation();
             if (chart) updateChartLabels();
+            
+            // Re-render active results or final screens if visible to update localized text
+            if (!document.getElementById('screen-results').classList.contains('hidden')) {
+                showResultsScreen(gameStage);
+            } else if (!document.getElementById('screen-final').classList.contains('hidden')) {
+                showFinalSummaryScreen();
+            }
         });
 
         // Navigation helpers
@@ -856,6 +1026,11 @@
         document.getElementById('btn-gameplay-back').addEventListener('click', goBack);
         document.getElementById('btn-results-back').addEventListener('click', goBack);
         document.getElementById('btn-final-back').addEventListener('click', goBack);
+        
+        document.getElementById('btn-close-ai-modal').addEventListener('click', () => {
+            sound.playClick();
+            document.getElementById('modal-ai-intro').classList.add('hidden');
+        });
 
         // Trigger start simulation
         document.getElementById('btn-start').addEventListener('click', () => {
@@ -1203,19 +1378,19 @@
             const patientsDesc = document.getElementById('lbl-patients-desc');
             const patientsIcon = document.getElementById('img-patients-icon');
             
-            if (patients > 0) {
+            if (shortage_qty > 0) {
                 const pctNotServed = shortage_pct.toFixed(1);
-                patientsStatus.textContent = currentLang === 'en' ? `${pctNotServed}% Not Served` : `${pctNotServed}% Tidak Dilayani`;
+                patientsStatus.textContent = i18n[currentLang].patient_status_short.replace('{pct}', pctNotServed);
                 patientsStatus.className = "text-base font-bold text-red-400 mt-1";
-                patientsDesc.textContent = i18n[currentLang].patients_shortage_desc
-                    .replace('{q}', Math.round(shortage_qty).toLocaleString())
-                    .replace('{p}', Math.round(patients).toLocaleString());
-                patientsIcon.textContent = "⚠️";
+                patientsDesc.textContent = i18n[currentLang].patient_desc_short
+                    .replace('{qty}', Math.round(shortage_qty).toLocaleString())
+                    .replace('{patients}', Math.round(patients).toLocaleString());
+                patientsIcon.textContent = "⚠️"; // Shortage use warning icon
             } else {
-                patientsStatus.textContent = currentLang === 'en' ? "100% Covered" : "100% Liputan";
+                patientsStatus.textContent = i18n[currentLang].patient_status_all;
                 patientsStatus.className = "text-base font-bold text-emerald-400 mt-1";
-                patientsDesc.textContent = currentLang === 'en' ? "No shortages detected. Patient medication needs are fully secured." : "Tiada kekurangan dikesan. Keperluan ubat pesakit dijamin sepenuhnya.";
-                patientsIcon.textContent = "🏥";
+                patientsDesc.textContent = i18n[currentLang].patient_desc_all;
+                patientsIcon.textContent = "🛡️"; // Okay use shield icon
             }
 
             // Column 2: Stock Quantity Status
@@ -1224,29 +1399,25 @@
             const stockIcon = document.getElementById('img-stock-icon');
             
             if (shortage_qty > 0) {
-                stockStatus.textContent = `-${Math.round(shortage_qty).toLocaleString()} Doses`;
-                if (currentLang !== 'en') stockStatus.textContent = `-${Math.round(shortage_qty).toLocaleString()} Dos`;
+                stockStatus.textContent = i18n[currentLang].stock_status_shortage.replace('{qty}', Math.round(shortage_qty).toLocaleString());
                 stockStatus.className = "text-base font-mono font-bold text-red-400 mt-1";
-                stockDesc.textContent = currentLang === 'en' 
-                    ? "Under-stocked. Order fell short of actual demand during the flood." 
-                    : "Kekurangan stok. Pesanan kurang daripada permintaan sebenar semasa banjir.";
-                stockIcon.textContent = "📉";
+                stockDesc.textContent = i18n[currentLang].stock_status_shortage_desc.replace('{pct}', shortage_pct.toFixed(1));
+                stockIcon.textContent = "⚠️"; // Shortage use warning icon
             } else if (surplus_pct > 5) {
-                stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Doses`;
-                if (currentLang !== 'en') stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Dos`;
+                stockStatus.textContent = i18n[currentLang].stock_status_wastage.replace('{qty}', Math.round(surplus_qty).toLocaleString());
                 stockStatus.className = "text-base font-mono font-bold text-amber-500 mt-1";
-                stockDesc.textContent = currentLang === 'en'
-                    ? `Over-stocked. Excess stock (+${surplus_pct.toFixed(1)}%) exceeds safety buffer, creating storage waste.`
-                    : `Stok berlebihan. Lebihan (+${surplus_pct.toFixed(1)}%) melebihi penimbal keselamatan, mewujudkan pembaziran.`;
-                stockIcon.textContent = "📦";
-            } else {
-                stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Doses`;
-                if (currentLang !== 'en') stockStatus.textContent = `+${Math.round(surplus_qty).toLocaleString()} Dos`;
+                stockDesc.textContent = i18n[currentLang].stock_status_wastage_desc.replace('{pct}', surplus_pct.toFixed(1));
+                stockIcon.textContent = "⚠️"; // Wastage use warning icon
+            } else if (surplus_qty > 0) {
+                stockStatus.textContent = i18n[currentLang].stock_status_okay;
                 stockStatus.className = "text-base font-mono font-bold text-emerald-400 mt-1";
-                stockDesc.textContent = currentLang === 'en'
-                    ? `Optimal stock level. Safety buffer (+${surplus_pct.toFixed(1)}%) kept patients safe with minimal surplus.`
-                    : `Tahap stok optimum. Penimbal keselamatan (+${surplus_pct.toFixed(1)}%) memastikan pesakit selamat dengan lebihan minimum.`;
-                stockIcon.textContent = "🛡️";
+                stockDesc.textContent = i18n[currentLang].stock_status_okay_desc.replace('{pct}', surplus_pct.toFixed(1));
+                stockIcon.textContent = "🛡️"; // Okay use shield icon
+            } else {
+                stockStatus.textContent = i18n[currentLang].stock_status_perfect;
+                stockStatus.className = "text-base font-mono font-bold text-emerald-400 mt-1";
+                stockDesc.textContent = i18n[currentLang].stock_status_perfect_desc;
+                stockIcon.textContent = "🛡️"; // Okay use shield icon
             }
 
             // Column 3: Cost Impact (Savings / Losses compared to Naive)
@@ -1259,45 +1430,45 @@
             let costNaive = naiveTotal * unitCost + (naiveTotal < actualTotal ? (actualTotal - naiveTotal) * unitCost * 2.5 : 0);
             
             const costDiff = costNaive - cost; // Positive means Player saved money
-            const shortagePenalty = shortage_qty * unitCost * 1.5; // Extra 1.5x paid on top of 1.0x normal
+            const emergencyShortageCost = shortage_qty * unitCost * 2.5;
             const wasteCost = surplus_qty * unitCost;
 
-            if (costDiff >= 0) {
-                costHeader.textContent = currentLang === 'en' ? "Savings vs Naive" : "Penjimatan vs Naif";
-                costValue.textContent = "+" + formatCurrency(costDiff);
-                costIcon.textContent = "📈";
-                
-                // Color it Orange/Red if we saved money overall but caused a shortage/high waste
-                if (shortage_qty > 0) {
-                    costValue.className = "text-base font-mono font-bold text-amber-500 mt-1";
-                    costDesc.textContent = currentLang === 'en'
-                        ? `Saved RM ${costDiff.toFixed(2)} overall, but incurred RM ${shortagePenalty.toFixed(2)} in emergency shortage penalty.`
-                        : `Jimat RM ${costDiff.toFixed(2)} keseluruhan, tetapi menanggung penalti kekurangan kecemasan RM ${shortagePenalty.toFixed(2)}.`;
-                } else if (surplus_pct > 5) {
-                    costValue.className = "text-base font-mono font-bold text-amber-500 mt-1";
-                    costDesc.textContent = currentLang === 'en'
-                        ? `Saved RM ${costDiff.toFixed(2)} overall, but lost RM ${wasteCost.toFixed(2)} in wasted surplus.`
-                        : `Jimat RM ${costDiff.toFixed(2)} keseluruhan, tetapi rugi RM ${wasteCost.toFixed(2)} dalam pembaziran lebihan.`;
-                } else {
+            if (shortage_qty > 0) {
+                // Shortage present: show Emergency Purchase in Red/Amber
+                costHeader.textContent = i18n[currentLang].cost_status_emergency;
+                costValue.textContent = "-" + formatCurrency(emergencyShortageCost);
+                costValue.className = "text-base font-mono font-bold text-red-400 mt-1";
+                costDesc.textContent = currentLang === 'en'
+                    ? `Incurred emergency cost of RM ${emergencyShortageCost.toFixed(2)} (2.5x markup) to cover shortage.`
+                    : `Menanggung kos kecemasan RM ${emergencyShortageCost.toFixed(2)} (2.5x gandaan) untuk menampung kekurangan.`;
+                costIcon.textContent = "⚠️"; // Shortage/wastage use warning icon
+            } else if (surplus_pct > 5) {
+                // Wastage present (> 5% surplus): show Wastage Loss in Amber
+                costHeader.textContent = i18n[currentLang].cost_status_wastage;
+                costValue.textContent = "-" + formatCurrency(wasteCost);
+                costValue.className = "text-base font-mono font-bold text-amber-500 mt-1";
+                costDesc.textContent = currentLang === 'en'
+                    ? `Lost RM ${wasteCost.toFixed(2)} due to expired/spoiled surplus stock.`
+                    : `Rugi RM ${wasteCost.toFixed(2)} akibat stok berlebihan yang rosak/luput.`;
+                costIcon.textContent = "⚠️"; // Shortage/wastage use warning icon
+            } else {
+                // Okay (<= 5% surplus): compare to naive baseline
+                if (costDiff >= 0) {
+                    costHeader.textContent = i18n[currentLang].cost_status_savings;
+                    costValue.textContent = "+" + formatCurrency(costDiff);
                     costValue.className = "text-base font-mono font-bold text-emerald-400 mt-1";
                     costDesc.textContent = currentLang === 'en'
-                        ? "Optimal cost. Saved money compared to traditional Monthly Baseline."
-                        : "Kos optimum. Menjimatkan wang berbanding Garis Asas Bulanan tradisional.";
-                }
-            } else {
-                costHeader.textContent = currentLang === 'en' ? "Loss vs Naive" : "Kerugian vs Naif";
-                costValue.textContent = "-" + formatCurrency(Math.abs(costDiff));
-                costValue.className = "text-base font-mono font-bold text-red-400 mt-1";
-                costIcon.textContent = "⚠️";
-                
-                if (shortage_qty > 0) {
-                    costDesc.textContent = currentLang === 'en'
-                        ? `Exceeded budget by RM ${Math.abs(costDiff).toFixed(2)} due to RM ${shortagePenalty.toFixed(2)} emergency purchase penalty.`
-                        : `Melebihi bajet sebanyak RM ${Math.abs(costDiff).toFixed(2)} kerana penalti pembelian kecemasan RM ${shortagePenalty.toFixed(2)}.`;
+                        ? `Saved RM ${costDiff.toFixed(2)} compared to traditional Naive baseline.`
+                        : `Jimat RM ${costDiff.toFixed(2)} berbanding garis asas Naif tradisional.`;
+                    costIcon.textContent = "✅"; // Okay use check icon
                 } else {
+                    costHeader.textContent = i18n[currentLang].cost_status_loss;
+                    costValue.textContent = "-" + formatCurrency(Math.abs(costDiff));
+                    costValue.className = "text-base font-mono font-bold text-red-400 mt-1";
                     costDesc.textContent = currentLang === 'en'
-                        ? `Exceeded budget by RM ${Math.abs(costDiff).toFixed(2)} due to RM ${wasteCost.toFixed(2)} of wasted surplus.`
-                        : `Melebihi bajet sebanyak RM ${Math.abs(costDiff).toFixed(2)} kerana lebihan pembaziran RM ${wasteCost.toFixed(2)}.`;
+                        ? `Exceeded Naive baseline cost by RM ${Math.abs(costDiff).toFixed(2)}.`
+                        : `Melebihi kos garis asas Naif sebanyak RM ${Math.abs(costDiff).toFixed(2)}.`;
+                    costIcon.textContent = "⚠️"; // Shortage/wastage use warning icon
                 }
             }
             
@@ -1355,6 +1526,10 @@
         function initStage2Gameplay() {
             gameStage = 2;
             navigateTo('screen-gameplay');
+            
+            // Show AI model introduction modal front and center
+            document.getElementById('modal-ai-intro').classList.remove('hidden');
+            updateTranslation();
             
             document.getElementById('stage-badge').textContent = "STAGE 2";
             document.getElementById('stage-badge').className = "px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider";
