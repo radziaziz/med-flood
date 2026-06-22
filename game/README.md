@@ -62,3 +62,77 @@ You can open the game in two ways:
 ### Exporting/Clearing Data
 - **Export CSV:** Click "Export CSV" inside the admin panel. It downloads the scores stored in `LocalStorage` as a standard `.csv` file.
 - **Results.csv:** If `server.py` was running in the background, you can also grab the unified results directly from `game/data/results.csv`.
+
+---
+
+## ☁️ Google Sheets Cloud Database Integration (Cloud Deployment)
+
+If you host the game in the cloud (e.g. on GitHub Pages) and want to collect player results globally into a single spreadsheet without running a local Python server, you can set up a free Google Sheets database:
+
+### Step 1: Create a Google Sheet & Apps Script
+1. Create a new Google Sheet.
+2. Go to **Extensions** > **Apps Script**.
+3. Delete the default code and paste the following Google Apps Script:
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  // Set up headers on first use
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      "Timestamp", "Name", "Email", "Facility", "Medication", 
+      "Flood Start Date", "Unit Cost", "Actual Total Doses", 
+      "Stage 1 Prediction", "Stage 1 Error %", "Stage 1 Cost (RM)", "Stage 1 Missed Patients",
+      "Stage 2 Prediction", "Stage 2 Error %", "Stage 2 Cost (RM)", "Stage 2 Missed Patients",
+      "Chosen Model", "Net AI Savings vs Guess (RM)", "Shortage Avoided (Patients)", "Waste Avoided (Doses)"
+    ]);
+  }
+  
+  sheet.appendRow([
+    data.timestamp || new Date().toISOString(),
+    data.name || "",
+    data.email || "",
+    data.fac_code || "",
+    data.med_name || "",
+    data.flood_start_date || "",
+    data.unit_cost || 0,
+    data.actual_total || 0,
+    data.stage1_pred || 0,
+    data.stage1_error || 0,
+    data.stage1_cost || 0,
+    data.stage1_patients || 0,
+    data.stage2_pred || 0,
+    data.stage2_error || 0,
+    data.stage2_cost || 0,
+    data.stage2_patients || 0,
+    data.chosen_model || "",
+    data.cost_saved_vs_naive || 0,
+    data.shortage_avoided || 0,
+    data.waste_avoided || 0
+  ]);
+  
+  return ContentService.createTextOutput(JSON.stringify({"status": "success"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+### Step 2: Deploy as a Web App
+1. Click the **Deploy** button on the top right, and choose **New deployment**.
+2. Click the gear icon next to "Select type" and select **Web App**.
+3. Configure the deployment:
+   - **Description:** Planetary Health Game Database
+   - **Execute as:** Me (your email)
+   - **Who has access:** Anyone (essential so the public browser can submit results)
+4. Click **Deploy** and authorize the script permissions.
+5. Copy the generated **Web App URL** (e.g. `https://script.google.com/macros/s/AKfycb.../exec`).
+
+### Step 3: Insert URL into the Game Code
+1. Open [game/index.html](file:///home/radziaziz/Projects/Planetary_Health_2026/game/index.html).
+2. Locate `const GSHEET_URL = "";` (around line 1724) and paste your Web App URL inside the quotation marks:
+   ```javascript
+   const GSHEET_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+   ```
+3. Save, commit, and push your changes to GitHub. All game play records will now stream directly to your Google Sheet in real-time!
+
