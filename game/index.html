@@ -68,9 +68,6 @@
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
         }
-        .transition-opacity-500 {
-            transition: opacity 0.5s ease;
-        }
     </style>
 </head>
 <body class="h-full font-sans select-none flex flex-col justify-between overflow-hidden">
@@ -83,7 +80,13 @@
                 <p class="text-xs text-slate-400 font-semibold" id="game-subtitle">Pharmacoinformatics Simulation</p>
             </div>
         </div>
-        <div class="flex items-center space-x-4">
+        
+        <div class="flex items-center space-x-3">
+            <!-- User Badge -->
+            <div id="user-badge" class="hidden flex items-center space-x-2 bg-slate-900/60 border border-slate-800 px-3 py-1.5 rounded-xl">
+                <span class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500 text-[10px] text-blue-400 font-bold flex items-center justify-center" id="user-avatar">--</span>
+                <span class="text-xs text-slate-300 font-semibold" id="user-name">Manager</span>
+            </div>
             <!-- Language Selector -->
             <button id="btn-lang" class="px-3 py-1.5 text-xs font-semibold glass-panel rounded-lg hover:bg-slate-800 transition-colors flex items-center space-x-1">
                 <span>🌐</span>
@@ -105,7 +108,7 @@
                 <div class="inline-block px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider" data-i18n="tag_role">Pharmacy Manager Role</div>
                 <h2 class="text-3xl font-extrabold tracking-tight text-glow text-blue-400" data-i18n="welcome_title">Climate-Resilient Pharmacy</h2>
                 <p class="text-slate-300 text-sm leading-relaxed" data-i18n="welcome_intro">
-                    You are a Pharmacy Manager at a Malaysian public hospital. An incoming flood disaster is forecasted in 2 weeks. Disasters disrupt logistics and trigger cardivascular crises. Your mission is to forecast medication needs (Defined Daily Doses - DDD) to save patients while avoiding wastage.
+                    You are a Pharmacy Manager at a Malaysian public hospital. An incoming flood disaster is forecasted in 2 weeks. Disasters disrupt logistics and trigger cardiovascular crises. Your mission is to forecast medication needs (in Doses) to save patients while avoiding wastage.
                 </p>
             </div>
             
@@ -113,14 +116,6 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="label_name">Manager Name</label>
                     <input type="text" id="input-name" class="w-full bg-slate-950/80 border border-slate-800 focus:border-blue-500 text-slate-100 rounded-xl px-4 py-3 focus:outline-none transition-colors" placeholder="e.g. Mohd Radzi">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="label_email">Email Address (Optional)</label>
-                    <input type="email" id="input-email" class="w-full bg-slate-950/80 border border-slate-800 focus:border-blue-500 text-slate-100 rounded-xl px-4 py-3 focus:outline-none transition-colors" placeholder="e.g. radzi@example.com">
-                </div>
-                <div class="flex items-start space-x-2.5">
-                    <input type="checkbox" id="check-subscribe" checked class="w-4 h-4 rounded text-blue-500 focus:ring-0 mt-1 cursor-pointer">
-                    <label for="check-subscribe" class="text-xs text-slate-400 leading-normal cursor-pointer" data-i18n="subscribe_note">I consent to receiving my forecast analysis and research updates.</label>
                 </div>
             </div>
             
@@ -131,9 +126,9 @@
         <div id="screen-gameplay" class="w-full glass-panel p-6 rounded-3xl space-y-6 hidden transition-all duration-300">
             <!-- Step Header -->
             <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-800/60">
-                <div>
+                <div class="flex items-center space-x-3">
                     <span id="stage-badge" class="px-2.5 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase tracking-wider">STAGE 1</span>
-                    <h2 id="stage-title" class="text-xl font-bold mt-1 text-slate-100">Wild Guess Demand Forecasting</h2>
+                    <h2 id="stage-title" class="text-xl font-bold text-slate-100">Wild Guess Demand Forecasting</h2>
                 </div>
                 <div class="mt-2 md:mt-0 flex items-center space-x-6 text-xs text-slate-400 font-semibold bg-slate-950/40 px-4 py-2 rounded-xl border border-slate-800/40">
                     <div>
@@ -145,12 +140,24 @@
                 </div>
             </div>
 
-            <!-- Warning Alert -->
-            <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-center space-x-3">
-                <span class="text-2xl">🚨</span>
-                <div>
-                    <h3 class="text-xs font-bold text-red-400 uppercase tracking-wider" data-i18n="alert_title">Incoming Flood Alert</h3>
-                    <p class="text-xs text-slate-300 mt-0.5" id="lbl-alert-desc">A flood is forecasted to hit this clinic area. Historical demand is shown on the chart. Predict the next 2-week order.</p>
+            <!-- Warning Alert / Buffer Tip Container -->
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Flood Warning Alert -->
+                <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-center space-x-3">
+                    <span class="text-2xl">🚨</span>
+                    <div>
+                        <h3 class="text-xs font-bold text-red-400 uppercase tracking-wider" data-i18n="alert_title">Incoming Flood Alert</h3>
+                        <p class="text-xs text-slate-300 mt-0.5" id="lbl-alert-desc">A flood is forecasted to hit this clinic area. Historical demand is shown on the chart. Predict the next 2-week order.</p>
+                    </div>
+                </div>
+
+                <!-- Safety Buffer Tip (Stage 2 Only) -->
+                <div id="buffer-tip-box" class="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4 flex items-center space-x-3 hidden">
+                    <span class="text-2xl">💡</span>
+                    <div>
+                        <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider" data-i18n="buffer_tip_title">Logistics Safety Buffer Tip</h3>
+                        <p class="text-xs text-slate-300 mt-0.5" data-i18n="buffer_tip_desc">AI models forecast actual usage. In pharmacy logistics, it is safer to order a little extra (e.g. +5% buffer) to avoid shortage risk during spikes. Try adjusting the slider slightly above the model suggestion!</p>
+                    </div>
                 </div>
             </div>
 
@@ -159,8 +166,8 @@
                 <!-- Chart Area -->
                 <div class="lg:col-span-2 bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 min-h-[300px] flex flex-col justify-between">
                     <div class="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800/40">
-                        <span data-i18n="chart_title">Medication Consumption (Daily DDD)</span>
-                        <span id="chart-hint" class="italic text-[10px]">Solid: History | Dashed: Your Forecast</span>
+                        <span id="lbl-chart-title" data-i18n="chart_title">Medication Consumption (Daily Doses)</span>
+                        <span id="chart-hint" class="italic text-[10px]" data-i18n="chart_hint">Solid: History | Dashed: Your Forecast</span>
                     </div>
                     <div class="relative flex-1 h-[280px] mt-2">
                         <canvas id="game-chart"></canvas>
@@ -169,65 +176,60 @@
 
                 <!-- Input Controls Area -->
                 <div class="bg-slate-950/40 border border-slate-800/60 rounded-2xl p-5 flex flex-col justify-between space-y-6">
-                    <!-- Historical Baseline Stats -->
-                    <div class="space-y-3">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="baseline_header">Historical Reference (14 Days)</h4>
-                        <div class="grid grid-cols-2 gap-3 text-center">
-                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
-                                <p class="text-[10px] text-slate-400 font-semibold" data-i18n="stat_daily_avg">Daily Average</p>
-                                <p id="val-daily-avg" class="text-sm font-mono font-bold text-slate-200 mt-1">--</p>
-                            </div>
-                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
-                                <p class="text-[10px] text-slate-400 font-semibold" data-i18n="stat_normal_total">Normal 14d Total</p>
-                                <p id="val-normal-total" class="text-sm font-mono font-bold text-slate-200 mt-1">--</p>
-                            </div>
+                    <!-- Presets Selection (Stage 1 Only) -->
+                    <div id="presets-container" class="space-y-3">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="presets_header">Select Baseline Guess</h4>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button id="btn-preset-avg" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_avg">Average</button>
+                            <button id="btn-preset-trend" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_trend">Current Use</button>
+                            <button id="btn-preset-median" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_median">Median</button>
                         </div>
                     </div>
 
                     <!-- AI Models Cards (Stage 2 Only) -->
                     <div id="ai-models-container" class="space-y-3 hidden">
                         <h4 class="text-xs font-bold text-blue-400 uppercase tracking-wider" data-i18n="ai_models_header">AI Models Suggestions</h4>
-                        <div class="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                        <div class="space-y-2 max-h-[180px] overflow-y-auto pr-1">
                             <!-- TFT Card -->
-                            <button id="btn-ai-tft" class="w-full text-left p-2.5 rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-colors flex items-center justify-between">
-                                <div>
-                                    <p class="text-[10px] font-bold text-blue-400">TFT (SOTA Deep Learning)</p>
-                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">RM/DDD: Lowest Error</p>
+                            <button id="btn-ai-tft" class="w-full text-left p-2 rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-colors flex items-center justify-between">
+                                <div class="flex-1 pr-2">
+                                    <p class="text-[10px] font-bold text-blue-400">TFT (SOTA DL)</p>
+                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Best accuracy (<2% err). Cons: High GPU training cost.</p>
                                 </div>
-                                <div class="text-right font-mono">
+                                <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-tft" class="text-xs font-bold text-slate-200">--</p>
                                     <span class="text-[9px] text-emerald-400 font-bold bg-emerald-500/10 px-1 rounded">1.8% Err</span>
                                 </div>
                             </button>
                             <!-- LSTM Card -->
-                            <button id="btn-ai-lstm" class="w-full text-left p-2.5 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 transition-colors flex items-center justify-between">
-                                <div>
-                                    <p class="text-[10px] font-bold text-violet-400">LSTM (Recurrent Network)</p>
-                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">Captures sequential history</p>
+                            <button id="btn-ai-lstm" class="w-full text-left p-2 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 transition-colors flex items-center justify-between">
+                                <div class="flex-1 pr-2">
+                                    <p class="text-[10px] font-bold text-violet-400">LSTM (RNN)</p>
+                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Captures sequential history. Cons: Computationally heavy.</p>
                                 </div>
-                                <div class="text-right font-mono">
+                                <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-lstm" class="text-xs font-bold text-slate-200">--</p>
                                     <span class="text-[9px] text-emerald-400/90 font-bold bg-emerald-500/10 px-1 rounded">2.4% Err</span>
                                 </div>
                             </button>
                             <!-- XGBoost Card -->
-                            <button id="btn-ai-xgb" class="w-full text-left p-2.5 rounded-xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 transition-colors flex items-center justify-between">
-                                <div>
-                                    <p class="text-[10px] font-bold text-amber-400">XGBoost (Lightweight ML)</p>
-                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">Fast, standard CPU hardware</p>
+                            <button id="btn-ai-xgb" class="w-full text-left p-2 rounded-xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 transition-colors flex items-center justify-between">
+                                <div class="flex-1 pr-2">
+                                    <p class="text-[10px] font-bold text-amber-400">XGBoost (Light ML)</p>
+                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Lightweight, fast CPU. Cons: Moderate error (~12%).</p>
                                 </div>
-                                <div class="text-right font-mono">
+                                <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-xgb" class="text-xs font-bold text-slate-200">--</p>
                                     <span class="text-[9px] text-amber-400 font-bold bg-amber-500/10 px-1 rounded">12.6% Err</span>
                                 </div>
                             </button>
                             <!-- Chronos Card -->
-                            <button id="btn-ai-chr" class="w-full text-left p-2.5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors flex items-center justify-between">
-                                <div>
-                                    <p class="text-[10px] font-bold text-emerald-400">Chronos (Foundation Model)</p>
-                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">Zero-shot: No training required</p>
+                            <button id="btn-ai-chr" class="w-full text-left p-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors flex items-center justify-between">
+                                <div class="flex-1 pr-2">
+                                    <p class="text-[10px] font-bold text-emerald-400">Chronos (TSFM)</p>
+                                    <p class="text-[9px] text-slate-400 leading-tight">Pros: Zero-shot (no training). Cons: Slower inference.</p>
                                 </div>
-                                <div class="text-right font-mono">
+                                <div class="text-right font-mono shrink-0">
                                     <p id="ai-val-chr" class="text-xs font-bold text-slate-200">--</p>
                                     <span class="text-[9px] text-amber-400/90 font-bold bg-amber-500/10 px-1 rounded">12.7% Err</span>
                                 </div>
@@ -244,11 +246,15 @@
                         <input type="range" id="input-slider" min="-50" max="100" value="0" class="w-full accent-blue-500">
                         <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40 text-center font-mono">
                             <p class="text-[10px] text-slate-400 font-sans font-semibold" data-i18n="stat_your_forecast">Your Forecast Total (14 Days)</p>
-                            <p id="val-your-forecast" class="text-lg font-bold text-blue-400 mt-0.5">-- DDD</p>
+                            <p id="val-your-forecast" class="text-lg font-bold text-blue-400 mt-0.5">-- Doses</p>
                         </div>
                     </div>
 
-                    <button id="btn-submit" class="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_submit">Hantar Ramalan</button>
+                    <!-- Buttons Container -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <button id="btn-gameplay-back" class="py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold rounded-xl transition-colors border border-slate-800 text-sm" data-i18n="btn_back">Back</button>
+                        <button id="btn-submit" class="col-span-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_submit">Submit Order</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,33 +303,33 @@
 
             <!-- Impact Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Patients Served Card -->
+                <!-- Shortage Impact Card -->
                 <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
                     <span id="img-patients-icon" class="text-4xl">🏥</span>
                     <div class="flex-1">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" data-i18n="impact_patients_header">Patient Treatment Impact</p>
-                        <h3 id="lbl-patients-status" class="text-lg font-bold text-emerald-400 mt-1">All Patients Served</h3>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-patients-header" data-i18n="impact_patients_header">Patient Treatment Impact</p>
+                        <h3 id="lbl-patients-status" class="text-base font-bold text-emerald-400 mt-1">All Patients Served</h3>
                         <p id="lbl-patients-desc" class="text-xs text-slate-300 mt-0.5">You met patient demand. life-saving drug coverage intact.</p>
                     </div>
                 </div>
 
-                <!-- Financial Costs Card -->
+                <!-- Financial Budget Diff Card -->
                 <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
                     <span id="img-cost-icon" class="text-4xl">💰</span>
                     <div class="flex-1">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" data-i18n="impact_cost_header">Financial Procurement Cost</p>
-                        <h3 id="lbl-cost-value" class="text-lg font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
-                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Spent relative to normal cost.</p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-cost-header">Procurement Cost Diff</p>
+                        <h3 id="lbl-cost-value" class="text-base font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
+                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Compared to Naive Baseline.</p>
                     </div>
                 </div>
 
-                <!-- Savings / Waste Card -->
+                <!-- Surplus / Waste Card -->
                 <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
                     <span id="img-waste-icon" class="text-4xl">📉</span>
                     <div class="flex-1">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-waste-header">Procurement Waste / Savings</p>
-                        <h3 id="lbl-waste-value" class="text-lg font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
-                        <p id="lbl-waste-desc" class="text-xs text-slate-300 mt-0.5">Losses avoided by matching demand.</p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-waste-header">Medication Wastage</p>
+                        <h3 id="lbl-waste-value" class="text-base font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
+                        <p id="lbl-waste-desc" class="text-xs text-slate-300 mt-0.5">Losses from excess ordering.</p>
                     </div>
                 </div>
             </div>
@@ -333,10 +339,87 @@
                 Disasters cause major drug shortages or surplus. In public hospitals, shortage triggers high-priced emergency purchases (up to 250% price markup), while excess stocks decay or expire, costing taxpayers. Standard historical baseline ordering performs poorly during extreme climate events.
             </div>
 
-            <button id="btn-next-stage" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_next">Seterusnya</button>
+            <!-- Navigation Buttons -->
+            <div class="grid grid-cols-3 gap-3">
+                <button id="btn-results-back" class="py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold rounded-xl transition-colors border border-slate-800 text-sm" data-i18n="btn_back">Back</button>
+                <button id="btn-next-stage" class="col-span-2 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_next">Next</button>
+            </div>
         </div>
 
-        <!-- SCREEN 4: Admin Panel (Hidden) -->
+        <!-- SCREEN 5: Final Comparison Summary & Email Capture -->
+        <div id="screen-final" class="w-full max-w-2xl glass-panel p-8 rounded-3xl space-y-6 hidden transition-all duration-300">
+            <div class="text-center space-y-3">
+                <div class="inline-block px-3 py-1 text-xs font-semibold bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 uppercase tracking-wider" data-i18n="final_tag">Evaluation Complete</div>
+                <h2 class="text-3xl font-extrabold tracking-tight text-glow text-emerald-400" data-i18n="final_title">Human Guess vs. AI Assist</h2>
+                <p class="text-slate-300 text-sm leading-relaxed" data-i18n="final_intro">
+                    Congratulations! You have completed both simulation stages. Here is your final performance review.
+                </p>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="overflow-hidden border border-slate-800 rounded-2xl bg-slate-950/40">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-slate-900/80 text-slate-400 font-bold border-b border-slate-800">
+                        <tr>
+                            <th class="py-3 px-4" data-i18n="th_metric">Performance Metric</th>
+                            <th class="py-3 px-4 text-amber-400" data-i18n="th_s1">Stage 1 (Wild Guess)</th>
+                            <th class="py-3 px-4 text-blue-400" data-i18n="th_s2">Stage 2 (AI-Assisted)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/40 font-mono">
+                        <tr>
+                            <td class="py-3 px-4 font-sans font-semibold text-slate-200" data-i18n="row_error">Forecast Error (%)</td>
+                            <td id="final-err-s1" class="py-3 px-4">--%</td>
+                            <td id="final-err-s2" class="py-3 px-4 text-blue-400 font-bold">--%</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-sans font-semibold text-slate-200" data-i18n="row_shortage">Shortage Doses / Patients</td>
+                            <td id="final-shortage-s1" class="py-3 px-4">--</td>
+                            <td id="final-shortage-s2" class="py-3 px-4 text-blue-400 font-bold">--</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-sans font-semibold text-slate-200" data-i18n="row_waste">Procurement Waste (RM)</td>
+                            <td id="final-waste-s1" class="py-3 px-4">RM --</td>
+                            <td id="final-waste-s2" class="py-3 px-4 text-blue-400 font-bold">RM --</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-sans font-semibold text-slate-200" data-i18n="row_cost">Total Real Cost (RM)</td>
+                            <td id="final-cost-s1" class="py-3 px-4">RM --</td>
+                            <td id="final-cost-s2" class="py-3 px-4 text-blue-400 font-bold">RM --</td>
+                        </tr>
+                        <tr class="bg-emerald-500/5">
+                            <td class="py-3 px-4 font-sans font-bold text-emerald-400" data-i18n="row_savings">Net AI Savings vs. Guess</td>
+                            <td colspan="2" id="final-savings" class="py-3 px-4 text-emerald-400 font-bold text-center">RM 0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Closing Box -->
+            <div class="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4 text-xs text-slate-300 leading-relaxed" id="final-closing-box">
+                By integrating AI forecasting models into hospital supply chains, you slashed your forecasting error, minimized medication waste, and saved RM in procurement costs, while safeguarding patients. This represents UiTM's RO2/RO3 research objective: applying deep learning (TFT) to build climate-resilient pharmacy operations in Malaysia.
+            </div>
+
+            <!-- Email Capture Block -->
+            <div class="space-y-4 pt-2 border-t border-slate-800/60">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="label_final_email">Receive Your Results Report (Optional)</label>
+                    <input type="email" id="input-final-email" class="w-full bg-slate-950/80 border border-slate-800 focus:border-emerald-500 text-slate-100 rounded-xl px-4 py-3 focus:outline-none transition-colors" placeholder="e.g. radzi@example.com">
+                </div>
+                <div class="flex items-start space-x-2.5">
+                    <input type="checkbox" id="check-final-subscribe" checked class="w-4 h-4 rounded text-emerald-500 focus:ring-0 mt-1 cursor-pointer">
+                    <label for="check-final-subscribe" class="text-xs text-slate-400 leading-normal cursor-pointer" data-i18n="subscribe_note">I consent to saving my score offline and receiving research updates.</label>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="grid grid-cols-3 gap-3">
+                <button id="btn-final-back" class="py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold rounded-xl transition-colors border border-slate-800 text-sm" data-i18n="btn_back">Back</button>
+                <button id="btn-finish" class="col-span-2 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_finish">Send Results & Finish</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 6: Admin Panel (Hidden) -->
         <div id="screen-admin" class="w-full glass-panel p-6 rounded-3xl space-y-6 hidden transition-all duration-300 max-w-4xl">
             <div class="flex justify-between items-center pb-4 border-b border-slate-800">
                 <h2 class="text-xl font-bold text-slate-200">Admin Dashboard: Player Results</h2>
@@ -379,12 +462,9 @@
         <p>© 2026 Faculty of Pharmacy, UiTM. Mohd Radzi bin Ab. Aziz. All rights reserved.</p>
         <p class="mt-1 md:mt-0 flex items-center space-x-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500 block animate-pulse"></span>
-            <span>ThinkPad T14 Local Offline Deploy v4.0</span>
+            <span>ThinkPad T14 Local Offline Deploy v4.1</span>
         </p>
     </footer>
-
-    <!-- Audio Element (Ambient background synth loop) -->
-    <!-- Managed entirely inside SoundGenerator via Web Audio API -->
 
     <!-- Load Scenarios Data -->
     <script src="data/scenarios.js"></script>
@@ -396,29 +476,31 @@
             en: {
                 tag_role: "Pharmacy Manager Role",
                 welcome_title: "Climate-Resilient Pharmacy",
-                welcome_intro: "You are the Pharmacy Manager at a Malaysian public healthcare facility. A flood alert has been issued for the next 2 weeks. Floods disrupt logistics and trigger cardiovascular emergencies. Your mission is to forecast medication needs (Defined Daily Doses - DDD) to protect patients while minimizing waste.",
+                welcome_intro: "You are the Pharmacy Manager at a Malaysian public hospital. An incoming flood warning is active for the next 2 weeks. Disasters disrupt supply logistics and trigger emergency cardiac surges. Your goal is to forecast cardiovascular medication demand (in Doses) to protect patient lives while avoiding waste.",
                 label_name: "Manager Name",
-                label_email: "Email Address (Optional)",
+                label_final_email: "Receive Your Results Report (Optional)",
                 subscribe_note: "I consent to saving my score offline and receiving research updates.",
                 btn_start: "Start Mission",
                 stat_drug: "Drug:",
                 stat_fac: "Facility:",
                 alert_title: "Incoming Flood Alert",
-                baseline_header: "Historical Reference (14 Days)",
-                stat_daily_avg: "Daily Average",
-                stat_normal_total: "Normal 14d Total",
+                presets_header: "Select Baseline Guess",
+                preset_avg: "Average",
+                preset_trend: "Current Use",
+                preset_median: "Median",
                 ai_models_header: "AI Models Suggestions",
                 slider_label: "Adjust Order Level",
                 stat_your_forecast: "Your Forecast Total (14 Days)",
                 btn_submit: "Submit Order",
+                btn_back: "Back",
                 stat_forecast_error: "Forecast Error",
                 impact_patients_header: "Patient Treatment Impact",
-                impact_cost_header: "Procurement Cost",
-                lbl_waste_header_waste: "Procurement Waste",
-                lbl_waste_header_saved: "Cost Saved vs Naive",
                 btn_next: "Next",
-                chart_title: "Medication Consumption (Daily DDD)",
+                chart_title: "Medication Consumption (Daily Doses)",
                 chart_hint: "Solid: History | Dashed: Your Forecast",
+                buffer_tip_title: "Logistics Safety Buffer Tip",
+                buffer_tip_desc: "AI models forecast actual usage. In pharmacy logistics, it is safer to order a little extra (e.g. +5% buffer) to avoid shortage risk during spikes. Try adjusting the slider slightly above the model suggestion!",
+                
                 // Dynamic translation fields
                 alert_desc: "A flood warning has been issued for this clinic. Historically, floods disrupt supply. Predict medication needs for the next 14 days.",
                 s1_title: "Wild Guess Demand Forecasting",
@@ -429,39 +511,55 @@
                 patients_served_ok: "All Patients Served",
                 patients_served_ok_desc: "Your order met patient demand. Life-saving drug coverage is secure.",
                 patients_shortage: "Medication Shortage",
-                patients_shortage_desc: "{n} patient-courses went unserved. Emergency buy ordered at a 2.5x markup.",
+                patients_shortage_desc: "{q} Doses Short. This left approximately {p} patients unserved (without their 14-day supply of critical medication).",
                 patients_surplus_desc: "All patients served, but excess inventory was left vulnerable to flood damage.",
                 edu_box_s1: "Disasters cause major drug shortages or surplus. In public hospitals, shortage triggers high-priced emergency purchases (up to 250% price markup), while excess stocks decay or expire, costing taxpayers. Standard historical baseline ordering performs poorly during extreme climate events.",
                 edu_box_s2: "Using AI models dramatically optimizes procurement. TFT (Temporal Fusion Transformer) provides SOTA deep learning precision, while LSTM captures sequence patterns. XGBoost offers speed on light hardware. Chronos-2 is a zero-shot model working instantly without training. AI prevents waste and saves lives.",
+                
+                // Screen 5 Final Comparison fields
+                final_tag: "Evaluation Complete",
+                final_title: "Human Guess vs. AI Assist",
+                final_intro: "Congratulations! You have completed both simulation stages. Here is your final performance review.",
+                th_metric: "Performance Metric",
+                th_s1: "Stage 1 (Wild Guess)",
+                th_s2: "Stage 2 (AI-Assisted)",
+                row_error: "Forecast Error (%)",
+                row_shortage: "Shortage Doses / Patients",
+                row_waste: "Procurement Waste (RM)",
+                row_cost: "Total Real Cost (RM)",
+                row_savings: "Net AI Savings vs. Guess",
+                btn_finish: "Send Results & Finish",
                 btn_restart: "Restart Game",
-                btn_results: "Show Score Comparison"
+                final_closing_box: "By integrating AI forecasting models into hospital supply chains, you slashed your forecasting error by {e}%, minimized medication waste, and saved {s} in procurement costs, while safeguarding patients. This represents UiTM's RO2/RO3 research: applying deep learning (TFT) to build climate-resilient pharmacy operations in Malaysia."
             },
             bm: {
                 tag_role: "Peranan Pengurus Farmasi",
                 welcome_title: "Farmasi Resilien Iklim",
-                welcome_intro: "Anda adalah Pengurus Farmasi di fasiliti kesihatan awam Malaysia. Amaran banjir telah dikeluarkan untuk 2 minggu akan datang. Banjir mengganggu logistik dan mencetuskan kecemasan kardiovaskular. Misi anda adalah untuk meramal keperluan ubat (Defined Daily Doses - DDD) demi melindungi pesakit dan meminimumkan pembaziran.",
+                welcome_intro: "Anda adalah Pengurus Farmasi di fasiliti kesihatan awam Malaysia. Amaran banjir telah dikeluarkan untuk 2 minggu akan datang. Banjir mengganggu logistik dan mencetuskan kecemasan kardiovaskular. Misi anda adalah untuk meramal keperluan ubat (dalam Dos) demi melindungi pesakit dan meminimumkan pembaziran.",
                 label_name: "Nama Pengurus",
-                label_email: "Alamat E-mel (Pilihan)",
+                label_final_email: "Terima Laporan Keputusan Anda (Pilihan)",
                 subscribe_note: "Saya bersetuju untuk menyimpan markah saya secara luar talian dan menerima kemas kini penyelidikan.",
                 btn_start: "Mula Misi",
                 stat_drug: "Ubat:",
                 stat_fac: "Fasiliti:",
                 alert_title: "Amaran Banjir Masuk",
-                baseline_header: "Rujukan Sejarah (14 Hari)",
-                stat_daily_avg: "Purata Harian",
-                stat_normal_total: "Jumlah Normal 14h",
+                presets_header: "Pilih Tekaan Garis Asas",
+                preset_avg: "Purata",
+                preset_trend: "Guna Semasa",
+                preset_median: "Median",
                 ai_models_header: "Cadangan Model AI",
                 slider_label: "Laras Tahap Pesanan",
                 stat_your_forecast: "Jumlah Ramalan Anda (14 Hari)",
                 btn_submit: "Hantar Pesanan",
+                btn_back: "Kembali",
                 stat_forecast_error: "Ralat Ramalan",
                 impact_patients_header: "Impak Rawatan Pesakit",
-                impact_cost_header: "Kos Perolehan",
-                lbl_waste_header_waste: "Pembaziran Perolehan",
-                lbl_waste_header_saved: "Kos Dijimat vs Naif",
                 btn_next: "Seterusnya",
-                chart_title: "Penggunaan Ubat-ubatan (DDD Harian)",
+                chart_title: "Penggunaan Ubat-ubatan (Dos Harian)",
                 chart_hint: "Garis Padu: Sejarah | Garis Putus-putus: Ramalan Anda",
+                buffer_tip_title: "Tip Penimbal Keselamatan Logistik",
+                buffer_tip_desc: "Model AI meramal penggunaan sebenar. Dalam logistik farmasi, adalah lebih selamat untuk memesan lebih sedikit (cth. penimbal +5%) untuk mengelakkan risiko kekurangan semasa lonjakan. Cuba laras gelangsar sedikit di atas cadangan AI!",
+                
                 // Dynamic translation fields
                 alert_desc: "Amaran banjir dikeluarkan untuk klinik ini. Secara sejarahnya, banjir mengganggu bekalan. Ramal keperluan ubat untuk 14 hari akan datang.",
                 s1_title: "Ramalan Tekaan Rawak Permintaan",
@@ -472,12 +570,26 @@
                 patients_served_ok: "Semua Pesakit Dilayani",
                 patients_served_ok_desc: "Pesanan anda memenuhi permintaan pesakit. Liputan ubat menyelamat nyawa adalah selamat.",
                 patients_shortage: "Kekurangan Ubat-ubatan",
-                patients_shortage_desc: "{n} rawatan pesakit tidak dilayani. Pembelian kecemasan diarahkan pada harga markup 2.5x.",
+                patients_shortage_desc: "Kekurangan {q} Dos. Ini menyebabkan sekitar {p} pesakit tidak dilayani (tanpa bekalan 14 hari ubat kritikal mereka).",
                 patients_surplus_desc: "Semua pesakit dilayani, tetapi inventori berlebihan terdedah kepada kerosakan banjir.",
                 edu_box_s1: "Bencana menyebabkan kekurangan atau lebihan ubat yang besar. Di hospital kerajaan, kekurangan mencetuskan pembelian kecemasan harga tinggi (sehingga 250% markup), manakala stok berlebihan rosak atau luput, membebankan pembayar cukai. Kaedah pesanan garis asas naif (t-28) tidak berfungsi baik semasa bencana.",
                 edu_box_s2: "Model AI mengoptimumkan perolehan. TFT memberikan ketepatan deep learning SOTA, manakala LSTM menangkap corak jujukan. XGBoost menawarkan kelajuan pada perkakasan biasa. Chronos-2 pula ialah model zero-shot yang berfungsi tanpa latihan. AI mengelakkan pembaziran dan menyelamatkan nyawa.",
+                
+                // Screen 5 Final Comparison fields
+                final_tag: "Penilaian Selesai",
+                final_title: "Teka Rawak vs Bantuan AI",
+                final_intro: "Tahniah! Anda telah menyelesaikan kedua-dua tahap simulasi. Berikut adalah ringkasan penilaian prestasi akhir anda.",
+                th_metric: "Metrik Prestasi",
+                th_s1: "Tahap 1 (Teka Rawak)",
+                th_s2: "Tahap 2 (Berbantuan AI)",
+                row_error: "Ralat Ramalan (%)",
+                row_shortage: "Kekurangan Dos / Pesakit",
+                row_waste: "Pembaziran Perolehan (RM)",
+                row_cost: "Jumlah Kos Sebenar (RM)",
+                row_savings: "Penjimatan AI Bersih vs Tekaan",
+                btn_finish: "Hantar Keputusan & Tamat",
                 btn_restart: "Mula Semula",
-                btn_results: "Lihat Perbandingan Markah"
+                final_closing_box: "Dengan menyepadukan model ramalan AI ke dalam rantaian bekalan hospital, anda telah mengurangkan ralat ramalan sebanyak {e}%, meminimumkan pembaziran ubat, dan menjimatkan {s} dalam kos perolehan, sambil melindungi pesakit. Ini mewakili penyelidikan RO2/RO3 UiTM: menerapkan deep learning (TFT) demi membina rantaian farmasi resilien iklim di Malaysia."
             }
         };
 
@@ -601,6 +713,8 @@
         let chart = null;
         let currentScenario = null;
         let gameStage = 1; // 1: Wild Guess, 2: AI-Assisted
+        let screenHistory = [];
+        
         let playerState = {
             name: '',
             email: '',
@@ -621,6 +735,14 @@
             waste_avoided: 0
         };
 
+        // Active forecast curve loaded for current screen (scales on slider move)
+        let activeBaseCurve = [];
+
+        // Helper currency formatter
+        function formatCurrency(val) {
+            return "RM " + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         // Initialize translation
         function updateTranslation() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -634,10 +756,10 @@
             // Input Placeholders
             if (currentLang === 'en') {
                 document.getElementById('input-name').placeholder = "e.g. Mohd Radzi";
-                document.getElementById('input-email').placeholder = "e.g. radzi@example.com";
+                document.getElementById('input-final-email').placeholder = "e.g. radzi@example.com";
             } else {
                 document.getElementById('input-name').placeholder = "cth. Mohd Radzi";
-                document.getElementById('input-email').placeholder = "cth. radzi@example.com";
+                document.getElementById('input-final-email').placeholder = "cth. radzi@example.com";
             }
 
             // Dynamic screen translations based on state
@@ -666,6 +788,56 @@
             if (chart) updateChartLabels();
         });
 
+        // Navigation helpers
+        function navigateTo(targetId) {
+            // Find current active screen
+            const active = document.querySelector('main > div:not(.hidden)');
+            if (active) {
+                screenHistory.push(active.id);
+                active.classList.add('hidden');
+            }
+            document.getElementById(targetId).classList.remove('hidden');
+        }
+
+        function goBack() {
+            sound.playClick();
+            if (screenHistory.length === 0) return;
+            const prevId = screenHistory.pop();
+            const active = document.querySelector('main > div:not(.hidden)');
+            if (active) active.classList.add('hidden');
+            document.getElementById(prevId).classList.remove('hidden');
+            
+            // Handle specific revert behavior on back
+            if (prevId === 'screen-gameplay') {
+                // If moving back to gameplay, re-init the stage
+                if (gameStage === 1) {
+                    // Stage 1
+                    document.getElementById('presets-container').classList.remove('hidden');
+                    document.getElementById('ai-models-container').classList.add('hidden');
+                    document.getElementById('buffer-tip-box').classList.add('hidden');
+                    document.getElementById('stage-badge').textContent = "STAGE 1";
+                    document.getElementById('stage-badge').className = "px-2.5 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase tracking-wider";
+                } else {
+                    // Stage 2
+                    document.getElementById('presets-container').classList.add('hidden');
+                    document.getElementById('ai-models-container').classList.remove('hidden');
+                    document.getElementById('buffer-tip-box').classList.remove('hidden');
+                    document.getElementById('stage-badge').textContent = "STAGE 2";
+                    document.getElementById('stage-badge').className = "px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider";
+                }
+                // Strip the results line from chart if present
+                if (chart && chart.data.datasets.length > 2) {
+                    chart.data.datasets.pop();
+                    chart.update();
+                }
+            }
+        }
+
+        // Wire up back buttons
+        document.getElementById('btn-gameplay-back').addEventListener('click', goBack);
+        document.getElementById('btn-results-back').addEventListener('click', goBack);
+        document.getElementById('btn-final-back').addEventListener('click', goBack);
+
         // Trigger start simulation
         document.getElementById('btn-start').addEventListener('click', () => {
             const nameInput = document.getElementById('input-name').value.trim();
@@ -674,12 +846,16 @@
                 return;
             }
             playerState.name = nameInput;
-            playerState.email = document.getElementById('input-email').value.trim();
-            playerState.subscribe = document.getElementById('check-subscribe').checked;
+            
+            // Set initials for avatar
+            const initials = nameInput.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById('user-avatar').textContent = initials;
+            document.getElementById('user-name').textContent = nameInput;
+            document.getElementById('user-badge').classList.remove('hidden');
             
             sound.playClick();
             
-            // Randomly select scenario from window.gameScenarios
+            // Randomly select scenario
             if (!window.gameScenarios || window.gameScenarios.length === 0) {
                 alert('No scenario data loaded. Check scenarios.js.');
                 return;
@@ -687,10 +863,7 @@
             const randomIndex = Math.floor(Math.random() * window.gameScenarios.length);
             currentScenario = window.gameScenarios[randomIndex];
             
-            // Hide welcome screen, show gameplay
-            document.getElementById('screen-welcome').classList.add('hidden');
-            document.getElementById('screen-gameplay').classList.remove('hidden');
-            
+            navigateTo('screen-gameplay');
             initGameplayScreen();
         });
 
@@ -701,6 +874,16 @@
 
         function getActualForecastTotal() {
             return currentScenario.forecast.reduce((a, b) => a + b.actual, 0);
+        }
+
+        function getMedian(values) {
+            if (values.length === 0) return 0;
+            const sorted = [...values].sort((a, b) => a - b);
+            const half = Math.floor(sorted.length / 2);
+            if (sorted.length % 2 !== 0) {
+                return sorted[half];
+            }
+            return (sorted[half - 1] + sorted[half]) / 2.0;
         }
 
         function initGameplayScreen() {
@@ -715,50 +898,84 @@
             const histAvg = getHistoricalAvg();
             const normTotal = histAvg * 14;
             
-            document.getElementById('val-daily-avg').textContent = Math.round(histAvg).toLocaleString() + " DDD";
-            document.getElementById('val-normal-total').textContent = Math.round(normTotal).toLocaleString() + " DDD";
+            document.getElementById('val-daily-avg').textContent = Math.round(histAvg).toLocaleString() + " Doses";
+            document.getElementById('val-normal-total').textContent = Math.round(normTotal).toLocaleString() + " Doses";
+            
+            // Initialize flat baseline curve
+            activeBaseCurve = Array(14).fill(histAvg);
             
             // Initialize slider to 0% adjustment
             const slider = document.getElementById('input-slider');
             slider.value = 0;
-            updateSliderOutput(0, normTotal);
+            updateSliderOutput(0);
             
-            // Hide AI container in stage 1
+            // Reset layout containers
+            document.getElementById('presets-container').classList.remove('hidden');
             document.getElementById('ai-models-container').classList.add('hidden');
+            document.getElementById('buffer-tip-box').classList.add('hidden');
             
-            // Render / reset Chart
-            renderChart(normTotal);
+            // Render Chart
+            renderChart();
             
+            // Setup Stage 1 Presets Button Actions
+            const actualHistoryValues = currentScenario.history.map(h => h.actual);
+            
+            document.getElementById('btn-preset-avg').onclick = () => {
+                sound.playClick();
+                slider.value = 0;
+                updateSliderOutput(0);
+            };
+            document.getElementById('btn-preset-trend').onclick = () => {
+                sound.playClick();
+                // Project latest day (day 14) forward
+                const currentUse = actualHistoryValues[actualHistoryValues.length - 1];
+                const pct = ((currentUse - histAvg) / histAvg) * 100;
+                slider.value = Math.max(-50, Math.min(100, Math.round(pct)));
+                updateSliderOutput(slider.value);
+            };
+            document.getElementById('btn-preset-median').onclick = () => {
+                sound.playClick();
+                const median = getMedian(actualHistoryValues);
+                const pct = ((median - histAvg) / histAvg) * 100;
+                slider.value = Math.max(-50, Math.min(100, Math.round(pct)));
+                updateSliderOutput(slider.value);
+            };
+
             updateTranslation();
         }
 
-        function updateSliderOutput(pct, normTotal) {
+        function updateSliderOutput(pct) {
             const multiplier = 1 + (pct / 100);
-            const predictedTotal = normTotal * multiplier;
+            
+            // Scale the active daily curve by the multiplier
+            const scaledDailyCurve = activeBaseCurve.map(val => val * multiplier);
+            const predictedTotal = scaledDailyCurve.reduce((a, b) => a + b, 0);
             
             document.getElementById('val-slider-pct').textContent = (pct >= 0 ? "+" : "") + pct + "%";
-            document.getElementById('val-your-forecast').textContent = Math.round(predictedTotal).toLocaleString() + " DDD";
+            document.getElementById('val-your-forecast').textContent = Math.round(predictedTotal).toLocaleString() + " " + (currentLang === 'en' ? 'Doses' : 'Dos');
             
             if (chart) {
                 // Update dashed forecast line preview dynamically on slider drag
-                const avgDaily = predictedTotal / 14;
-                const forecastData = Array(14).fill(avgDaily);
-                chart.data.datasets[1].data = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, ...forecastData];
-                chart.update('none'); // Update immediately at 60fps without transition animations
+                chart.data.datasets[1].data = [
+                    ...Array(14).fill(null), 
+                    ...scaledDailyCurve
+                ];
+                chart.update('none'); 
             }
         }
 
         document.getElementById('input-slider').addEventListener('input', (e) => {
             const pct = parseInt(e.target.value);
-            const histAvg = getHistoricalAvg();
-            const normTotal = histAvg * 14;
-            updateSliderOutput(pct, normTotal);
+            updateSliderOutput(pct);
             
-            // Set model to custom since they adjusted manually
-            playerState.chosen_model = 'Custom';
+            if (gameStage === 2) {
+                // If they adjust manually in stage 2, change the model state label to custom
+                // unless they exactly selected one of the AI totals.
+                playerState.chosen_model = 'Custom';
+            }
         });
 
-        function renderChart(normTotal) {
+        function renderChart() {
             const ctx = document.getElementById('game-chart').getContext('2d');
             if (chart) {
                 chart.destroy();
@@ -767,11 +984,7 @@
             const historyDates = currentScenario.history.map(h => h.date);
             const forecastDates = currentScenario.forecast.map(f => f.date);
             const labels = [...historyDates, ...forecastDates];
-            
             const historyData = currentScenario.history.map(h => h.actual);
-            // Default forecast data is the normal historical baseline
-            const histAvg = getHistoricalAvg();
-            const initialForecastData = Array(14).fill(histAvg);
             
             chart = new Chart(ctx, {
                 type: 'line',
@@ -789,7 +1002,7 @@
                         },
                         {
                             label: currentLang === 'en' ? 'Your Forecast' : 'Ramalan Anda',
-                            data: [...Array(14).fill(null), ...initialForecastData],
+                            data: [...Array(14).fill(null), ...activeBaseCurve],
                             borderColor: '#f59e0b',
                             borderDash: [6, 4],
                             borderWidth: 2,
@@ -822,6 +1035,9 @@
             if (chart) {
                 chart.data.datasets[0].label = currentLang === 'en' ? 'Actual Usage' : 'Penggunaan Sebenar';
                 chart.data.datasets[1].label = currentLang === 'en' ? 'Your Forecast' : 'Ramalan Anda';
+                if (chart.data.datasets[2]) {
+                    chart.data.datasets[2].label = currentLang === 'en' ? 'Actual Future' : 'Masa Depan Sebenar';
+                }
                 chart.update();
             }
         }
@@ -830,10 +1046,10 @@
         document.getElementById('btn-submit').addEventListener('click', () => {
             sound.playClick();
             
-            const histAvg = getHistoricalAvg();
-            const normTotal = histAvg * 14;
-            const sliderVal = parseInt(document.getElementById('input-slider').value);
-            const predictedTotal = normTotal * (1 + (sliderVal / 100));
+            // Calculate sum of active forecast curve currently loaded in the chart
+            // (Takes slider adjustments directly from Chart's dataset)
+            const forecastDailyData = chart.data.datasets[1].data.slice(14);
+            const predictedTotal = forecastDailyData.reduce((a, b) => a + b, 0);
             
             const actualTotal = getActualForecastTotal();
             
@@ -855,18 +1071,21 @@
             let totalCost = 0;
             let patientsAffected = 0;
             let wasteValue = 0;
+            let quantityShort = 0;
             
             if (predicted < actual) {
                 // Shortage: Normal cost of predicted, plus emergency buying markup (2.5x) for deficit
                 const normalCost = predicted * unitCost;
                 const emergencyCost = (actual - predicted) * unitCost * 2.5;
                 totalCost = normalCost + emergencyCost;
-                // Patients affected = deficit DDD divided by 14 days course
-                patientsAffected = (actual - predicted) / 14;
+                
+                quantityShort = actual - predicted;
+                patientsAffected = quantityShort / 14; // patient courses missed
                 wasteValue = 0;
             } else {
                 // Surplus: Cost spent on total predicted. Excess represents direct waste.
                 totalCost = predicted * unitCost;
+                quantityShort = 0;
                 patientsAffected = 0;
                 wasteValue = (predicted - actual) * unitCost;
             }
@@ -877,7 +1096,7 @@
                 playerState.stage1_patients = patientsAffected;
                 playerState.stage1_waste = wasteValue;
                 
-                showResultsScreen(1);
+                showResultsScreen(1, quantityShort);
             } else {
                 playerState.stage2_err = errorPct;
                 playerState.stage2_cost = totalCost;
@@ -899,20 +1118,16 @@
                 }
                 
                 // Savings / Benefits comparisons (Avoided waste and shortage)
-                playerState.cost_saved_vs_naive = Math.max(0, naiveCost - totalCost);
+                playerState.cost_saved_vs_naive = naiveCost - totalCost; // Can be positive (savings) or negative (loss)
                 playerState.shortage_avoided = Math.max(0, naivePatients - patientsAffected);
                 playerState.waste_avoided = Math.max(0, naiveWaste - wasteValue);
                 
-                showResultsScreen(2);
-                
-                // Submit to backend
-                submitResults();
+                showResultsScreen(2, quantityShort);
             }
         }
 
-        function showResultsScreen(stage) {
-            document.getElementById('screen-gameplay').classList.add('hidden');
-            document.getElementById('screen-results').classList.remove('hidden');
+        function showResultsScreen(stage, quantityShort) {
+            navigateTo('screen-results');
             
             const resultsBadge = document.getElementById('results-badge');
             const resultsTitle = document.getElementById('results-title');
@@ -922,7 +1137,12 @@
             
             // Update chart to show actual utilization line
             const actualForecastData = currentScenario.forecast.map(f => f.actual);
-            // Actual line plotted in green/blue, player forecast in dashed orange
+            
+            // Clean up old actual future line if it was drawn previously
+            if (chart.data.datasets.length > 2) {
+                chart.data.datasets.pop();
+            }
+            
             chart.data.datasets.push({
                 label: currentLang === 'en' ? 'Actual Future' : 'Masa Depan Sebenar',
                 data: [...Array(14).fill(null), ...actualForecastData],
@@ -941,31 +1161,31 @@
             errVal.textContent = err.toFixed(1) + "%";
             
             if (err < 5) {
-                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl font-mono text-center";
+                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl font-mono text-center shadow-lg shadow-emerald-500/5";
                 sound.playSuccess();
             } else if (err < 15) {
-                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-mono text-center";
+                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-mono text-center shadow-lg shadow-amber-500/5";
                 sound.playClick();
             } else {
-                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl font-mono text-center";
+                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl font-mono text-center shadow-lg shadow-red-500/5";
                 sound.playAlert();
             }
             
-            // Populating UI cards
-            document.getElementById('lbl-cost-value').textContent = "RM " + cost.toFixed(2);
-            
+            // Patients Shortage Card text
             const patientsStatus = document.getElementById('lbl-patients-status');
             const patientsDesc = document.getElementById('lbl-patients-desc');
             const patientsIcon = document.getElementById('img-patients-icon');
             
             if (patients > 0) {
                 patientsStatus.textContent = i18n[currentLang].patients_shortage;
-                patientsStatus.className = "text-lg font-bold text-red-400 mt-1";
-                patientsDesc.textContent = i18n[currentLang].patients_shortage_desc.replace('{n}', Math.round(patients));
+                patientsStatus.className = "text-base font-bold text-red-400 mt-1";
+                patientsDesc.textContent = i18n[currentLang].patients_shortage_desc
+                    .replace('{q}', Math.round(quantityShort).toLocaleString())
+                    .replace('{p}', Math.round(patients).toLocaleString());
                 patientsIcon.textContent = "⚠️";
             } else {
                 patientsStatus.textContent = i18n[currentLang].patients_served_ok;
-                patientsStatus.className = "text-lg font-bold text-emerald-400 mt-1";
+                patientsStatus.className = "text-base font-bold text-emerald-400 mt-1";
                 patientsIcon.textContent = "🏥";
                 if (waste > 0) {
                     patientsDesc.textContent = i18n[currentLang].patients_surplus_desc;
@@ -973,22 +1193,46 @@
                     patientsDesc.textContent = i18n[currentLang].patients_served_ok_desc;
                 }
             }
+
+            // Procurement Cost & Naive Difference display
+            const costHeader = document.getElementById('lbl-cost-header');
+            const costValue = document.getElementById('lbl-cost-value');
+            const costDesc = document.getElementById('lbl-cost-desc');
+            const costIcon = document.getElementById('img-cost-icon');
             
-            const wasteHeader = document.getElementById('lbl-waste-header');
-            const wasteValue = document.getElementById('lbl-waste-value');
-            const wasteDesc = document.getElementById('lbl-waste-desc');
-            const wasteIcon = document.getElementById('img-waste-icon');
+            const naiveTotal = currentScenario.forecast.reduce((a, b) => a + b.naive, 0);
+            const actualTotal = getActualForecastTotal();
+            const unitCost = currentScenario.unit_cost;
+            let costNaive = naiveTotal * unitCost + (naiveTotal < actualTotal ? (actualTotal - naiveTotal) * unitCost * 2.5 : 0);
+            
+            const costDiff = costNaive - cost; // Positive means Player saved money, Negative means Player spent more
+
+            if (costDiff >= 0) {
+                costHeader.textContent = i18n[currentLang].lbl_waste_header_saved;
+                costValue.textContent = "+" + formatCurrency(costDiff);
+                costValue.className = "text-base font-mono font-bold text-emerald-400 mt-1";
+                costDesc.textContent = currentLang === 'en' ? "Savings compared to traditional Monthly Baseline order." : "Penjimatan berbanding pesanan Bulanan Garis Asas.";
+                costIcon.textContent = "📈";
+            } else {
+                costHeader.textContent = currentLang === 'en' ? "Budget Exceeded" : "Bajet Terlebih";
+                costValue.textContent = "-" + formatCurrency(Math.abs(costDiff));
+                costValue.className = "text-base font-mono font-bold text-red-400 mt-1";
+                costDesc.textContent = currentLang === 'en' ? "Spent extra due to emergency markup/medication waste." : "Belanja lebih kerana markup kecemasan/pembaziran ubat.";
+                costIcon.textContent = "⚠️";
+            }
+            
+            // Wastage card
+            document.getElementById('lbl-waste-value').textContent = formatCurrency(waste);
+            if (waste > 0) {
+                document.getElementById('lbl-waste-desc').textContent = currentLang === 'en' ? "Inventory expired or spoiled in flood." : "Inventori tamat tempoh/rosak akibat banjir.";
+            } else {
+                document.getElementById('lbl-waste-desc').textContent = currentLang === 'en' ? "Zero waste achieved." : "Sifar pembaziran dicapai.";
+            }
             
             if (stage === 1) {
                 resultsBadge.textContent = "STAGE 1 RESULT";
                 resultsTitle.textContent = i18n[currentLang].res_title_s1;
                 document.getElementById('lbl-results-edu').textContent = i18n[currentLang].edu_box_s1;
-                
-                wasteHeader.textContent = i18n[currentLang].lbl_waste_header_waste;
-                wasteValue.textContent = "RM " + waste.toFixed(2);
-                wasteValue.className = "text-lg font-mono font-bold text-amber-500 mt-1";
-                wasteDesc.textContent = currentLang === 'en' ? "Inventory value decayed/wasted." : "Nilai inventori rosak/dibazirkan.";
-                wasteIcon.textContent = "📉";
                 
                 document.getElementById('model-comparison-container').classList.add('hidden');
                 
@@ -999,155 +1243,204 @@
                 resultsTitle.textContent = i18n[currentLang].res_title_s2;
                 document.getElementById('lbl-results-edu').textContent = i18n[currentLang].edu_box_s2;
                 
-                // Compare with Naive
-                wasteHeader.textContent = i18n[currentLang].lbl_waste_header_saved;
-                wasteValue.textContent = "RM " + playerState.cost_saved_vs_naive.toFixed(2);
-                wasteValue.className = "text-lg font-mono font-bold text-emerald-400 mt-1";
-                
-                let avoidedDesc = "";
-                if (currentLang === 'en') {
-                    avoidedDesc = `Saved RM ${playerState.cost_saved_vs_naive.toFixed(2)} and protected ${Math.round(playerState.shortage_avoided)} patients compared to baseline.`;
-                } else {
-                    avoidedDesc = `Menjimatkan RM ${playerState.cost_saved_vs_naive.toFixed(2)} dan melindungi ${Math.round(playerState.shortage_avoided)} pesakit berbanding asas.`;
-                }
-                wasteDesc.textContent = avoidedDesc;
-                wasteIcon.textContent = "🚀";
-                
-                // Populate Dashboard Cards
-                const naiveTotal = currentScenario.forecast.reduce((a, b) => a + b.naive, 0);
+                // Populate Comparison Dashboard Cards
                 const tftTotal = currentScenario.forecast.reduce((a, b) => a + b.tft, 0);
-                const actualTotal = getActualForecastTotal();
                 
                 const naiveErr = (Math.abs(naiveTotal - actualTotal) / actualTotal) * 100;
                 const tftErr = (Math.abs(tftTotal - actualTotal) / actualTotal) * 100;
                 
-                let costNaive = naiveTotal * unitCost + (naiveTotal < actualTotal ? (actualTotal - naiveTotal) * unitCost * 2.5 : 0);
                 let costTft = tftTotal * unitCost + (tftTotal < actualTotal ? (actualTotal - tftTotal) * unitCost * 2.5 : 0);
                 
                 document.getElementById('comp-err-s1').textContent = playerState.stage1_err.toFixed(1) + "% Err";
-                document.getElementById('comp-cost-s1').textContent = "Cost: RM " + playerState.stage1_cost.toFixed(2);
+                document.getElementById('comp-cost-s1').textContent = "Cost: " + formatCurrency(playerState.stage1_cost);
                 
                 document.getElementById('comp-err-naive').textContent = naiveErr.toFixed(1) + "% Err";
-                document.getElementById('comp-cost-naive').textContent = "Cost: RM " + costNaive.toFixed(2);
+                document.getElementById('comp-cost-naive').textContent = "Cost: " + formatCurrency(costNaive);
                 
                 document.getElementById('comp-err-s2').textContent = playerState.stage2_err.toFixed(1) + "% Err";
-                document.getElementById('comp-cost-s2').textContent = "Cost: RM " + playerState.stage2_cost.toFixed(2);
+                document.getElementById('comp-cost-s2').textContent = "Cost: " + formatCurrency(playerState.stage2_cost);
                 
                 document.getElementById('comp-err-tft').textContent = tftErr.toFixed(1) + "% Err";
-                document.getElementById('comp-cost-tft').textContent = "Cost: RM " + costTft.toFixed(2);
+                document.getElementById('comp-cost-tft').textContent = "Cost: " + formatCurrency(costTft);
                 
                 document.getElementById('model-comparison-container').classList.remove('hidden');
                 
-                btnNext.textContent = i18n[currentLang].btn_restart;
+                btnNext.textContent = currentLang === 'en' ? "View Final Summary" : "Lihat Ringkasan Akhir";
             }
         }
 
-        // Transition from results to Stage 2 or restart
+        // Transition logic
         document.getElementById('btn-next-stage').addEventListener('click', () => {
             sound.playClick();
             
             if (gameStage === 1) {
-                // Transition to Stage 2 Gameplay
-                document.getElementById('screen-results').classList.add('hidden');
-                document.getElementById('screen-gameplay').classList.remove('hidden');
-                
                 initStage2Gameplay();
             } else {
-                // Restart game
-                document.getElementById('screen-results').classList.add('hidden');
-                document.getElementById('screen-welcome').classList.remove('hidden');
-                
-                // Reset inputs
-                document.getElementById('input-name').value = '';
-                document.getElementById('input-email').value = '';
-                
-                playerState = {
-                    name: '',
-                    email: '',
-                    subscribe: true,
-                    stage1_pred: 0,
-                    stage1_err: 0,
-                    stage1_cost: 0,
-                    stage1_patients: 0,
-                    stage1_waste: 0,
-                    stage2_pred: 0,
-                    stage2_err: 0,
-                    stage2_cost: 0,
-                    stage2_patients: 0,
-                    stage2_waste: 0,
-                    chosen_model: 'Custom',
-                    cost_saved_vs_naive: 0,
-                    shortage_avoided: 0,
-                    waste_avoided: 0
-                };
+                showFinalSummaryScreen();
             }
         });
 
         function initStage2Gameplay() {
             gameStage = 2;
+            navigateTo('screen-gameplay');
+            
             document.getElementById('stage-badge').textContent = "STAGE 2";
             document.getElementById('stage-badge').className = "px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider";
             document.getElementById('stage-title').textContent = i18n[currentLang].s2_title;
             document.getElementById('lbl-alert-desc').textContent = i18n[currentLang].s2_desc;
             
-            // Re-render chart to strip the "actual future" line we showed in results
+            // Re-render chart (strips the Stage 1 green results line)
             const histAvg = getHistoricalAvg();
             const normTotal = histAvg * 14;
+            activeBaseCurve = Array(14).fill(histAvg);
             renderChart(normTotal);
             
-            // Show AI models suggestions
+            // Show AI model suggestions and buffer tip, hide Stage 1 presets
+            document.getElementById('presets-container').classList.add('hidden');
             document.getElementById('ai-models-container').classList.remove('hidden');
+            document.getElementById('buffer-tip-box').classList.remove('hidden');
             
-            // Compute values for AI cards
+            // Reset slider and model state
+            const slider = document.getElementById('input-slider');
+            slider.value = 0;
+            updateSliderOutput(0);
+            playerState.chosen_model = 'Custom';
+            
+            // Compute predictions for model cards
             const tftTotal = currentScenario.forecast.reduce((a, b) => a + b.tft, 0);
             const lstmTotal = currentScenario.forecast.reduce((a, b) => a + b.lstm, 0);
             const xgbTotal = currentScenario.forecast.reduce((a, b) => a + b.xgb, 0);
             const chrTotal = currentScenario.forecast.reduce((a, b) => a + b.chr2, 0);
             
-            document.getElementById('ai-val-tft').textContent = Math.round(tftTotal).toLocaleString() + " DDD";
-            document.getElementById('ai-val-lstm').textContent = Math.round(lstmTotal).toLocaleString() + " DDD";
-            document.getElementById('ai-val-xgb').textContent = Math.round(xgbTotal).toLocaleString() + " DDD";
-            document.getElementById('ai-val-chr').textContent = Math.round(chrTotal).toLocaleString() + " DDD";
+            document.getElementById('ai-val-tft').textContent = Math.round(tftTotal).toLocaleString() + " Doses";
+            document.getElementById('ai-val-lstm').textContent = Math.round(lstmTotal).toLocaleString() + " Doses";
+            document.getElementById('ai-val-xgb').textContent = Math.round(xgbTotal).toLocaleString() + " Doses";
+            document.getElementById('ai-val-chr').textContent = Math.round(chrTotal).toLocaleString() + " Doses";
             
-            // Wire AI button click handlers
-            const slider = document.getElementById('input-slider');
-            
-            const applyModelSuggestion = (total, modelName) => {
+            // Setup model click actions (copies actual model trendline shape!)
+            const selectModel = (modelName, dailyCurve) => {
                 sound.playClick();
                 playerState.chosen_model = modelName;
                 
-                // Calculate percentage adjustment needed for this total
-                const diffPct = ((total - normTotal) / normTotal) * 100;
-                slider.value = Math.max(-50, Math.min(100, Math.round(diffPct)));
-                updateSliderOutput(slider.value, normTotal);
+                // Copy the exact trendline shape from predictions data
+                activeBaseCurve = [...dailyCurve];
                 
-                // Overlay the daily prediction line of the chosen AI model
-                let modelData = [];
-                if (modelName === 'TFT') {
-                    modelData = currentScenario.forecast.map(f => f.tft);
-                } else if (modelName === 'LSTM') {
-                    modelData = currentScenario.forecast.map(f => f.lstm);
-                } else if (modelName === 'XGBoost') {
-                    modelData = currentScenario.forecast.map(f => f.xgb);
-                } else if (modelName === 'Chronos') {
-                    modelData = currentScenario.forecast.map(f => f.chr2);
-                }
+                // Find percentage adjustment compared to historical average (so slider = 0 sets to model's baseline)
+                const modelSum = dailyCurve.reduce((a, b) => a + b, 0);
+                const pct = 0; // Selecting a model starts at its baseline (0% adjustment for that model)
                 
-                chart.data.datasets[1].data = [...Array(14).fill(null), ...modelData];
+                slider.value = 0;
+                
+                // Display the model curve on the chart
+                chart.data.datasets[1].data = [...Array(14).fill(null), ...activeBaseCurve];
                 chart.update();
+                
+                updateSliderOutput(0);
             };
             
-            document.getElementById('btn-ai-tft').onclick = () => applyModelSuggestion(tftTotal, 'TFT');
-            document.getElementById('btn-ai-lstm').onclick = () => applyModelSuggestion(lstmTotal, 'LSTM');
-            document.getElementById('btn-ai-xgb').onclick = () => applyModelSuggestion(xgbTotal, 'XGBoost');
-            document.getElementById('btn-ai-chr').onclick = () => applyModelSuggestion(chrTotal, 'Chronos');
+            document.getElementById('btn-ai-tft').onclick = () => selectModel('TFT', currentScenario.forecast.map(f => f.tft));
+            document.getElementById('btn-ai-lstm').onclick = () => selectModel('LSTM', currentScenario.forecast.map(f => f.lstm));
+            document.getElementById('btn-ai-xgb').onclick = () => selectModel('XGBoost', currentScenario.forecast.map(f => f.xgb));
+            document.getElementById('btn-ai-chr').onclick = () => selectModel('Chronos', currentScenario.forecast.map(f => f.chr2));
             
             updateTranslation();
         }
 
+        // Screen 5: Final Evaluation Summary
+        function showFinalSummaryScreen() {
+            navigateTo('screen-final');
+            sound.playSuccess();
+            
+            // Format comparison metrics
+            document.getElementById('final-err-s1').textContent = playerState.stage1_err.toFixed(1) + "%";
+            document.getElementById('final-err-s2').textContent = playerState.stage2_err.toFixed(1) + "%";
+            
+            // Shortage formatting
+            const shortageS1Val = playerState.stage1_patients > 0 
+                ? `${Math.round(playerState.stage1_patients * 14).toLocaleString()} Doses (${Math.round(playerState.stage1_patients)} Patients)` 
+                : "0 Doses (0 Patients)";
+            const shortageS2Val = playerState.stage2_patients > 0 
+                ? `${Math.round(playerState.stage2_patients * 14).toLocaleString()} Doses (${Math.round(playerState.stage2_patients)} Patients)` 
+                : "0 Doses (0 Patients)";
+                
+            document.getElementById('final-shortage-s1').textContent = shortageS1Val;
+            document.getElementById('final-shortage-s2').textContent = shortageS2Val;
+            
+            // Waste formatting
+            document.getElementById('final-waste-s1').textContent = formatCurrency(playerState.stage1_waste);
+            document.getElementById('final-waste-s2').textContent = formatCurrency(playerState.stage2_waste);
+            
+            // Total cost formatting
+            document.getElementById('final-cost-s1').textContent = formatCurrency(playerState.stage1_cost);
+            document.getElementById('final-cost-s2').textContent = formatCurrency(playerState.stage2_cost);
+            
+            // Net savings
+            const netSavings = playerState.stage1_cost - playerState.stage2_cost;
+            document.getElementById('final-savings').textContent = formatCurrency(netSavings);
+            if (netSavings >= 0) {
+                document.getElementById('final-savings').className = "py-3 px-4 text-emerald-400 font-bold text-center";
+            } else {
+                document.getElementById('final-savings').className = "py-3 px-4 text-red-400 font-bold text-center";
+            }
+            
+            // Closing description text replacement
+            const finalErrReduced = Math.max(0, playerState.stage1_err - playerState.stage2_err);
+            let finalClosingDesc = i18n[currentLang].final_closing_box
+                .replace('{e}', finalErrReduced.toFixed(1))
+                .replace('{s}', formatCurrency(Math.max(0, netSavings)));
+            
+            document.getElementById('final-closing-box').textContent = finalClosingDesc;
+            
+            // Pre-fill email address if it was set in input state
+            document.getElementById('input-final-email').value = playerState.email;
+            
+            updateTranslation();
+        }
+
+        // Finish Game and Submit final results
+        document.getElementById('btn-finish').addEventListener('click', () => {
+            playerState.email = document.getElementById('input-final-email').value.trim();
+            playerState.subscribe = document.getElementById('check-final-subscribe').checked;
+            
+            sound.playClick();
+            
+            submitResults();
+            
+            alert(currentLang === 'en' ? 'Simulation completed! Your results have been saved locally.' : 'Simulasi selesai! Keputusan anda telah disimpan secara tempatan.');
+            
+            // Reset to welcome
+            document.getElementById('screen-final').classList.add('hidden');
+            document.getElementById('screen-welcome').classList.remove('hidden');
+            document.getElementById('user-badge').classList.add('hidden');
+            
+            // Reset state
+            document.getElementById('input-name').value = '';
+            document.getElementById('input-final-email').value = '';
+            
+            playerState = {
+                name: '',
+                email: '',
+                subscribe: true,
+                stage1_pred: 0,
+                stage1_err: 0,
+                stage1_cost: 0,
+                stage1_patients: 0,
+                stage1_waste: 0,
+                stage2_pred: 0,
+                stage2_err: 0,
+                stage2_cost: 0,
+                stage2_patients: 0,
+                stage2_waste: 0,
+                chosen_model: 'Custom',
+                cost_saved_vs_naive: 0,
+                shortage_avoided: 0,
+                waste_avoided: 0
+            };
+            screenHistory = [];
+        });
+
         // Backend Logging Integration
         function submitResults() {
-            // Save locally to LocalStorage anyway
             let localScores = [];
             try {
                 localScores = JSON.parse(localStorage.getItem('ph_game_scores')) || [];
@@ -1196,7 +1489,7 @@
             });
         }
 
-        // Admin Panel Functions
+        // Admin Panel Functions (Triple-click / 4 clicks on Header logo to open)
         const headerLogo = document.getElementById('header-logo');
         let logoClicks = 0;
         let logoClickTimer = null;
@@ -1206,7 +1499,7 @@
             if (logoClicks === 1) {
                 logoClickTimer = setTimeout(() => { logoClicks = 0; }, 2000);
             }
-            if (logoClicks >= 4) { // Triple-clicking opens admin (we use 4 to be safe)
+            if (logoClicks >= 4) {
                 clearTimeout(logoClickTimer);
                 logoClicks = 0;
                 openAdminPanel();
@@ -1219,7 +1512,7 @@
             document.querySelectorAll('main > div').forEach(el => el.classList.add('hidden'));
             document.getElementById('screen-admin').classList.remove('hidden');
             
-            // Populate admin list
+            // Populate list
             const tbody = document.getElementById('admin-tbody');
             tbody.innerHTML = '';
             
@@ -1240,7 +1533,7 @@
                     <td class="py-2 px-4">${score.stage1_error.toFixed(1)}%</td>
                     <td class="py-2 px-4 text-emerald-400">${score.stage2_error.toFixed(1)}%</td>
                     <td class="py-2 px-4 text-slate-400">${score.chosen_model}</td>
-                    <td class="py-2 px-4 text-emerald-400">RM ${score.cost_saved_vs_naive.toFixed(2)}</td>
+                    <td class="py-2 px-4 text-emerald-400">${formatCurrency(score.cost_saved_vs_naive)}</td>
                 `;
                 tbody.appendChild(tr);
             });
