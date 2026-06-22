@@ -1,0 +1,6 @@
+# Ignore administrative notes, slides and PDFs
+administrative/
+
+# Ignore Python cache
+__pycache__/
+*.pyc

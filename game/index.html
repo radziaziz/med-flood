@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planetary Health: Climate-Resilient Pharmacy Manager</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #080d1a;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(29, 78, 216, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #f1f5f9;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-panel-glow {
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            box-shadow: 0 0 25px 0 rgba(59, 130, 246, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #1e293b;
+            border-radius: 8px;
+            height: 8px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+            transition: transform 0.1s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        .transition-opacity-500 {
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body class="h-full font-sans select-none flex flex-col justify-between overflow-hidden">
+    <!-- Header -->
+    <header class="w-full max-w-6xl mx-auto px-4 py-4 flex items-center justify-between z-10">
+        <div class="flex items-center space-x-3 cursor-pointer" id="header-logo">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-blue-500/20">PH</div>
+            <div>
+                <h1 class="text-lg font-bold tracking-tight text-slate-100 uppercase" id="game-title">PLANETARY HEALTH FORECAST GAME</h1>
+                <p class="text-xs text-slate-400 font-semibold" id="game-subtitle">Pharmacoinformatics Simulation</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <!-- Language Selector -->
+            <button id="btn-lang" class="px-3 py-1.5 text-xs font-semibold glass-panel rounded-lg hover:bg-slate-800 transition-colors flex items-center space-x-1">
+                <span>🌐</span>
+                <span id="lang-text">BM</span>
+            </button>
+            <!-- Audio Toggle -->
+            <button id="btn-audio" class="w-9 h-9 flex items-center justify-center glass-panel rounded-lg hover:bg-slate-800 transition-colors text-sm">
+                🔇
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-5xl mx-auto px-4 flex-1 flex items-center justify-center py-4 relative z-10 overflow-y-auto">
+        
+        <!-- SCREEN 1: Welcome -->
+        <div id="screen-welcome" class="w-full max-w-xl glass-panel p-8 rounded-3xl space-y-6 transition-all duration-300">
+            <div class="text-center space-y-3">
+                <div class="inline-block px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider" data-i18n="tag_role">Pharmacy Manager Role</div>
+                <h2 class="text-3xl font-extrabold tracking-tight text-glow text-blue-400" data-i18n="welcome_title">Climate-Resilient Pharmacy</h2>
+                <p class="text-slate-300 text-sm leading-relaxed" data-i18n="welcome_intro">
+                    You are a Pharmacy Manager at a Malaysian public hospital. An incoming flood disaster is forecasted in 2 weeks. Disasters disrupt logistics and trigger cardivascular crises. Your mission is to forecast medication needs (Defined Daily Doses - DDD) to save patients while avoiding wastage.
+                </p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="label_name">Manager Name</label>
+                    <input type="text" id="input-name" class="w-full bg-slate-950/80 border border-slate-800 focus:border-blue-500 text-slate-100 rounded-xl px-4 py-3 focus:outline-none transition-colors" placeholder="e.g. Mohd Radzi">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="label_email">Email Address (Optional)</label>
+                    <input type="email" id="input-email" class="w-full bg-slate-950/80 border border-slate-800 focus:border-blue-500 text-slate-100 rounded-xl px-4 py-3 focus:outline-none transition-colors" placeholder="e.g. radzi@example.com">
+                </div>
+                <div class="flex items-start space-x-2.5">
+                    <input type="checkbox" id="check-subscribe" checked class="w-4 h-4 rounded text-blue-500 focus:ring-0 mt-1 cursor-pointer">
+                    <label for="check-subscribe" class="text-xs text-slate-400 leading-normal cursor-pointer" data-i18n="subscribe_note">I consent to receiving my forecast analysis and research updates.</label>
+                </div>
+            </div>
+            
+            <button id="btn-start" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/20 hover:scale-[1.02]" data-i18n="btn_start">Start Simulation</button>
+        </div>
+
+        <!-- SCREEN 2: Gameplay (Stage 1 or Stage 2) -->
+        <div id="screen-gameplay" class="w-full glass-panel p-6 rounded-3xl space-y-6 hidden transition-all duration-300">
+            <!-- Step Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-800/60">
+                <div>
+                    <span id="stage-badge" class="px-2.5 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase tracking-wider">STAGE 1</span>
+                    <h2 id="stage-title" class="text-xl font-bold mt-1 text-slate-100">Wild Guess Demand Forecasting</h2>
+                </div>
+                <div class="mt-2 md:mt-0 flex items-center space-x-6 text-xs text-slate-400 font-semibold bg-slate-950/40 px-4 py-2 rounded-xl border border-slate-800/40">
+                    <div>
+                        <span data-i18n="stat_drug">Drug:</span> <span id="lbl-drug" class="text-blue-400 font-bold">Amlodipine</span>
+                    </div>
+                    <div>
+                        <span data-i18n="stat_fac">Facility:</span> <span id="lbl-fac" class="text-indigo-400 font-bold">11-01010011</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Alert -->
+            <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-center space-x-3">
+                <span class="text-2xl">🚨</span>
+                <div>
+                    <h3 class="text-xs font-bold text-red-400 uppercase tracking-wider" data-i18n="alert_title">Incoming Flood Alert</h3>
+                    <p class="text-xs text-slate-300 mt-0.5" id="lbl-alert-desc">A flood is forecasted to hit this clinic area. Historical demand is shown on the chart. Predict the next 2-week order.</p>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Chart Area -->
+                <div class="lg:col-span-2 bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 min-h-[300px] flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800/40">
+                        <span data-i18n="chart_title">Medication Consumption (Daily DDD)</span>
+                        <span id="chart-hint" class="italic text-[10px]">Solid: History | Dashed: Your Forecast</span>
+                    </div>
+                    <div class="relative flex-1 h-[280px] mt-2">
+                        <canvas id="game-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Input Controls Area -->
+                <div class="bg-slate-950/40 border border-slate-800/60 rounded-2xl p-5 flex flex-col justify-between space-y-6">
+                    <!-- Historical Baseline Stats -->
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="baseline_header">Historical Reference (14 Days)</h4>
+                        <div class="grid grid-cols-2 gap-3 text-center">
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
+                                <p class="text-[10px] text-slate-400 font-semibold" data-i18n="stat_daily_avg">Daily Average</p>
+                                <p id="val-daily-avg" class="text-sm font-mono font-bold text-slate-200 mt-1">--</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
+                                <p class="text-[10px] text-slate-400 font-semibold" data-i18n="stat_normal_total">Normal 14d Total</p>
+                                <p id="val-normal-total" class="text-sm font-mono font-bold text-slate-200 mt-1">--</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Models Cards (Stage 2 Only) -->
+                    <div id="ai-models-container" class="space-y-3 hidden">
+                        <h4 class="text-xs font-bold text-blue-400 uppercase tracking-wider" data-i18n="ai_models_header">AI Models Suggestions</h4>
+                        <div class="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                            <!-- TFT Card -->
+                            <button id="btn-ai-tft" class="w-full text-left p-2.5 rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-colors flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold text-blue-400">TFT (SOTA Deep Learning)</p>
+                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">RM/DDD: Lowest Error</p>
+                                </div>
+                                <div class="text-right font-mono">
+                                    <p id="ai-val-tft" class="text-xs font-bold text-slate-200">--</p>
+                                    <span class="text-[9px] text-emerald-400 font-bold bg-emerald-500/10 px-1 rounded">1.8% Err</span>
+                                </div>
+                            </button>
+                            <!-- LSTM Card -->
+                            <button id="btn-ai-lstm" class="w-full text-left p-2.5 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 transition-colors flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold text-violet-400">LSTM (Recurrent Network)</p>
+                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">Captures sequential history</p>
+                                </div>
+                                <div class="text-right font-mono">
+                                    <p id="ai-val-lstm" class="text-xs font-bold text-slate-200">--</p>
+                                    <span class="text-[9px] text-emerald-400/90 font-bold bg-emerald-500/10 px-1 rounded">2.4% Err</span>
+                                </div>
+                            </button>
+                            <!-- XGBoost Card -->
+                            <button id="btn-ai-xgb" class="w-full text-left p-2.5 rounded-xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 transition-colors flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold text-amber-400">XGBoost (Lightweight ML)</p>
+                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">Fast, standard CPU hardware</p>
+                                </div>
+                                <div class="text-right font-mono">
+                                    <p id="ai-val-xgb" class="text-xs font-bold text-slate-200">--</p>
+                                    <span class="text-[9px] text-amber-400 font-bold bg-amber-500/10 px-1 rounded">12.6% Err</span>
+                                </div>
+                            </button>
+                            <!-- Chronos Card -->
+                            <button id="btn-ai-chr" class="w-full text-left p-2.5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold text-emerald-400">Chronos (Foundation Model)</p>
+                                    <p class="text-xs text-slate-300 font-semibold mt-0.5">Zero-shot: No training required</p>
+                                </div>
+                                <div class="text-right font-mono">
+                                    <p id="ai-val-chr" class="text-xs font-bold text-slate-200">--</p>
+                                    <span class="text-[9px] text-amber-400/90 font-bold bg-amber-500/10 px-1 rounded">12.7% Err</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Slider Control -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
+                            <span data-i18n="slider_label">Adjust Order Level</span>
+                            <span id="val-slider-pct" class="text-blue-400 font-mono">Normal (0%)</span>
+                        </div>
+                        <input type="range" id="input-slider" min="-50" max="100" value="0" class="w-full accent-blue-500">
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/40 text-center font-mono">
+                            <p class="text-[10px] text-slate-400 font-sans font-semibold" data-i18n="stat_your_forecast">Your Forecast Total (14 Days)</p>
+                            <p id="val-your-forecast" class="text-lg font-bold text-blue-400 mt-0.5">-- DDD</p>
+                        </div>
+                    </div>
+
+                    <button id="btn-submit" class="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_submit">Hantar Ramalan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: Results Display (Stage 1 or Stage 2) -->
+        <div id="screen-results" class="w-full glass-panel p-6 rounded-3xl space-y-6 hidden transition-all duration-300">
+            <!-- Step Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-800/60">
+                <div>
+                    <span id="results-badge" class="px-2.5 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase tracking-wider">STAGE 1 RESULT</span>
+                    <h2 id="results-title" class="text-xl font-bold mt-1 text-slate-100">Reality Check: What Actually Happened?</h2>
+                </div>
+                <div id="result-error-badge" class="mt-2 md:mt-0 px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl font-mono text-center">
+                    <p class="text-[9px] uppercase tracking-wider font-semibold font-sans" data-i18n="stat_forecast_error">Forecast Error</p>
+                    <p id="val-result-error" class="text-base font-bold">--%</p>
+                </div>
+            </div>
+
+            <!-- Comparison Dashboard (Visible on Stage 2 Results) -->
+            <div id="model-comparison-container" class="hidden grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Player Stage 1 Card -->
+                <div class="bg-slate-900/50 border border-slate-800 p-3 rounded-xl">
+                    <p class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Stage 1 (Wild Guess)</p>
+                    <p id="comp-err-s1" class="text-lg font-mono font-bold mt-1">--% Error</p>
+                    <p id="comp-cost-s1" class="text-xs text-slate-400 font-semibold mt-0.5">Cost: RM --</p>
+                </div>
+                <!-- Naive Baseline Card -->
+                <div class="bg-slate-900/50 border border-slate-800 p-3 rounded-xl">
+                    <p class="text-[10px] font-bold text-rose-400 uppercase tracking-wider">Naive (t-28)</p>
+                    <p id="comp-err-naive" class="text-lg font-mono font-bold mt-1">--% Error</p>
+                    <p id="comp-cost-naive" class="text-xs text-slate-400 font-semibold mt-0.5">Cost: RM --</p>
+                </div>
+                <!-- Player Stage 2 Card -->
+                <div class="bg-slate-900/50 border border-blue-500/20 bg-blue-500/5 p-3 rounded-xl">
+                    <p class="text-[10px] font-bold text-blue-400 uppercase tracking-wider">Stage 2 (AI-Assisted)</p>
+                    <p id="comp-err-s2" class="text-lg font-mono font-bold mt-1">--% Error</p>
+                    <p id="comp-cost-s2" class="text-xs text-slate-400 font-semibold mt-0.5">Cost: RM --</p>
+                </div>
+                <!-- SOTA TFT Card -->
+                <div class="bg-slate-900/50 border border-emerald-500/20 bg-emerald-500/5 p-3 rounded-xl">
+                    <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">TFT Model (SOTA AI)</p>
+                    <p id="comp-err-tft" class="text-lg font-mono font-bold mt-1">--% Error</p>
+                    <p id="comp-cost-tft" class="text-xs text-slate-400 font-semibold mt-0.5">Cost: RM --</p>
+                </div>
+            </div>
+
+            <!-- Impact Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Patients Served Card -->
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
+                    <span id="img-patients-icon" class="text-4xl">🏥</span>
+                    <div class="flex-1">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" data-i18n="impact_patients_header">Patient Treatment Impact</p>
+                        <h3 id="lbl-patients-status" class="text-lg font-bold text-emerald-400 mt-1">All Patients Served</h3>
+                        <p id="lbl-patients-desc" class="text-xs text-slate-300 mt-0.5">You met patient demand. life-saving drug coverage intact.</p>
+                    </div>
+                </div>
+
+                <!-- Financial Costs Card -->
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
+                    <span id="img-cost-icon" class="text-4xl">💰</span>
+                    <div class="flex-1">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" data-i18n="impact_cost_header">Financial Procurement Cost</p>
+                        <h3 id="lbl-cost-value" class="text-lg font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
+                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Spent relative to normal cost.</p>
+                    </div>
+                </div>
+
+                <!-- Savings / Waste Card -->
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex items-center space-x-4">
+                    <span id="img-waste-icon" class="text-4xl">📉</span>
+                    <div class="flex-1">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-waste-header">Procurement Waste / Savings</p>
+                        <h3 id="lbl-waste-value" class="text-lg font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
+                        <p id="lbl-waste-desc" class="text-xs text-slate-300 mt-0.5">Losses avoided by matching demand.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context Educational Box -->
+            <div class="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4 text-xs text-slate-300 leading-relaxed" id="lbl-results-edu">
+                Disasters cause major drug shortages or surplus. In public hospitals, shortage triggers high-priced emergency purchases (up to 250% price markup), while excess stocks decay or expire, costing taxpayers. Standard historical baseline ordering performs poorly during extreme climate events.
+            </div>
+
+            <button id="btn-next-stage" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:scale-[1.02]" data-i18n="btn_next">Seterusnya</button>
+        </div>
+
+        <!-- SCREEN 4: Admin Panel (Hidden) -->
+        <div id="screen-admin" class="w-full glass-panel p-6 rounded-3xl space-y-6 hidden transition-all duration-300 max-w-4xl">
+            <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+                <h2 class="text-xl font-bold text-slate-200">Admin Dashboard: Player Results</h2>
+                <button id="btn-close-admin" class="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg transition-colors">Close</button>
+            </div>
+            
+            <div class="flex space-x-3">
+                <button id="btn-export-csv" class="px-4 py-2 text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition-all flex items-center space-x-1 shadow-md">
+                    <span>📥</span> <span>Export CSV</span>
+                </button>
+                <button id="btn-clear-scores" class="px-4 py-2 text-xs bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white font-bold border border-red-500/20 rounded-lg transition-all">
+                    Clear Leaderboard
+                </button>
+            </div>
+
+            <div class="overflow-x-auto max-h-[350px] border border-slate-800 rounded-xl bg-slate-950/40">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="sticky top-0 bg-slate-900 text-slate-400 font-bold border-b border-slate-800">
+                        <tr>
+                            <th class="py-2.5 px-4">Time</th>
+                            <th class="py-2.5 px-4">Player</th>
+                            <th class="py-2.5 px-4">Drug</th>
+                            <th class="py-2.5 px-4">S1 Err</th>
+                            <th class="py-2.5 px-4">S2 Err</th>
+                            <th class="py-2.5 px-4">Model</th>
+                            <th class="py-2.5 px-4">Cost Saved vs Naive</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-tbody" class="divide-y divide-slate-800/40 font-mono">
+                        <!-- Populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-6xl mx-auto px-4 py-4 border-t border-slate-800/40 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-500 font-semibold z-10">
+        <p>© 2026 Faculty of Pharmacy, UiTM. Mohd Radzi bin Ab. Aziz. All rights reserved.</p>
+        <p class="mt-1 md:mt-0 flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 block animate-pulse"></span>
+            <span>ThinkPad T14 Local Offline Deploy v4.0</span>
+        </p>
+    </footer>
+
+    <!-- Audio Element (Ambient background synth loop) -->
+    <!-- Managed entirely inside SoundGenerator via Web Audio API -->
+
+    <!-- Load Scenarios Data -->
+    <script src="data/scenarios.js"></script>
+
+    <!-- Game Logic Script -->
+    <script>
+        // Language translation dictionary
+        const i18n = {
+            en: {
+                tag_role: "Pharmacy Manager Role",
+                welcome_title: "Climate-Resilient Pharmacy",
+                welcome_intro: "You are the Pharmacy Manager at a Malaysian public healthcare facility. A flood alert has been issued for the next 2 weeks. Floods disrupt logistics and trigger cardiovascular emergencies. Your mission is to forecast medication needs (Defined Daily Doses - DDD) to protect patients while minimizing waste.",
+                label_name: "Manager Name",
+                label_email: "Email Address (Optional)",
+                subscribe_note: "I consent to saving my score offline and receiving research updates.",
+                btn_start: "Start Mission",
+                stat_drug: "Drug:",
+                stat_fac: "Facility:",
+                alert_title: "Incoming Flood Alert",
+                baseline_header: "Historical Reference (14 Days)",
+                stat_daily_avg: "Daily Average",
+                stat_normal_total: "Normal 14d Total",
+                ai_models_header: "AI Models Suggestions",
+                slider_label: "Adjust Order Level",
+                stat_your_forecast: "Your Forecast Total (14 Days)",
+                btn_submit: "Submit Order",
+                stat_forecast_error: "Forecast Error",
+                impact_patients_header: "Patient Treatment Impact",
+                impact_cost_header: "Procurement Cost",
+                lbl_waste_header_waste: "Procurement Waste",
+                lbl_waste_header_saved: "Cost Saved vs Naive",
+                btn_next: "Next",
+                chart_title: "Medication Consumption (Daily DDD)",
+                chart_hint: "Solid: History | Dashed: Your Forecast",
+                // Dynamic translation fields
+                alert_desc: "A flood warning has been issued for this clinic. Historically, floods disrupt supply. Predict medication needs for the next 14 days.",
+                s1_title: "Wild Guess Demand Forecasting",
+                s2_title: "AI-Assisted Demand Forecasting",
+                s2_desc: "Stage 2: AI Forecasting Models are now online. Review their projections, analyze algorithms' classes, pros & cons, and submit your assisted order.",
+                res_title_s1: "Stage 1 Reality Check: The Wild Guess",
+                res_title_s2: "Stage 2 Result: Human vs AI",
+                patients_served_ok: "All Patients Served",
+                patients_served_ok_desc: "Your order met patient demand. Life-saving drug coverage is secure.",
+                patients_shortage: "Medication Shortage",
+                patients_shortage_desc: "{n} patient-courses went unserved. Emergency buy ordered at a 2.5x markup.",
+                patients_surplus_desc: "All patients served, but excess inventory was left vulnerable to flood damage.",
+                edu_box_s1: "Disasters cause major drug shortages or surplus. In public hospitals, shortage triggers high-priced emergency purchases (up to 250% price markup), while excess stocks decay or expire, costing taxpayers. Standard historical baseline ordering performs poorly during extreme climate events.",
+                edu_box_s2: "Using AI models dramatically optimizes procurement. TFT (Temporal Fusion Transformer) provides SOTA deep learning precision, while LSTM captures sequence patterns. XGBoost offers speed on light hardware. Chronos-2 is a zero-shot model working instantly without training. AI prevents waste and saves lives.",
+                btn_restart: "Restart Game",
+                btn_results: "Show Score Comparison"
+            },
+            bm: {
+                tag_role: "Peranan Pengurus Farmasi",
+                welcome_title: "Farmasi Resilien Iklim",
+                welcome_intro: "Anda adalah Pengurus Farmasi di fasiliti kesihatan awam Malaysia. Amaran banjir telah dikeluarkan untuk 2 minggu akan datang. Banjir mengganggu logistik dan mencetuskan kecemasan kardiovaskular. Misi anda adalah untuk meramal keperluan ubat (Defined Daily Doses - DDD) demi melindungi pesakit dan meminimumkan pembaziran.",
+                label_name: "Nama Pengurus",
+                label_email: "Alamat E-mel (Pilihan)",
+                subscribe_note: "Saya bersetuju untuk menyimpan markah saya secara luar talian dan menerima kemas kini penyelidikan.",
+                btn_start: "Mula Misi",
+                stat_drug: "Ubat:",
+                stat_fac: "Fasiliti:",
+                alert_title: "Amaran Banjir Masuk",
+                baseline_header: "Rujukan Sejarah (14 Hari)",
+                stat_daily_avg: "Purata Harian",
+                stat_normal_total: "Jumlah Normal 14h",
+                ai_models_header: "Cadangan Model AI",
+                slider_label: "Laras Tahap Pesanan",
+                stat_your_forecast: "Jumlah Ramalan Anda (14 Hari)",
+                btn_submit: "Hantar Pesanan",
+                stat_forecast_error: "Ralat Ramalan",
+                impact_patients_header: "Impak Rawatan Pesakit",
+                impact_cost_header: "Kos Perolehan",
+                lbl_waste_header_waste: "Pembaziran Perolehan",
+                lbl_waste_header_saved: "Kos Dijimat vs Naif",
+                btn_next: "Seterusnya",
+                chart_title: "Penggunaan Ubat-ubatan (DDD Harian)",
+                chart_hint: "Garis Padu: Sejarah | Garis Putus-putus: Ramalan Anda",
+                // Dynamic translation fields
+                alert_desc: "Amaran banjir dikeluarkan untuk klinik ini. Secara sejarahnya, banjir mengganggu bekalan. Ramal keperluan ubat untuk 14 hari akan datang.",
+                s1_title: "Ramalan Tekaan Rawak Permintaan",
+                s2_title: "Ramalan Permintaan Berbantukan AI",
+                s2_desc: "Tahap 2: Model Ramalan AI kini dalam talian. Tinjau unjuran mereka, nilai kelas algoritma, pro & kontra, dan hantar pesanan berbantuan anda.",
+                res_title_s1: "Reality Check Tahap 1: Tekaan Rawak",
+                res_title_s2: "Keputusan Tahap 2: Manusia vs AI",
+                patients_served_ok: "Semua Pesakit Dilayani",
+                patients_served_ok_desc: "Pesanan anda memenuhi permintaan pesakit. Liputan ubat menyelamat nyawa adalah selamat.",
+                patients_shortage: "Kekurangan Ubat-ubatan",
+                patients_shortage_desc: "{n} rawatan pesakit tidak dilayani. Pembelian kecemasan diarahkan pada harga markup 2.5x.",
+                patients_surplus_desc: "Semua pesakit dilayani, tetapi inventori berlebihan terdedah kepada kerosakan banjir.",
+                edu_box_s1: "Bencana menyebabkan kekurangan atau lebihan ubat yang besar. Di hospital kerajaan, kekurangan mencetuskan pembelian kecemasan harga tinggi (sehingga 250% markup), manakala stok berlebihan rosak atau luput, membebankan pembayar cukai. Kaedah pesanan garis asas naif (t-28) tidak berfungsi baik semasa bencana.",
+                edu_box_s2: "Model AI mengoptimumkan perolehan. TFT memberikan ketepatan deep learning SOTA, manakala LSTM menangkap corak jujukan. XGBoost menawarkan kelajuan pada perkakasan biasa. Chronos-2 pula ialah model zero-shot yang berfungsi tanpa latihan. AI mengelakkan pembaziran dan menyelamatkan nyawa.",
+                btn_restart: "Mula Semula",
+                btn_results: "Lihat Perbandingan Markah"
+            }
+        };
+
+        // Web Audio API Sound Generator
+        class SoundGenerator {
+            constructor() {
+                this.ctx = null;
+                this.ambientSource = null;
+                this.ambientGain = null;
+                this.enabled = false;
+                this.ambientEnabled = false;
+            }
+            init() {
+                if (this.ctx) return;
+                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                this.setupAmbient();
+            }
+            setupAmbient() {
+                const bufferSize = 2 * this.ctx.sampleRate;
+                const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                let lastOut = 0.0;
+                for (let i = 0; i < bufferSize; i++) {
+                    const white = Math.random() * 2 - 1;
+                    output[i] = (lastOut + (0.018 * white)) / 1.02;
+                    lastOut = output[i];
+                    output[i] *= 2.5; 
+                }
+                const whiteNoise = this.ctx.createBufferSource();
+                whiteNoise.buffer = noiseBuffer;
+                whiteNoise.loop = true;
+
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(350, this.ctx.currentTime);
+
+                this.ambientGain = this.ctx.createGain();
+                this.ambientGain.gain.setValueAtTime(0.001, this.ctx.currentTime); 
+
+                whiteNoise.connect(filter);
+                filter.connect(this.ambientGain);
+                this.ambientGain.connect(this.ctx.destination);
+                
+                this.ambientSource = whiteNoise;
+            }
+            toggleAmbient(enable) {
+                this.init();
+                this.ambientEnabled = enable;
+                if (enable) {
+                    if (this.ctx.state === 'suspended') {
+                        this.ctx.resume();
+                    }
+                    try {
+                        this.ambientSource.start();
+                    } catch (e) {}
+                    this.ambientGain.gain.setTargetAtTime(0.05, this.ctx.currentTime, 1);
+                } else {
+                    if (this.ambientGain) {
+                        this.ambientGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.5);
+                    }
+                }
+            }
+            playClick() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.08);
+            }
+            playSuccess() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const playNote = (freq, delay, duration) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + delay);
+                    gain.gain.setValueAtTime(0.0, now + delay);
+                    gain.gain.linearRampToValueAtTime(0.05, now + delay + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + delay + duration);
+                    osc.start(now + delay);
+                    osc.stop(now + delay + duration);
+                };
+                playNote(523.25, 0, 0.15); // C5
+                playNote(659.25, 0.08, 0.15); // E5
+                playNote(783.99, 0.16, 0.25); // G5
+                playNote(1046.50, 0.28, 0.4); // C6
+            }
+            playAlert() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(160, now);
+                osc.frequency.setValueAtTime(110, now + 0.12);
+                gain.gain.setValueAtTime(0.06, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.22);
+                osc.start(now);
+                osc.stop(now + 0.22);
+            }
+        }
+
+        // Global state
+        let currentLang = 'en';
+        const sound = new SoundGenerator();
+        let chart = null;
+        let currentScenario = null;
+        let gameStage = 1; // 1: Wild Guess, 2: AI-Assisted
+        let playerState = {
+            name: '',
+            email: '',
+            subscribe: true,
+            stage1_pred: 0,
+            stage1_err: 0,
+            stage1_cost: 0,
+            stage1_patients: 0,
+            stage1_waste: 0,
+            stage2_pred: 0,
+            stage2_err: 0,
+            stage2_cost: 0,
+            stage2_patients: 0,
+            stage2_waste: 0,
+            chosen_model: 'Custom',
+            cost_saved_vs_naive: 0,
+            shortage_avoided: 0,
+            waste_avoided: 0
+        };
+
+        // Initialize translation
+        function updateTranslation() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.textContent = i18n[currentLang][key];
+                }
+            });
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'BM' : 'EN';
+            
+            // Input Placeholders
+            if (currentLang === 'en') {
+                document.getElementById('input-name').placeholder = "e.g. Mohd Radzi";
+                document.getElementById('input-email').placeholder = "e.g. radzi@example.com";
+            } else {
+                document.getElementById('input-name').placeholder = "cth. Mohd Radzi";
+                document.getElementById('input-email').placeholder = "cth. radzi@example.com";
+            }
+
+            // Dynamic screen translations based on state
+            if (currentScenario) {
+                document.getElementById('lbl-alert-desc').textContent = i18n[currentLang].alert_desc;
+                if (gameStage === 1) {
+                    document.getElementById('stage-title').textContent = i18n[currentLang].s1_title;
+                } else {
+                    document.getElementById('stage-title').textContent = i18n[currentLang].s2_title;
+                }
+            }
+        }
+
+        // Setup sound and ambient
+        document.getElementById('btn-audio').addEventListener('click', () => {
+            sound.enabled = !sound.enabled;
+            sound.toggleAmbient(sound.enabled);
+            document.getElementById('btn-audio').textContent = sound.enabled ? '🔊' : '🔇';
+            sound.playClick();
+        });
+
+        document.getElementById('btn-lang').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'bm' : 'en';
+            sound.playClick();
+            updateTranslation();
+            if (chart) updateChartLabels();
+        });
+
+        // Trigger start simulation
+        document.getElementById('btn-start').addEventListener('click', () => {
+            const nameInput = document.getElementById('input-name').value.trim();
+            if (!nameInput) {
+                alert(currentLang === 'en' ? 'Please enter your name to start.' : 'Sila masukkan nama anda untuk bermula.');
+                return;
+            }
+            playerState.name = nameInput;
+            playerState.email = document.getElementById('input-email').value.trim();
+            playerState.subscribe = document.getElementById('check-subscribe').checked;
+            
+            sound.playClick();
+            
+            // Randomly select scenario from window.gameScenarios
+            if (!window.gameScenarios || window.gameScenarios.length === 0) {
+                alert('No scenario data loaded. Check scenarios.js.');
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * window.gameScenarios.length);
+            currentScenario = window.gameScenarios[randomIndex];
+            
+            // Hide welcome screen, show gameplay
+            document.getElementById('screen-welcome').classList.add('hidden');
+            document.getElementById('screen-gameplay').classList.remove('hidden');
+            
+            initGameplayScreen();
+        });
+
+        function getHistoricalAvg() {
+            const sum = currentScenario.history.reduce((a, b) => a + b.actual, 0);
+            return sum / currentScenario.history.length;
+        }
+
+        function getActualForecastTotal() {
+            return currentScenario.forecast.reduce((a, b) => a + b.actual, 0);
+        }
+
+        function initGameplayScreen() {
+            gameStage = 1;
+            document.getElementById('stage-badge').textContent = "STAGE 1";
+            document.getElementById('stage-badge').className = "px-2.5 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase tracking-wider";
+            document.getElementById('stage-title').textContent = i18n[currentLang].s1_title;
+            
+            document.getElementById('lbl-drug').textContent = currentScenario.med_name;
+            document.getElementById('lbl-fac').textContent = currentScenario.fac_code;
+            
+            const histAvg = getHistoricalAvg();
+            const normTotal = histAvg * 14;
+            
+            document.getElementById('val-daily-avg').textContent = Math.round(histAvg).toLocaleString() + " DDD";
+            document.getElementById('val-normal-total').textContent = Math.round(normTotal).toLocaleString() + " DDD";
+            
+            // Initialize slider to 0% adjustment
+            const slider = document.getElementById('input-slider');
+            slider.value = 0;
+            updateSliderOutput(0, normTotal);
+            
+            // Hide AI container in stage 1
+            document.getElementById('ai-models-container').classList.add('hidden');
+            
+            // Render / reset Chart
+            renderChart(normTotal);
+            
+            updateTranslation();
+        }
+
+        function updateSliderOutput(pct, normTotal) {
+            const multiplier = 1 + (pct / 100);
+            const predictedTotal = normTotal * multiplier;
+            
+            document.getElementById('val-slider-pct').textContent = (pct >= 0 ? "+" : "") + pct + "%";
+            document.getElementById('val-your-forecast').textContent = Math.round(predictedTotal).toLocaleString() + " DDD";
+            
+            if (chart) {
+                // Update dashed forecast line preview dynamically on slider drag
+                const avgDaily = predictedTotal / 14;
+                const forecastData = Array(14).fill(avgDaily);
+                chart.data.datasets[1].data = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, ...forecastData];
+                chart.update('none'); // Update immediately at 60fps without transition animations
+            }
+        }
+
+        document.getElementById('input-slider').addEventListener('input', (e) => {
+            const pct = parseInt(e.target.value);
+            const histAvg = getHistoricalAvg();
+            const normTotal = histAvg * 14;
+            updateSliderOutput(pct, normTotal);
+            
+            // Set model to custom since they adjusted manually
+            playerState.chosen_model = 'Custom';
+        });
+
+        function renderChart(normTotal) {
+            const ctx = document.getElementById('game-chart').getContext('2d');
+            if (chart) {
+                chart.destroy();
+            }
+            
+            const historyDates = currentScenario.history.map(h => h.date);
+            const forecastDates = currentScenario.forecast.map(f => f.date);
+            const labels = [...historyDates, ...forecastDates];
+            
+            const historyData = currentScenario.history.map(h => h.actual);
+            // Default forecast data is the normal historical baseline
+            const histAvg = getHistoricalAvg();
+            const initialForecastData = Array(14).fill(histAvg);
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: currentLang === 'en' ? 'Actual Usage' : 'Penggunaan Sebenar',
+                            data: [...historyData, ...Array(14).fill(null)],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.1
+                        },
+                        {
+                            label: currentLang === 'en' ? 'Your Forecast' : 'Ramalan Anda',
+                            data: [...Array(14).fill(null), ...initialForecastData],
+                            borderColor: '#f59e0b',
+                            borderDash: [6, 4],
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function updateChartLabels() {
+            if (chart) {
+                chart.data.datasets[0].label = currentLang === 'en' ? 'Actual Usage' : 'Penggunaan Sebenar';
+                chart.data.datasets[1].label = currentLang === 'en' ? 'Your Forecast' : 'Ramalan Anda';
+                chart.update();
+            }
+        }
+
+        // Submit Forecast
+        document.getElementById('btn-submit').addEventListener('click', () => {
+            sound.playClick();
+            
+            const histAvg = getHistoricalAvg();
+            const normTotal = histAvg * 14;
+            const sliderVal = parseInt(document.getElementById('input-slider').value);
+            const predictedTotal = normTotal * (1 + (sliderVal / 100));
+            
+            const actualTotal = getActualForecastTotal();
+            
+            if (gameStage === 1) {
+                playerState.stage1_pred = predictedTotal;
+                calculateStageResults(1, predictedTotal, actualTotal);
+            } else {
+                playerState.stage2_pred = predictedTotal;
+                calculateStageResults(2, predictedTotal, actualTotal);
+            }
+        });
+
+        // Math engine for game results
+        function calculateStageResults(stage, predicted, actual) {
+            const unitCost = currentScenario.unit_cost;
+            const absError = Math.abs(predicted - actual);
+            const errorPct = (absError / actual) * 100;
+            
+            let totalCost = 0;
+            let patientsAffected = 0;
+            let wasteValue = 0;
+            
+            if (predicted < actual) {
+                // Shortage: Normal cost of predicted, plus emergency buying markup (2.5x) for deficit
+                const normalCost = predicted * unitCost;
+                const emergencyCost = (actual - predicted) * unitCost * 2.5;
+                totalCost = normalCost + emergencyCost;
+                // Patients affected = deficit DDD divided by 14 days course
+                patientsAffected = (actual - predicted) / 14;
+                wasteValue = 0;
+            } else {
+                // Surplus: Cost spent on total predicted. Excess represents direct waste.
+                totalCost = predicted * unitCost;
+                patientsAffected = 0;
+                wasteValue = (predicted - actual) * unitCost;
+            }
+            
+            if (stage === 1) {
+                playerState.stage1_err = errorPct;
+                playerState.stage1_cost = totalCost;
+                playerState.stage1_patients = patientsAffected;
+                playerState.stage1_waste = wasteValue;
+                
+                showResultsScreen(1);
+            } else {
+                playerState.stage2_err = errorPct;
+                playerState.stage2_cost = totalCost;
+                playerState.stage2_patients = patientsAffected;
+                playerState.stage2_waste = wasteValue;
+                
+                // Now compile comparisons with Naive
+                const naiveTotal = currentScenario.forecast.reduce((a, b) => a + b.naive, 0);
+                
+                let naiveCost = 0;
+                let naivePatients = 0;
+                let naiveWaste = 0;
+                if (naiveTotal < actual) {
+                    naiveCost = naiveTotal * unitCost + (actual - naiveTotal) * unitCost * 2.5;
+                    naivePatients = (actual - naiveTotal) / 14;
+                } else {
+                    naiveCost = naiveTotal * unitCost;
+                    naiveWaste = (naiveTotal - actual) * unitCost;
+                }
+                
+                // Savings / Benefits comparisons (Avoided waste and shortage)
+                playerState.cost_saved_vs_naive = Math.max(0, naiveCost - totalCost);
+                playerState.shortage_avoided = Math.max(0, naivePatients - patientsAffected);
+                playerState.waste_avoided = Math.max(0, naiveWaste - wasteValue);
+                
+                showResultsScreen(2);
+                
+                // Submit to backend
+                submitResults();
+            }
+        }
+
+        function showResultsScreen(stage) {
+            document.getElementById('screen-gameplay').classList.add('hidden');
+            document.getElementById('screen-results').classList.remove('hidden');
+            
+            const resultsBadge = document.getElementById('results-badge');
+            const resultsTitle = document.getElementById('results-title');
+            const errorBadge = document.getElementById('result-error-badge');
+            const errVal = document.getElementById('val-result-error');
+            const btnNext = document.getElementById('btn-next-stage');
+            
+            // Update chart to show actual utilization line
+            const actualForecastData = currentScenario.forecast.map(f => f.actual);
+            // Actual line plotted in green/blue, player forecast in dashed orange
+            chart.data.datasets.push({
+                label: currentLang === 'en' ? 'Actual Future' : 'Masa Depan Sebenar',
+                data: [...Array(14).fill(null), ...actualForecastData],
+                borderColor: '#10b981', // green line
+                borderWidth: 3,
+                fill: false,
+                tension: 0.1
+            });
+            chart.update();
+
+            const err = stage === 1 ? playerState.stage1_err : playerState.stage2_err;
+            const cost = stage === 1 ? playerState.stage1_cost : playerState.stage2_cost;
+            const patients = stage === 1 ? playerState.stage1_patients : playerState.stage2_patients;
+            const waste = stage === 1 ? playerState.stage1_waste : playerState.stage2_waste;
+            
+            errVal.textContent = err.toFixed(1) + "%";
+            
+            if (err < 5) {
+                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl font-mono text-center";
+                sound.playSuccess();
+            } else if (err < 15) {
+                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-mono text-center";
+                sound.playClick();
+            } else {
+                errorBadge.className = "mt-2 md:mt-0 px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl font-mono text-center";
+                sound.playAlert();
+            }
+            
+            // Populating UI cards
+            document.getElementById('lbl-cost-value').textContent = "RM " + cost.toFixed(2);
+            
+            const patientsStatus = document.getElementById('lbl-patients-status');
+            const patientsDesc = document.getElementById('lbl-patients-desc');
+            const patientsIcon = document.getElementById('img-patients-icon');
+            
+            if (patients > 0) {
+                patientsStatus.textContent = i18n[currentLang].patients_shortage;
+                patientsStatus.className = "text-lg font-bold text-red-400 mt-1";
+                patientsDesc.textContent = i18n[currentLang].patients_shortage_desc.replace('{n}', Math.round(patients));
+                patientsIcon.textContent = "⚠️";
+            } else {
+                patientsStatus.textContent = i18n[currentLang].patients_served_ok;
+                patientsStatus.className = "text-lg font-bold text-emerald-400 mt-1";
+                patientsIcon.textContent = "🏥";
+                if (waste > 0) {
+                    patientsDesc.textContent = i18n[currentLang].patients_surplus_desc;
+                } else {
+                    patientsDesc.textContent = i18n[currentLang].patients_served_ok_desc;
+                }
+            }
+            
+            const wasteHeader = document.getElementById('lbl-waste-header');
+            const wasteValue = document.getElementById('lbl-waste-value');
+            const wasteDesc = document.getElementById('lbl-waste-desc');
+            const wasteIcon = document.getElementById('img-waste-icon');
+            
+            if (stage === 1) {
+                resultsBadge.textContent = "STAGE 1 RESULT";
+                resultsTitle.textContent = i18n[currentLang].res_title_s1;
+                document.getElementById('lbl-results-edu').textContent = i18n[currentLang].edu_box_s1;
+                
+                wasteHeader.textContent = i18n[currentLang].lbl_waste_header_waste;
+                wasteValue.textContent = "RM " + waste.toFixed(2);
+                wasteValue.className = "text-lg font-mono font-bold text-amber-500 mt-1";
+                wasteDesc.textContent = currentLang === 'en' ? "Inventory value decayed/wasted." : "Nilai inventori rosak/dibazirkan.";
+                wasteIcon.textContent = "📉";
+                
+                document.getElementById('model-comparison-container').classList.add('hidden');
+                
+                btnNext.textContent = currentLang === 'en' ? "Next: Introduce AI Assist" : "Seterusnya: Kenalkan Bantuan AI";
+            } else {
+                resultsBadge.textContent = "STAGE 2 RESULT";
+                resultsBadge.className = "px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider";
+                resultsTitle.textContent = i18n[currentLang].res_title_s2;
+                document.getElementById('lbl-results-edu').textContent = i18n[currentLang].edu_box_s2;
+                
+                // Compare with Naive
+                wasteHeader.textContent = i18n[currentLang].lbl_waste_header_saved;
+                wasteValue.textContent = "RM " + playerState.cost_saved_vs_naive.toFixed(2);
+                wasteValue.className = "text-lg font-mono font-bold text-emerald-400 mt-1";
+                
+                let avoidedDesc = "";
+                if (currentLang === 'en') {
+                    avoidedDesc = `Saved RM ${playerState.cost_saved_vs_naive.toFixed(2)} and protected ${Math.round(playerState.shortage_avoided)} patients compared to baseline.`;
+                } else {
+                    avoidedDesc = `Menjimatkan RM ${playerState.cost_saved_vs_naive.toFixed(2)} dan melindungi ${Math.round(playerState.shortage_avoided)} pesakit berbanding asas.`;
+                }
+                wasteDesc.textContent = avoidedDesc;
+                wasteIcon.textContent = "🚀";
+                
+                // Populate Dashboard Cards
+                const naiveTotal = currentScenario.forecast.reduce((a, b) => a + b.naive, 0);
+                const tftTotal = currentScenario.forecast.reduce((a, b) => a + b.tft, 0);
+                const actualTotal = getActualForecastTotal();
+                
+                const naiveErr = (Math.abs(naiveTotal - actualTotal) / actualTotal) * 100;
+                const tftErr = (Math.abs(tftTotal - actualTotal) / actualTotal) * 100;
+                
+                let costNaive = naiveTotal * unitCost + (naiveTotal < actualTotal ? (actualTotal - naiveTotal) * unitCost * 2.5 : 0);
+                let costTft = tftTotal * unitCost + (tftTotal < actualTotal ? (actualTotal - tftTotal) * unitCost * 2.5 : 0);
+                
+                document.getElementById('comp-err-s1').textContent = playerState.stage1_err.toFixed(1) + "% Err";
+                document.getElementById('comp-cost-s1').textContent = "Cost: RM " + playerState.stage1_cost.toFixed(2);
+                
+                document.getElementById('comp-err-naive').textContent = naiveErr.toFixed(1) + "% Err";
+                document.getElementById('comp-cost-naive').textContent = "Cost: RM " + costNaive.toFixed(2);
+                
+                document.getElementById('comp-err-s2').textContent = playerState.stage2_err.toFixed(1) + "% Err";
+                document.getElementById('comp-cost-s2').textContent = "Cost: RM " + playerState.stage2_cost.toFixed(2);
+                
+                document.getElementById('comp-err-tft').textContent = tftErr.toFixed(1) + "% Err";
+                document.getElementById('comp-cost-tft').textContent = "Cost: RM " + costTft.toFixed(2);
+                
+                document.getElementById('model-comparison-container').classList.remove('hidden');
+                
+                btnNext.textContent = i18n[currentLang].btn_restart;
+            }
+        }
+
+        // Transition from results to Stage 2 or restart
+        document.getElementById('btn-next-stage').addEventListener('click', () => {
+            sound.playClick();
+            
+            if (gameStage === 1) {
+                // Transition to Stage 2 Gameplay
+                document.getElementById('screen-results').classList.add('hidden');
+                document.getElementById('screen-gameplay').classList.remove('hidden');
+                
+                initStage2Gameplay();
+            } else {
+                // Restart game
+                document.getElementById('screen-results').classList.add('hidden');
+                document.getElementById('screen-welcome').classList.remove('hidden');
+                
+                // Reset inputs
+                document.getElementById('input-name').value = '';
+                document.getElementById('input-email').value = '';
+                
+                playerState = {
+                    name: '',
+                    email: '',
+                    subscribe: true,
+                    stage1_pred: 0,
+                    stage1_err: 0,
+                    stage1_cost: 0,
+                    stage1_patients: 0,
+                    stage1_waste: 0,
+                    stage2_pred: 0,
+                    stage2_err: 0,
+                    stage2_cost: 0,
+                    stage2_patients: 0,
+                    stage2_waste: 0,
+                    chosen_model: 'Custom',
+                    cost_saved_vs_naive: 0,
+                    shortage_avoided: 0,
+                    waste_avoided: 0
+                };
+            }
+        });
+
+        function initStage2Gameplay() {
+            gameStage = 2;
+            document.getElementById('stage-badge').textContent = "STAGE 2";
+            document.getElementById('stage-badge').className = "px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider";
+            document.getElementById('stage-title').textContent = i18n[currentLang].s2_title;
+            document.getElementById('lbl-alert-desc').textContent = i18n[currentLang].s2_desc;
+            
+            // Re-render chart to strip the "actual future" line we showed in results
+            const histAvg = getHistoricalAvg();
+            const normTotal = histAvg * 14;
+            renderChart(normTotal);
+            
+            // Show AI models suggestions
+            document.getElementById('ai-models-container').classList.remove('hidden');
+            
+            // Compute values for AI cards
+            const tftTotal = currentScenario.forecast.reduce((a, b) => a + b.tft, 0);
+            const lstmTotal = currentScenario.forecast.reduce((a, b) => a + b.lstm, 0);
+            const xgbTotal = currentScenario.forecast.reduce((a, b) => a + b.xgb, 0);
+            const chrTotal = currentScenario.forecast.reduce((a, b) => a + b.chr2, 0);
+            
+            document.getElementById('ai-val-tft').textContent = Math.round(tftTotal).toLocaleString() + " DDD";
+            document.getElementById('ai-val-lstm').textContent = Math.round(lstmTotal).toLocaleString() + " DDD";
+            document.getElementById('ai-val-xgb').textContent = Math.round(xgbTotal).toLocaleString() + " DDD";
+            document.getElementById('ai-val-chr').textContent = Math.round(chrTotal).toLocaleString() + " DDD";
+            
+            // Wire AI button click handlers
+            const slider = document.getElementById('input-slider');
+            
+            const applyModelSuggestion = (total, modelName) => {
+                sound.playClick();
+                playerState.chosen_model = modelName;
+                
+                // Calculate percentage adjustment needed for this total
+                const diffPct = ((total - normTotal) / normTotal) * 100;
+                slider.value = Math.max(-50, Math.min(100, Math.round(diffPct)));
+                updateSliderOutput(slider.value, normTotal);
+                
+                // Overlay the daily prediction line of the chosen AI model
+                let modelData = [];
+                if (modelName === 'TFT') {
+                    modelData = currentScenario.forecast.map(f => f.tft);
+                } else if (modelName === 'LSTM') {
+                    modelData = currentScenario.forecast.map(f => f.lstm);
+                } else if (modelName === 'XGBoost') {
+                    modelData = currentScenario.forecast.map(f => f.xgb);
+                } else if (modelName === 'Chronos') {
+                    modelData = currentScenario.forecast.map(f => f.chr2);
+                }
+                
+                chart.data.datasets[1].data = [...Array(14).fill(null), ...modelData];
+                chart.update();
+            };
+            
+            document.getElementById('btn-ai-tft').onclick = () => applyModelSuggestion(tftTotal, 'TFT');
+            document.getElementById('btn-ai-lstm').onclick = () => applyModelSuggestion(lstmTotal, 'LSTM');
+            document.getElementById('btn-ai-xgb').onclick = () => applyModelSuggestion(xgbTotal, 'XGBoost');
+            document.getElementById('btn-ai-chr').onclick = () => applyModelSuggestion(chrTotal, 'Chronos');
+            
+            updateTranslation();
+        }
+
+        // Backend Logging Integration
+        function submitResults() {
+            // Save locally to LocalStorage anyway
+            let localScores = [];
+            try {
+                localScores = JSON.parse(localStorage.getItem('ph_game_scores')) || [];
+            } catch (e) {
+                localScores = [];
+            }
+            
+            const scoreRecord = {
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19),
+                name: playerState.name,
+                email: playerState.email,
+                fac_code: currentScenario.fac_code,
+                med_name: currentScenario.med_name,
+                flood_start_date: currentScenario.flood_start_date,
+                unit_cost: currentScenario.unit_cost,
+                actual_total: getActualForecastTotal(),
+                stage1_pred: playerState.stage1_pred,
+                stage1_error: playerState.stage1_err,
+                stage1_cost: playerState.stage1_cost,
+                stage1_patients: playerState.stage1_patients,
+                stage2_pred: playerState.stage2_pred,
+                stage2_error: playerState.stage2_err,
+                stage2_cost: playerState.stage2_cost,
+                stage2_patients: playerState.stage2_patients,
+                chosen_model: playerState.chosen_model,
+                cost_saved_vs_naive: playerState.cost_saved_vs_naive,
+                shortage_avoided: playerState.shortage_avoided,
+                waste_avoided: playerState.waste_avoided
+            };
+            
+            localScores.push(scoreRecord);
+            localStorage.setItem('ph_game_scores', JSON.stringify(localScores));
+            
+            // Try to POST to local python server
+            fetch('http://localhost:5000/api/results', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(scoreRecord)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Logged to server:", data);
+            })
+            .catch(err => {
+                console.warn("Backend server not running. Saved to LocalStorage client-side only.", err);
+            });
+        }
+
+        // Admin Panel Functions
+        const headerLogo = document.getElementById('header-logo');
+        let logoClicks = 0;
+        let logoClickTimer = null;
+        
+        headerLogo.addEventListener('click', () => {
+            logoClicks++;
+            if (logoClicks === 1) {
+                logoClickTimer = setTimeout(() => { logoClicks = 0; }, 2000);
+            }
+            if (logoClicks >= 4) { // Triple-clicking opens admin (we use 4 to be safe)
+                clearTimeout(logoClickTimer);
+                logoClicks = 0;
+                openAdminPanel();
+            }
+        });
+
+        function openAdminPanel() {
+            sound.playClick();
+            // Hide current screen, show admin
+            document.querySelectorAll('main > div').forEach(el => el.classList.add('hidden'));
+            document.getElementById('screen-admin').classList.remove('hidden');
+            
+            // Populate admin list
+            const tbody = document.getElementById('admin-tbody');
+            tbody.innerHTML = '';
+            
+            let localScores = [];
+            try {
+                localScores = JSON.parse(localStorage.getItem('ph_game_scores')) || [];
+            } catch (e) {
+                localScores = [];
+            }
+            
+            localScores.reverse().forEach(score => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-800/40 hover:bg-slate-800/20 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-2 px-4">${score.timestamp.substring(11, 19)}</td>
+                    <td class="py-2 px-4 font-sans font-semibold text-slate-200">${score.name}</td>
+                    <td class="py-2 px-4 text-blue-400">${score.med_name}</td>
+                    <td class="py-2 px-4">${score.stage1_error.toFixed(1)}%</td>
+                    <td class="py-2 px-4 text-emerald-400">${score.stage2_error.toFixed(1)}%</td>
+                    <td class="py-2 px-4 text-slate-400">${score.chosen_model}</td>
+                    <td class="py-2 px-4 text-emerald-400">RM ${score.cost_saved_vs_naive.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('btn-close-admin').addEventListener('click', () => {
+            sound.playClick();
+            document.getElementById('screen-admin').classList.add('hidden');
+            document.getElementById('screen-welcome').classList.remove('hidden');
+        });
+
+        document.getElementById('btn-export-csv').addEventListener('click', () => {
+            sound.playClick();
+            let localScores = [];
+            try {
+                localScores = JSON.parse(localStorage.getItem('ph_game_scores')) || [];
+            } catch (e) {
+                localScores = [];
+            }
+            
+            if (localScores.length === 0) {
+                alert('No scores to export.');
+                return;
+            }
+            
+            const headers = [
+                'timestamp', 'name', 'email', 'fac_code', 'med_name', 
+                'flood_start_date', 'unit_cost', 'actual_total',
+                'stage1_pred', 'stage1_error', 'stage1_cost', 'stage1_patients',
+                'stage2_pred', 'stage2_error', 'stage2_cost', 'stage2_patients',
+                'chosen_model', 'cost_saved_vs_naive', 'shortage_avoided', 'waste_avoided'
+            ];
+            
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += headers.join(",") + "\n";
+            
+            localScores.forEach(score => {
+                const row = headers.map(h => {
+                    const val = score[h];
+                    return typeof val === 'string' ? `"${val.replace(/"/g, '""')}"` : val;
+                });
+                csvContent += row.join(",") + "\n";
+            });
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `planetary_health_game_results_${new Date().toISOString().substring(0, 10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        document.getElementById('btn-clear-scores').addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete all scoreboard data? This cannot be undone.')) {
+                localStorage.removeItem('ph_game_scores');
+                sound.playAlert();
+                openAdminPanel();
+            }
+        });
+    </script>
+</body>
+</html>
