@@ -142,20 +142,40 @@
             --bg-blue-tint: rgba(59, 130, 246, 0.06);
             --bg-emerald-tint: rgba(16, 185, 129, 0.06);
 
+            /* Red (shortage) colors for light theme */
+            --color-red-400: #dc2626; /* high contrast red */
+            --color-red-300: #b91c1c;
+            --bg-red-10: rgba(220, 38, 38, 0.08);
+            --border-red-20: rgba(220, 38, 38, 0.18);
+
             /* Amber (yellow) colors for light theme */
-            --color-amber-400: #d97706;
-            --color-amber-550: #b45309;
-            --color-amber-300: #b45309;
+            --color-amber-300: #b45309; /* dark amber */
+            --color-amber-400: #d97706; /* rich amber-600 */
+            --color-amber-550: #92400e; /* amber-800 */
+            --color-amber-500: #b45309; /* dark amber-700 */
+            --bg-amber-5: rgba(217, 119, 6, 0.05);
             --bg-amber-10: rgba(217, 119, 6, 0.12);
             --border-amber-20: rgba(217, 119, 6, 0.22);
 
             /* Emerald (green) colors for light theme */
+            --color-emerald-300: #047857;
             --color-emerald-400: #059669;
             --color-emerald-500: #047857;
-            --color-emerald-300: #047857;
+            --bg-emerald-5: rgba(5, 150, 105, 0.05);
+            --bg-emerald-10: rgba(5, 150, 105, 0.12);
+            --border-emerald-20: rgba(5, 150, 105, 0.22);
+
+            /* Violet colors for light theme */
+            --color-violet-400: #7c3aed; /* violet-600 */
+            --bg-violet-5: rgba(124, 58, 237, 0.05);
+            --bg-violet-10: rgba(124, 58, 237, 0.12);
+            --border-violet-20: rgba(124, 58, 237, 0.22);
 
             /* Blue colors for light theme */
             --color-blue-400: #2563eb;
+            --bg-blue-5: rgba(37, 99, 235, 0.05);
+            --bg-blue-10: rgba(37, 99, 235, 0.12);
+            --border-blue-20: rgba(37, 99, 235, 0.22);
         }
         .dark {
             --color-slate-100: #f1f5f9;
@@ -183,22 +203,43 @@
             --bg-blue-tint: rgba(59, 130, 246, 0.15);
             --bg-emerald-tint: rgba(16, 185, 129, 0.15);
 
+            /* Red (shortage) colors for dark theme */
+            --color-red-400: #f87171;
+            --color-red-300: #fca5a5;
+            --bg-red-10: rgba(239, 68, 68, 0.1);
+            --border-red-20: rgba(239, 68, 68, 0.2);
+
             /* Amber (yellow) colors for dark theme */
+            --color-amber-300: #fcd34d;
             --color-amber-400: #fbbf24;
             --color-amber-550: #f59e0b;
-            --color-amber-300: #fcd34d;
+            --color-amber-500: #f59e0b;
+            --bg-amber-5: rgba(245, 158, 11, 0.05);
             --bg-amber-10: rgba(245, 158, 11, 0.1);
             --border-amber-20: rgba(245, 158, 11, 0.2);
 
             /* Emerald (green) colors for dark theme */
+            --color-emerald-300: #a7f3d0;
             --color-emerald-400: #34d399;
             --color-emerald-500: #10b981;
-            --color-emerald-300: #a7f3d0;
+            --bg-emerald-5: rgba(16, 185, 129, 0.05);
+            --bg-emerald-10: rgba(16, 185, 129, 0.1);
+            --border-emerald-20: rgba(16, 185, 129, 0.2);
+
+            /* Violet colors for dark theme */
+            --color-violet-400: #a78bfa;
+            --bg-violet-5: rgba(139, 92, 246, 0.05);
+            --bg-violet-10: rgba(139, 92, 246, 0.1);
+            --border-violet-20: rgba(139, 92, 246, 0.2);
 
             /* Blue colors for dark theme */
             --color-blue-400: #60a5fa;
+            --bg-blue-5: rgba(59, 130, 246, 0.05);
+            --bg-blue-10: rgba(59, 130, 246, 0.1);
+            --border-blue-20: rgba(59, 130, 246, 0.2);
         }
 
+        /* Text overrides */
         .text-slate-100 { color: var(--color-slate-100) !important; }
         .text-slate-200 { color: var(--color-slate-200) !important; }
         .text-slate-300 { color: var(--color-slate-300) !important; }
@@ -207,35 +248,57 @@
         
         .bg-slate-900 { background-color: var(--bg-slate-900) !important; }
         .bg-slate-950 { background-color: var(--bg-slate-950) !important; }
+
+        /* Slideway/Slash class attribute overrides using attribute word match selectors */
+        [class~="bg-slate-950/60"] { background-color: var(--bg-slate-950-60) !important; }
+        [class~="bg-slate-950/40"] { background-color: var(--bg-slate-950-40) !important; }
+        [class~="bg-slate-900/60"] { background-color: var(--bg-slate-900-60) !important; }
+        [class~="bg-slate-900/50"] { background-color: var(--bg-slate-900-50) !important; }
+        [class~="bg-slate-900/80"] { background-color: var(--bg-slate-900-80) !important; }
         
-        .bg-slate-950\/60 { background-color: var(--bg-slate-950-60) !important; }
-        .bg-slate-950\/40 { background-color: var(--bg-slate-950-40) !important; }
-        .bg-slate-900\/60 { background-color: var(--bg-slate-900-60) !important; }
-        .bg-slate-900\/50 { background-color: var(--bg-slate-900-50) !important; }
-        .bg-slate-900\/50.bg-blue-500\/5 { background-color: var(--bg-blue-tint) !important; }
-        .bg-slate-900\/50.bg-emerald-500\/5 { background-color: var(--bg-emerald-tint) !important; }
-        .bg-slate-900\/80 { background-color: var(--bg-slate-900-80) !important; }
+        [class~="bg-slate-900/50"][class~="bg-blue-500/5"] { background-color: var(--bg-blue-tint) !important; }
+        [class~="bg-slate-900/50"][class~="bg-emerald-500/5"] { background-color: var(--bg-emerald-tint) !important; }
 
-        .border-slate-800 { border-color: var(--border-slate-800) !important; }
-        .border-slate-800\/80 { border-color: var(--border-slate-800-80) !important; }
-        .border-slate-800\/60 { border-color: var(--border-slate-800-60) !important; }
-        .border-slate-800\/40 { border-color: var(--border-slate-800-40) !important; }
-        .hover\:bg-slate-800:hover { background-color: var(--hover-slate-800) !important; }
+        [class~="border-slate-800"] { border-color: var(--border-slate-800) !important; }
+        [class~="border-slate-800/80"] { border-color: var(--border-slate-800-80) !important; }
+        [class~="border-slate-800/60"] { border-color: var(--border-slate-800-60) !important; }
+        [class~="border-slate-800/40"] { border-color: var(--border-slate-800-40) !important; }
+        [class~="hover:bg-slate-800"]:hover { background-color: var(--hover-slate-800) !important; }
 
-        /* Amber utility overrides */
-        .text-amber-400 { color: var(--color-amber-400) !important; }
-        .text-amber-550 { color: var(--color-amber-550) !important; }
+        /* Red (shortage) overrides */
+        .text-red-400 { color: var(--color-red-400) !important; }
+        .text-red-300 { color: var(--color-red-300) !important; }
+        [class~="bg-red-500/10"] { background-color: var(--bg-red-10) !important; }
+        [class~="border-red-500/20"] { border-color: var(--border-red-20) !important; }
+
+        /* Amber (yellow) overrides */
         .text-amber-300 { color: var(--color-amber-300) !important; }
-        .bg-amber-500\/10 { background-color: var(--bg-amber-10) !important; }
-        .border-amber-500\/20 { border-color: var(--border-amber-20) !important; }
+        .text-amber-400 { color: var(--color-amber-400) !important; }
+        .text-amber-500 { color: var(--color-amber-500) !important; }
+        .text-amber-550 { color: var(--color-amber-550) !important; }
+        [class~="bg-amber-500/5"] { background-color: var(--bg-amber-5) !important; }
+        [class~="bg-amber-500/10"] { background-color: var(--bg-amber-10) !important; }
+        [class~="border-amber-500/20"] { border-color: var(--border-amber-20) !important; }
 
-        /* Emerald utility overrides */
+        /* Emerald (green) overrides */
+        .text-emerald-300 { color: var(--color-emerald-300) !important; }
         .text-emerald-400 { color: var(--color-emerald-400) !important; }
         .text-emerald-500 { color: var(--color-emerald-500) !important; }
-        .text-emerald-300 { color: var(--color-emerald-300) !important; }
+        [class~="bg-emerald-500/5"] { background-color: var(--bg-emerald-5) !important; }
+        [class~="bg-emerald-500/10"] { background-color: var(--bg-emerald-10) !important; }
+        [class~="border-emerald-500/20"] { border-color: var(--border-emerald-20) !important; }
 
-        /* Blue utility overrides */
+        /* Violet overrides */
+        .text-violet-400 { color: var(--color-violet-400) !important; }
+        [class~="bg-violet-500/5"] { background-color: var(--bg-violet-5) !important; }
+        [class~="bg-violet-500/10"] { background-color: var(--bg-violet-10) !important; }
+        [class~="border-violet-500/20"] { border-color: var(--border-violet-20) !important; }
+
+        /* Blue overrides */
         .text-blue-400 { color: var(--color-blue-400) !important; }
+        [class~="bg-blue-500/5"] { background-color: var(--bg-blue-5) !important; }
+        [class~="bg-blue-500/10"] { background-color: var(--bg-blue-10) !important; }
+        [class~="border-blue-500/20"] { border-color: var(--border-blue-20) !important; }
 
         /* Dark mode compatibility for inputs */
         input[type="text"] {
