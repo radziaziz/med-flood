@@ -118,39 +118,124 @@
         /* Dynamic Tailwind Overrides */
         :root {
             --color-slate-100: #0f172a;
-            --color-slate-300: #475569;
-            --color-slate-450: #334155;
+            --color-slate-200: #1e293b;
+            --color-slate-300: #334155;
+            --color-slate-450: #475569;
             --bg-slate-900: #e2e8f0;
             --bg-slate-950: #f8fafc;
             --border-slate-800: #cbd5e1;
             --hover-slate-800: #cbd5e1;
+            
+            /* Background tones */
+            --bg-slate-950-60: rgba(255, 255, 255, 0.85);
+            --bg-slate-950-40: rgba(255, 255, 255, 0.6);
+            --bg-slate-900-60: rgba(226, 232, 240, 0.8);
+            --bg-slate-900-50: rgba(241, 245, 249, 0.95);
+            --bg-slate-900-80: rgba(203, 213, 225, 0.9);
+            
+            /* Border tones */
+            --border-slate-800-80: rgba(148, 163, 184, 0.3);
+            --border-slate-800-60: rgba(148, 163, 184, 0.2);
+            --border-slate-800-40: rgba(148, 163, 184, 0.15);
+            
+            /* Tints */
+            --bg-blue-tint: rgba(59, 130, 246, 0.06);
+            --bg-emerald-tint: rgba(16, 185, 129, 0.06);
+
+            /* Amber (yellow) colors for light theme */
+            --color-amber-400: #d97706;
+            --color-amber-550: #b45309;
+            --color-amber-300: #b45309;
+            --bg-amber-10: rgba(217, 119, 6, 0.12);
+            --border-amber-20: rgba(217, 119, 6, 0.22);
+
+            /* Emerald (green) colors for light theme */
+            --color-emerald-400: #059669;
+            --color-emerald-500: #047857;
+            --color-emerald-300: #047857;
+
+            /* Blue colors for light theme */
+            --color-blue-400: #2563eb;
         }
         .dark {
             --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
             --color-slate-300: #cbd5e1;
             --color-slate-450: #94a3b8;
             --bg-slate-900: #0f172a;
             --bg-slate-950: #020617;
             --border-slate-800: #1e293b;
             --hover-slate-800: #1e293b;
+            
+            /* Background tones */
+            --bg-slate-950-60: rgba(2, 6, 23, 0.6);
+            --bg-slate-950-40: rgba(2, 6, 23, 0.4);
+            --bg-slate-900-60: rgba(15, 23, 42, 0.6);
+            --bg-slate-900-50: rgba(15, 23, 42, 0.5);
+            --bg-slate-900-80: rgba(15, 23, 42, 0.8);
+            
+            /* Border tones */
+            --border-slate-800-80: rgba(30, 41, 59, 0.8);
+            --border-slate-800-60: rgba(30, 41, 59, 0.6);
+            --border-slate-800-40: rgba(30, 41, 59, 0.4);
+            
+            /* Tints */
+            --bg-blue-tint: rgba(59, 130, 246, 0.15);
+            --bg-emerald-tint: rgba(16, 185, 129, 0.15);
+
+            /* Amber (yellow) colors for dark theme */
+            --color-amber-400: #fbbf24;
+            --color-amber-550: #f59e0b;
+            --color-amber-300: #fcd34d;
+            --bg-amber-10: rgba(245, 158, 11, 0.1);
+            --border-amber-20: rgba(245, 158, 11, 0.2);
+
+            /* Emerald (green) colors for dark theme */
+            --color-emerald-400: #34d399;
+            --color-emerald-500: #10b981;
+            --color-emerald-300: #a7f3d0;
+
+            /* Blue colors for dark theme */
+            --color-blue-400: #60a5fa;
         }
 
         .text-slate-100 { color: var(--color-slate-100) !important; }
+        .text-slate-200 { color: var(--color-slate-200) !important; }
         .text-slate-300 { color: var(--color-slate-300) !important; }
         .text-slate-400 { color: var(--color-slate-450) !important; }
         .text-slate-700 { color: var(--color-slate-450) !important; }
+        
         .bg-slate-900 { background-color: var(--bg-slate-900) !important; }
-        .bg-slate-950\/40 { background-color: rgba(255, 255, 255, 0.4) !important; }
-        .dark .bg-slate-950\/40 { background-color: rgba(2, 6, 23, 0.4) !important; }
-        .bg-slate-950\/80 { background-color: rgba(255, 255, 255, 0.8) !important; }
-        .dark .bg-slate-950\/80 { background-color: rgba(2, 6, 23, 0.8) !important; }
         .bg-slate-950 { background-color: var(--bg-slate-950) !important; }
+        
+        .bg-slate-950\/60 { background-color: var(--bg-slate-950-60) !important; }
+        .bg-slate-950\/40 { background-color: var(--bg-slate-950-40) !important; }
+        .bg-slate-900\/60 { background-color: var(--bg-slate-900-60) !important; }
+        .bg-slate-900\/50 { background-color: var(--bg-slate-900-50) !important; }
+        .bg-slate-900\/50.bg-blue-500\/5 { background-color: var(--bg-blue-tint) !important; }
+        .bg-slate-900\/50.bg-emerald-500\/5 { background-color: var(--bg-emerald-tint) !important; }
+        .bg-slate-900\/80 { background-color: var(--bg-slate-900-80) !important; }
+
         .border-slate-800 { border-color: var(--border-slate-800) !important; }
-        .border-slate-800\/40 { border-color: rgba(148, 163, 184, 0.2) !important; }
-        .dark .border-slate-800\/40 { border-color: rgba(30, 41, 59, 0.4) !important; }
-        .border-slate-800\/60 { border-color: rgba(148, 163, 184, 0.3) !important; }
-        .dark .border-slate-800\/60 { border-color: rgba(30, 41, 59, 0.6) !important; }
+        .border-slate-800\/80 { border-color: var(--border-slate-800-80) !important; }
+        .border-slate-800\/60 { border-color: var(--border-slate-800-60) !important; }
+        .border-slate-800\/40 { border-color: var(--border-slate-800-40) !important; }
         .hover\:bg-slate-800:hover { background-color: var(--hover-slate-800) !important; }
+
+        /* Amber utility overrides */
+        .text-amber-400 { color: var(--color-amber-400) !important; }
+        .text-amber-550 { color: var(--color-amber-550) !important; }
+        .text-amber-300 { color: var(--color-amber-300) !important; }
+        .bg-amber-500\/10 { background-color: var(--bg-amber-10) !important; }
+        .border-amber-500\/20 { border-color: var(--border-amber-20) !important; }
+
+        /* Emerald utility overrides */
+        .text-emerald-400 { color: var(--color-emerald-400) !important; }
+        .text-emerald-500 { color: var(--color-emerald-500) !important; }
+        .text-emerald-300 { color: var(--color-emerald-300) !important; }
+
+        /* Blue utility overrides */
+        .text-blue-400 { color: var(--color-blue-400) !important; }
 
         /* Dark mode compatibility for inputs */
         input[type="text"] {
