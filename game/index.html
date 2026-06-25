@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -22,37 +23,79 @@
             }
         }
     </script>
+    <!-- Inline theme initializer (executes immediately to prevent flash) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            let isDark = false;
+            if (savedTheme === 'dark') {
+                isDark = true;
+            } else if (savedTheme === 'system') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
     <style>
         body {
+            background-color: #f1f5f9;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(139, 92, 246, 0.05) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #1e293b;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark body {
             background-color: #080d1a;
             background-image: 
                 radial-gradient(at 10% 20%, rgba(29, 78, 216, 0.15) 0px, transparent 50%),
                 radial-gradient(at 90% 80%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
                 radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
-            background-attachment: fixed;
             color: #f1f5f9;
         }
         .glass-panel {
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(148, 163, 184, 0.05);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
         .glass-panel-glow {
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 25px 0 rgba(59, 130, 246, 0.08);
+        }
+        .dark .glass-panel-glow {
             border: 1px solid rgba(59, 130, 246, 0.25);
             box-shadow: 0 0 25px 0 rgba(59, 130, 246, 0.15);
         }
         .text-glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
+        }
+        .dark .text-glow {
             text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
-            background: #1e293b;
+            background: #cbd5e1;
             border-radius: 8px;
             height: 8px;
             outline: none;
+        }
+        .dark input[type="range"] {
+            background: #1e293b;
         }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -62,38 +105,95 @@
             border-radius: 50%;
             background: #3b82f6;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
             transition: transform 0.1s ease;
+        }
+        .dark input[type="range"]::-webkit-slider-thumb {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
         }
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
         }
-    </style>
+
+        /* Dynamic Tailwind Overrides */
+        :root {
+            --color-slate-100: #0f172a;
+            --color-slate-300: #475569;
+            --color-slate-450: #334155;
+            --bg-slate-900: #e2e8f0;
+            --bg-slate-950: #f8fafc;
+            --border-slate-800: #cbd5e1;
+            --hover-slate-800: #cbd5e1;
+        }
+        .dark {
+            --color-slate-100: #f1f5f9;
+            --color-slate-300: #cbd5e1;
+            --color-slate-450: #94a3b8;
+            --bg-slate-900: #0f172a;
+            --bg-slate-950: #020617;
+            --border-slate-800: #1e293b;
+            --hover-slate-800: #1e293b;
+        }
+
+        .text-slate-100 { color: var(--color-slate-100) !important; }
+        .text-slate-300 { color: var(--color-slate-300) !important; }
+        .text-slate-400 { color: var(--color-slate-450) !important; }
+        .text-slate-700 { color: var(--color-slate-450) !important; }
+        .bg-slate-900 { background-color: var(--bg-slate-900) !important; }
+        .bg-slate-950\/40 { background-color: rgba(255, 255, 255, 0.4) !important; }
+        .dark .bg-slate-950\/40 { background-color: rgba(2, 6, 23, 0.4) !important; }
+        .bg-slate-950\/80 { background-color: rgba(255, 255, 255, 0.8) !important; }
+        .dark .bg-slate-950\/80 { background-color: rgba(2, 6, 23, 0.8) !important; }
+        .bg-slate-950 { background-color: var(--bg-slate-950) !important; }
+        .border-slate-800 { border-color: var(--border-slate-800) !important; }
+        .border-slate-800\/40 { border-color: rgba(148, 163, 184, 0.2) !important; }
+        .dark .border-slate-800\/40 { border-color: rgba(30, 41, 59, 0.4) !important; }
+        .border-slate-800\/60 { border-color: rgba(148, 163, 184, 0.3) !important; }
+        .dark .border-slate-800\/60 { border-color: rgba(30, 41, 59, 0.6) !important; }
+        .hover\:bg-slate-800:hover { background-color: var(--hover-slate-800) !important; }
+
+        /* Dark mode compatibility for inputs */
+        input[type="text"] {
+            background-color: var(--bg-slate-950) !important;
+            border-color: var(--border-slate-800) !important;
+            color: var(--color-slate-100) !important;
+        }
+        select {
+            background-color: var(--bg-slate-950) !important;
+            border-color: var(--border-slate-800) !important;
+            color: var(--color-slate-100) !important;
+        }
+</style>
 </head>
-<body class="h-full font-sans select-none flex flex-col justify-between overflow-hidden">
+<body class="h-full font-sans select-none flex flex-col justify-between overflow-hidden text-slate-800 dark:text-slate-100 transition-colors duration-300">
     <!-- Header -->
     <header class="w-full max-w-6xl mx-auto px-4 py-4 flex items-center justify-between z-10">
         <div class="flex items-center space-x-3 cursor-pointer" id="header-logo">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-blue-500/20">PH</div>
+            <img src="../assets/uitm-logo.png" alt="UiTM Logo" class="h-10 w-auto object-contain">
             <div>
-                <h1 class="text-lg font-bold tracking-tight text-slate-100 uppercase" id="game-title">PLANETARY HEALTH FORECAST GAME</h1>
-                <p class="text-xs text-slate-400 font-semibold" id="game-subtitle">Pharmacoinformatics Simulation</p>
+                <h1 class="text-lg font-bold tracking-tight text-slate-800 dark:text-slate-100 uppercase" id="game-title">PLANETARY HEALTH FORECAST GAME</h1>
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold" id="game-subtitle">Pharmacoinformatics Simulation</p>
             </div>
         </div>
         
         <div class="flex items-center space-x-3">
             <!-- User Badge -->
-            <div id="user-badge" class="hidden flex items-center space-x-2 bg-slate-900/60 border border-slate-800 px-3 py-1.5 rounded-xl">
+            <div id="user-badge" class="hidden flex items-center space-x-2 bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-xl">
                 <span class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500 text-[10px] text-blue-400 font-bold flex items-center justify-center" id="user-avatar">--</span>
-                <span class="text-xs text-slate-300 font-semibold" id="user-name">Manager</span>
+                <span class="text-xs text-slate-700 dark:text-slate-300 font-semibold" id="user-name">Manager</span>
             </div>
             <!-- Language Selector -->
-            <button id="btn-lang" class="px-3 py-1.5 text-xs font-semibold glass-panel rounded-lg hover:bg-slate-800 transition-colors flex items-center space-x-1">
+            <button id="btn-lang" class="px-3 py-1.5 text-xs font-semibold glass-panel rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors flex items-center space-x-1 text-slate-700 dark:text-slate-200">
                 <span>🌐</span>
                 <span id="lang-text">BM</span>
             </button>
+            <!-- Theme Toggle -->
+            <button id="btn-theme" class="px-3 py-1.5 text-xs font-semibold glass-panel rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors flex items-center space-x-1 text-slate-700 dark:text-slate-200">
+                <span id="theme-icon">☀️</span>
+                <span id="theme-text">Light</span>
+            </button>
             <!-- Audio Toggle -->
-            <button id="btn-audio" class="w-9 h-9 flex items-center justify-center glass-panel rounded-lg hover:bg-slate-800 transition-colors text-sm">
+            <button id="btn-audio" class="w-9 h-9 flex items-center justify-center glass-panel rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors text-sm text-slate-700 dark:text-slate-200">
                 🔇
             </button>
         </div>
@@ -1180,6 +1280,10 @@
             const labels = [...historyDates, ...forecastDates];
             const historyData = currentScenario.history.map(h => h.actual);
             
+            const isDark = document.documentElement.classList.contains('dark');
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.08)';
+            const tickColor = isDark ? '#94a3b8' : '#475569';
+            
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -1210,12 +1314,12 @@
                     maintainAspectRatio: false,
                     scales: {
                         x: {
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                            ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } }
+                            grid: { color: gridColor },
+                            ticks: { color: tickColor, font: { family: 'Outfit', size: 10 } }
                         },
                         y: {
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                            ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } }
+                            grid: { color: gridColor },
+                            ticks: { color: tickColor, font: { family: 'JetBrains Mono', size: 10 } }
                         }
                     },
                     plugins: {
@@ -1860,6 +1964,83 @@
                 openAdminPanel();
             }
         });
+
+        // Theme management hook
+        const themeManager = {
+            init() {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                this.applyTheme(savedTheme);
+                this.updateToggleUI(savedTheme);
+                
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (localStorage.getItem('theme') === 'system') {
+                        this.applyTheme('system');
+                    }
+                });
+            },
+            applyTheme(theme) {
+                let isDark = false;
+                if (theme === 'dark') {
+                    isDark = true;
+                } else if (theme === 'system') {
+                    isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                }
+                
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+                
+                // Redraw Chart if it exists
+                if (typeof chart !== 'undefined' && chart) {
+                    renderChart();
+                }
+            },
+            setTheme(theme) {
+                localStorage.setItem('theme', theme);
+                this.applyTheme(theme);
+                this.updateToggleUI(theme);
+            },
+            updateToggleUI(theme) {
+                const btn = document.getElementById('btn-theme');
+                if (!btn) return;
+                const icon = btn.querySelector('#theme-icon');
+                const text = btn.querySelector('#theme-text');
+                
+                if (theme === 'light') {
+                    if (icon) icon.textContent = '☀️';
+                    if (text) text.textContent = 'Light';
+                } else if (theme === 'dark') {
+                    if (icon) icon.textContent = '🌙';
+                    if (text) text.textContent = 'Dark';
+                } else {
+                    if (icon) icon.textContent = '💻';
+                    if (text) text.textContent = 'System';
+                }
+            },
+            toggleNext() {
+                const current = localStorage.getItem('theme') || 'light';
+                let next = 'light';
+                if (current === 'light') next = 'dark';
+                else if (current === 'dark') next = 'system';
+                else next = 'light';
+                
+                this.setTheme(next);
+            }
+        };
+
+        // Initialize theme manager
+        themeManager.init();
+        const btnTheme = document.getElementById('btn-theme');
+        if (btnTheme) {
+            btnTheme.addEventListener('click', () => {
+                themeManager.toggleNext();
+                if (typeof sound !== 'undefined' && sound.playClick) {
+                    sound.playClick();
+                }
+            });
+        }
     </script>
 </body>
 </html>
