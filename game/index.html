@@ -368,6 +368,11 @@
             </div>
             
             <button id="btn-start" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/20 hover:scale-[1.02]" data-i18n="btn_start">Start Simulation</button>
+            <div class="text-center pt-2">
+                <a href="../index.html" class="text-xs font-semibold text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors inline-flex items-center space-x-1">
+                    <span>⬅️</span> <span data-i18n="back_to_landing">Back to Landing Page</span>
+                </a>
+            </div>
         </div>
 
         <!-- SCREEN 2: Gameplay (Stage 1 or Stage 2) -->
@@ -376,7 +381,7 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-800/60">
                 <div class="flex items-center space-x-3">
                     <span id="stage-badge" class="px-2.5 py-0.5 text-[10px] font-bold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase tracking-wider">STAGE 1</span>
-                    <h2 id="stage-title" class="text-xl font-bold text-slate-100">Wild Guess Demand Forecasting</h2>
+                    <h2 id="stage-title" class="text-xl font-bold text-slate-100" data-i18n="s1_title">Intuitive Estimation</h2>
                 </div>
                 <div class="mt-2 md:mt-0 flex items-center space-x-6 text-xs text-slate-400 font-semibold bg-slate-950/40 px-4 py-2 rounded-xl border border-slate-800/40">
                     <div>
@@ -441,11 +446,11 @@
 
                     <!-- Presets Selection (Stage 1 Only) -->
                     <div id="presets-container" class="space-y-3">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="presets_header">Select Baseline Guess</h4>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="presets_header">Select Baseline Forecast</h4>
                         <div class="grid grid-cols-3 gap-2">
                             <button id="btn-preset-avg" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_avg">Average</button>
                             <button id="btn-preset-trend" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_trend">Current Use</button>
-                            <button id="btn-preset-median" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_median">Median</button>
+                            <button id="btn-preset-median" class="py-2 text-[10px] font-bold bg-slate-900 border border-slate-800 hover:bg-slate-800 rounded-xl text-slate-300 transition-colors" data-i18n="preset_historical">Historical</button>
                         </div>
                     </div>
 
@@ -540,13 +545,13 @@
             <div id="model-comparison-container" class="hidden grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Player Stage 1 Card -->
                 <div class="bg-slate-900/50 border border-slate-800 p-3 rounded-xl">
-                    <p class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Stage 1 (Wild Guess)</p>
+                    <p class="text-[10px] font-bold text-amber-400 uppercase tracking-wider" data-i18n="th_s1">Stage 1 (Intuitive Estimation)</p>
                     <p id="comp-err-s1" class="text-lg font-mono font-bold mt-1">--% Error</p>
                     <p id="comp-cost-s1" class="text-xs text-slate-400 font-semibold mt-0.5">Cost: RM --</p>
                 </div>
                 <!-- Naive Baseline Card -->
                 <div class="bg-slate-900/50 border border-slate-800 p-3 rounded-xl">
-                    <p class="text-[10px] font-bold text-rose-400 uppercase tracking-wider">Naive (t-28)</p>
+                    <p class="text-[10px] font-bold text-rose-400 uppercase tracking-wider" data-i18n="card_historical">Historical (t-28)</p>
                     <p id="comp-err-naive" class="text-lg font-mono font-bold mt-1">--% Error</p>
                     <p id="comp-cost-naive" class="text-xs text-slate-400 font-semibold mt-0.5">Cost: RM --</p>
                 </div>
@@ -592,7 +597,7 @@
                     <div class="flex-1">
                         <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-cost-header" data-i18n="cost_impact_header">Procurement Cost Diff</p>
                         <h3 id="lbl-cost-value" class="text-base font-mono font-bold text-slate-100 mt-1">RM 0.00</h3>
-                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Compared to Naive Baseline.</p>
+                        <p id="lbl-cost-desc" class="text-xs text-slate-300 mt-0.5">Compared to Historical Baseline.</p>
                     </div>
                 </div>
             </div>
@@ -686,7 +691,7 @@
         <div id="screen-admin" class="w-full glass-panel p-6 rounded-3xl space-y-6 hidden transition-all duration-300 max-w-4xl">
             <div class="flex justify-between items-center pb-4 border-b border-slate-800">
                 <h2 class="text-xl font-bold text-slate-200">Admin Dashboard: Player Results</h2>
-                <button id="btn-close-admin" class="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg transition-colors">Close</button>
+                <button id="btn-close-admin" class="px-3 py-1.5 text-xs bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-slate-100 font-bold rounded-lg transition-all">Close</button>
             </div>
             
             <div class="flex space-x-3">
@@ -708,7 +713,8 @@
                             <th class="py-2.5 px-4">S1 Err</th>
                             <th class="py-2.5 px-4">S2 Err</th>
                             <th class="py-2.5 px-4">Model</th>
-                            <th class="py-2.5 px-4">Cost Saved vs Naive</th>
+                            <th class="py-2.5 px-4">Cost Saved vs Historical</th>
+                            <th class="py-2.5 px-4">Cost Saved vs Intuitive</th>
                         </tr>
                     </thead>
                     <tbody id="admin-tbody" class="divide-y divide-slate-800/40 font-mono">
@@ -813,13 +819,14 @@
                 label_final_email: "Receive Your Results Report (Optional)",
                 subscribe_note: "I consent to saving my score offline and receiving research updates.",
                 btn_start: "Start Mission",
+                back_to_landing: "Back to Landing Page",
                 stat_drug: "Drug:",
                 stat_fac: "Facility:",
                 alert_title: "Incoming Flood Alert",
-                presets_header: "Select Baseline Guess",
+                presets_header: "Select Baseline Forecast",
                 preset_avg: "Average",
                 preset_trend: "Current Use",
-                preset_median: "Median",
+                preset_historical: "Historical",
                 ai_models_header: "AI Models Suggestions",
                 slider_label: "Adjust Order Level",
                 stat_your_forecast: "Your Forecast Total (14 Days)",
@@ -859,8 +866,8 @@
                 modal_chr_cons: "<strong>Cons:</strong> Slower inference speed; higher computational overhead than XGBoost.",
 
                 // Cost Column Statuses
-                cost_status_savings: "Savings vs Naive",
-                cost_status_loss: "Loss vs Naive",
+                cost_status_savings: "Savings vs Historical",
+                cost_status_loss: "Loss vs Historical",
                 cost_status_emergency: "Emergency Purchase",
                 cost_status_wastage: "Wastage Loss",
 
@@ -882,10 +889,10 @@
                 
                 // Dynamic translation fields
                 alert_desc: "A flood warning has been issued for this clinic. Historically, floods disrupt supply. Predict medication needs for the next 14 days.",
-                s1_title: "Wild Guess Demand Forecasting",
+                s1_title: "Intuitive Demand Forecasting",
                 s2_title: "AI-Assisted Demand Forecasting",
                 s2_desc: "Stage 2: AI Forecasting Models are now online. Review their projections, analyze algorithms' classes, pros & cons, and submit your assisted order.",
-                res_title_s1: "Stage 1 Reality Check: The Wild Guess",
+                res_title_s1: "Stage 1 Reality Check: Intuitive Estimation",
                 res_title_s2: "Stage 2 Result: Human vs AI",
                 patients_served_ok: "All Patients Served",
                 patients_served_ok_desc: "Your order met patient demand. Life-saving drug coverage is secure.",
@@ -897,16 +904,17 @@
                 
                 // Screen 5 Final Comparison fields
                 final_tag: "Evaluation Complete",
-                final_title: "Human Guess vs. AI Assist",
+                final_title: "Intuitive Estimation vs. AI Assist",
                 final_intro: "Congratulations! You have completed both simulation stages. Here is your final performance review.",
                 th_metric: "Performance Metric",
-                th_s1: "Stage 1 (Wild Guess)",
+                th_s1: "Stage 1 (Intuitive Estimation)",
                 th_s2: "Stage 2 (AI-Assisted)",
                 row_error: "Forecast Error (%)",
                 row_shortage: "Shortage Doses / Patients",
                 row_waste: "Procurement Waste (RM)",
                 row_cost: "Total Real Cost (RM)",
-                row_savings: "Net AI Savings vs. Guess",
+                row_savings: "Net AI Savings vs. Intuitive",
+                card_historical: "Historical (t-28)",
                 btn_finish: "Send Results & Finish",
                 btn_restart: "Restart Game",
                 final_closing_box: "By integrating AI forecasting models into hospital supply chains, you slashed your forecasting error by {e}%, minimized medication waste, and saved {s} in procurement costs, while safeguarding patients. This is in line with the research objective of leveraging AI in building a disaster-resilient pharmaceutical supply chain in Malaysia."
@@ -919,13 +927,14 @@
                 label_final_email: "Terima Laporan Keputusan Anda (Pilihan)",
                 subscribe_note: "Saya bersetuju untuk menyimpan markah saya secara luar talian dan menerima kemas kini penyelidikan.",
                 btn_start: "Mula Misi",
+                back_to_landing: "Kembali ke Laman Utama",
                 stat_drug: "Ubat:",
                 stat_fac: "Fasiliti:",
                 alert_title: "Amaran Banjir Diterima",
-                presets_header: "Pilih Tekaan Garis Asas",
+                presets_header: "Pilih Garis Asas Ramalan",
                 preset_avg: "Purata",
-                preset_trend: "Guna Semasa",
-                preset_median: "Median",
+                preset_trend: "Terkini",
+                preset_historical: "Sejarah",
                 ai_models_header: "Cadangan Model AI",
                 slider_label: "Laras Tahap Pesanan",
                 stat_your_forecast: "Jumlah Ramalan Anda (14 Hari)",
@@ -965,8 +974,8 @@
                 modal_chr_cons: "<strong>Kontra:</strong> Kelajuan inferens yang lebih perlahan; overhed pengiraan yang lebih tinggi berbanding XGBoost.",
 
                 // Cost Column Statuses
-                cost_status_savings: "Penjimatan vs Naif",
-                cost_status_loss: "Kerugian vs Naif",
+                cost_status_savings: "Penjimatan vs Sejarah",
+                cost_status_loss: "Kerugian vs Sejarah",
                 cost_status_emergency: "Pembelian Kecemasan",
                 cost_status_wastage: "Kerugian Pembaziran",
 
@@ -976,7 +985,7 @@
                 stock_status_okay: "Baik (Margin Selamat)",
                 stock_status_perfect: "Cemerlang (Stok Sempurna)",
                 stock_status_shortage_desc: "Kekurangan stok. Pesanan kurang daripada permintaan sebenar sebanyak {pct}%.",
-                stock_status_wastage_desc: "Stok berlebihan. Lebihan (+{pct}%) melebihi margin selamat 5%.",
+                stock_status_wastage_desc: "Stok berlebihan. Lebihan (+{pct}%) melebihi margin safe 5%.",
                 stock_status_okay_desc: "Tahap stok optimum. Penimbal keselamatan (+{pct}%) memastikan pesakit selamat dengan lebihan minimum.",
                 stock_status_perfect_desc: "Jumlah stok sepadan dengan permintaan sebenar secara tepat.",
 
@@ -988,31 +997,32 @@
                 
                 // Dynamic translation fields
                 alert_desc: "Amaran banjir dikeluarkan untuk klinik ini. Berdasarkan pengalaman, banjir mengganggu bekalan. Ramal keperluan ubat untuk 14 hari akan datang.",
-                s1_title: "Ramalan Tekaan Rawak Permintaan",
+                s1_title: "Anggaran Permintaan Intuitif",
                 s2_title: "Ramalan Permintaan Berbantukan AI",
                 s2_desc: "Tahap 2: Model Ramalan AI kini dalam talian. Tinjau unjuran mereka, nilai kelas algoritma, pro & kontra, dan hantar pesanan berbantuan anda.",
-                res_title_s1: "Reality Check Tahap 1: Tekaan Rawak",
+                res_title_s1: "Reality Check Tahap 1: Anggaran Intuitif",
                 res_title_s2: "Keputusan Tahap 2: Manusia vs AI",
                 patients_served_ok: "Semua Pesakit Dilayani",
                 patients_served_ok_desc: "Pesanan anda memenuhi permintaan pesakit. Liputan ubat menyelamat nyawa adalah selamat.",
                 patients_shortage: "Kekurangan Ubat-ubatan",
                 patients_shortage_desc: "Kekurangan {q} Dos. Ini menyebabkan sekitar {p} pesakit tidak dilayani (tanpa bekalan 14 hari ubat kritikal mereka).",
                 patients_surplus_desc: "Semua pesakit dilayani, tetapi inventori berlebihan terdedah kepada kerosakan banjir.",
-                edu_box_s1: "Bencana menyebabkan kekurangan atau lebihan ubat yang besar. Di hospital kerajaan, kekurangan mencetuskan pembelian kecemasan harga tinggi (sehingga 250% markup), manakala stok berlebihan rosak atau luput, membebankan pembayar cukai. Kaedah pesanan garis asas naif (t-28) tidak berfungsi baik semasa bencana.",
+                edu_box_s1: "Bencana menyebabkan kekurangan atau lebihan ubat yang besar. Di hospital kerajaan, kekurangan mencetuskan pembelian kecemasan harga tinggi (sehingga 250% markup), manakala stok berlebihan rosak atau luput, membebankan pembayar cukai. Kaedah pesanan garis asas sejarah (t-28) tidak berfungsi baik semasa bencana.",
                 edu_box_s2: "Model AI mengoptimumkan perolehan. TFT memberikan ketepatan deep learning SOTA, manakala LSTM menangkap corak jujukan. XGBoost menawarkan kelajuan pada perkakasan biasa. Chronos-2 pula ialah model zero-shot yang berfungsi tanpa latihan. AI mengelakkan pembaziran dan menyelamatkan nyawa.",
                 
                 // Screen 5 Final Comparison fields
                 final_tag: "Penilaian Selesai",
-                final_title: "Teka Rawak vs Bantuan AI",
+                final_title: "Anggaran Intuitif vs Bantuan AI",
                 final_intro: "Tahniah! Anda telah menyelesaikan kedua-dua tahap simulasi. Berikut adalah ringkasan penilaian prestasi akhir anda.",
                 th_metric: "Metrik Prestasi",
-                th_s1: "Tahap 1 (Teka Rawak)",
+                th_s1: "Tahap 1 (Anggaran Intuitif)",
                 th_s2: "Tahap 2 (Berbantuan AI)",
                 row_error: "Ralat Ramalan (%)",
                 row_shortage: "Kekurangan Dos / Pesakit",
                 row_waste: "Pembaziran Perolehan (RM)",
                 row_cost: "Jumlah Kos Sebenar (RM)",
-                row_savings: "Penjimatan AI Bersih vs Tekaan",
+                row_savings: "Penjimatan AI Bersih vs Intuitif",
+                card_historical: "Sejarah (t-28)",
                 btn_finish: "Hantar Keputusan & Tamat",
                 btn_restart: "Mula Semula",
                 final_closing_box: "Dengan menyepadukan model ramalan AI ke dalam rantaian bekalan hospital, anda telah mengurangkan ralat ramalan sebanyak {e}%, meminimumkan pembaziran ubat, dan menjimatkan {s} dalam kos perolehan, sambil melindungi pesakit. Ini selaras dengan objektif penyelidikan memanfaatkan AI dalam membina rantaian bekalan farmasi yang berdaya tahan terhadap bencana di Malaysia."
@@ -1318,15 +1328,6 @@
             return currentScenario.forecast.reduce((a, b) => a + b.actual, 0);
         }
 
-        function getMedian(values) {
-            if (values.length === 0) return 0;
-            const sorted = [...values].sort((a, b) => a - b);
-            const half = Math.floor(sorted.length / 2);
-            if (sorted.length % 2 !== 0) {
-                return sorted[half];
-            }
-            return (sorted[half - 1] + sorted[half]) / 2.0;
-        }
 
         function initGameplayScreen() {
             gameStage = 1;
@@ -1364,11 +1365,13 @@
             
             document.getElementById('btn-preset-avg').onclick = () => {
                 sound.playClick();
+                activeBaseCurve = Array(14).fill(histAvg);
                 slider.value = 0;
                 updateSliderOutput(0);
             };
             document.getElementById('btn-preset-trend').onclick = () => {
                 sound.playClick();
+                activeBaseCurve = Array(14).fill(histAvg);
                 // Project latest day (day 14) forward
                 const currentUse = actualHistoryValues[actualHistoryValues.length - 1];
                 const pct = ((currentUse - histAvg) / histAvg) * 100;
@@ -1377,10 +1380,10 @@
             };
             document.getElementById('btn-preset-median').onclick = () => {
                 sound.playClick();
-                const median = getMedian(actualHistoryValues);
-                const pct = ((median - histAvg) / histAvg) * 100;
-                slider.value = Math.max(-50, Math.min(100, Math.round(pct)));
-                updateSliderOutput(slider.value);
+                // Load naive curve baseline
+                activeBaseCurve = currentScenario.forecast.map(f => f.naive);
+                slider.value = 0;
+                updateSliderOutput(0);
             };
 
             updateTranslation();
@@ -1966,6 +1969,7 @@
                 stage2_patients: playerState.stage2_patients,
                 chosen_model: playerState.chosen_model,
                 cost_saved_vs_naive: playerState.cost_saved_vs_naive,
+                cost_saved_vs_intuitive: playerState.stage1_cost - playerState.stage2_cost,
                 shortage_avoided: playerState.shortage_avoided,
                 waste_avoided: playerState.waste_avoided
             };
@@ -2042,6 +2046,15 @@
             }
             
             localScores.reverse().forEach(score => {
+                const savedVsNaive = score.cost_saved_vs_naive;
+                const savedVsIntuitive = score.cost_saved_vs_intuitive !== undefined ? score.cost_saved_vs_intuitive : (score.stage1_cost - score.stage2_cost);
+                
+                const naiveColor = savedVsNaive >= 0 ? 'text-emerald-400' : 'text-red-400';
+                const intuitiveColor = savedVsIntuitive >= 0 ? 'text-emerald-400' : 'text-red-400';
+                
+                const formattedNaive = (savedVsNaive >= 0 ? "+" : "-") + formatCurrency(Math.abs(savedVsNaive));
+                const formattedIntuitive = (savedVsIntuitive >= 0 ? "+" : "-") + formatCurrency(Math.abs(savedVsIntuitive));
+
                 const tr = document.createElement('tr');
                 tr.className = "border-b border-slate-800/40 hover:bg-slate-800/20 transition-colors";
                 tr.innerHTML = `
@@ -2051,7 +2064,8 @@
                     <td class="py-2 px-4">${score.stage1_error.toFixed(1)}%</td>
                     <td class="py-2 px-4 text-emerald-400">${score.stage2_error.toFixed(1)}%</td>
                     <td class="py-2 px-4 text-slate-400">${score.chosen_model}</td>
-                    <td class="py-2 px-4 text-emerald-400">${formatCurrency(score.cost_saved_vs_naive)}</td>
+                    <td class="py-2 px-4 ${naiveColor}">${formattedNaive}</td>
+                    <td class="py-2 px-4 ${intuitiveColor}">${formattedIntuitive}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -2082,7 +2096,7 @@
                 'flood_start_date', 'unit_cost', 'actual_total',
                 'stage1_pred', 'stage1_error', 'stage1_cost', 'stage1_patients',
                 'stage2_pred', 'stage2_error', 'stage2_cost', 'stage2_patients',
-                'chosen_model', 'cost_saved_vs_naive', 'shortage_avoided', 'waste_avoided'
+                'chosen_model', 'cost_saved_vs_naive', 'cost_saved_vs_intuitive', 'shortage_avoided', 'waste_avoided'
             ];
             
             let csvContent = "data:text/csv;charset=utf-8,";

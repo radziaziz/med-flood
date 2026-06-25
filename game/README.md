@@ -41,7 +41,7 @@ You can open the game in two ways:
 
 1. **Manager Details:** The player inputs their Name and optional Email (to receive their results or research updates later).
 2. **Language Toggle:** Instant language selection between **English** and **Bahasa Melayu** at the top right.
-3. **Stage 1 (Wild Guess):** The player is shown 14 days of historical utilization. They drag a slider to predict the next 14 days under stress. A dashed orange preview line shifts on the Chart.js grid in real-time.
+3. **Stage 1 (Intuitive Estimation):** The player is shown 14 days of historical utilization. They drag a slider to predict the next 14 days under stress. A dashed orange preview line shifts on the Chart.js grid in real-time.
 4. **Stage 1 Results:** Shows actual utilization (in green). Calculates the absolute forecast error, procurement costs (standard vs emergency buying), and the count of missed patient treatment courses.
 5. **Stage 2 (AI-Assisted):** Introduces four deep learning and machine learning models:
    - **TFT (Temporal Fusion Transformer):** State-of-the-art accuracy (<2% error), but complex and requires training.
