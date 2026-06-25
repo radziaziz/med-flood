@@ -1,6 +1,7 @@
 # Ignore administrative notes, slides and PDFs
 administrative/
-
+poster/diagram/
+poster/draft/
 # Ignore Python cache
 __pycache__/
 *.pyc
