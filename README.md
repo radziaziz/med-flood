@@ -1,50 +1,96 @@
-# Planetary Health Awareness Expo 2026: MedForecast
+# Med-Flood: Forecasting Cardiovascular Medication Demand During Flood Disasters
 
-Welcome to the **MedForecast** repository, developed for the **Planetary Health Awareness Expo 2026** by the Faculty of Pharmacy, UiTM. 
+> **Development and Comparison of XGBoost, LSTM, and TFT for Forecasting Cardiovascular Medication Utilisation During Flood Disasters in Malaysian Public Healthcare Facilities**
 
-This project explores the impact of climate change—specifically severe flooding—on public health infrastructure in Malaysia, with a particular focus on forecasting cardiovascular medication requirements.
-
-## 📌 Project Overview
-During natural disasters like floods, public healthcare facilities face supply chain disruptions alongside surges in specific medical needs (e.g., cardiovascular therapies due to stress, displacement, or loss of existing supplies). **MedForecast** demonstrates how advanced machine learning models can anticipate these demands to safeguard patient care and reduce waste.
-
-This repository hosts a multi-component interactive local web application:
-1. **Interactive Forecast Dashboard**: Compare historical consumption data against predictive machine learning models:
-   - **Temporal Fusion Transformer (TFT)**
-   - **Long Short-Term Memory (LSTM)**
-   - **XGBoost (Extreme Gradient Boosting)**
-   - Baseline statistical models
-2. **Forecasting Simulation Game**: A gamified scenario-based simulation where you step into the shoes of a Hospital Pharmacy Manager during a flood alert to balance stock, safety buffers, emergency purchase costs, and patient coverage.
+**Med-Flood** (also presented as *MedForecast*) is a PhD research project in Pharmacoinformatics. The study investigates how artificial intelligence, deep learning architectures, and time-series foundation models can enhance disaster-resilient medication planning, emergency logistics, and stock management in Malaysian public healthcare facilities.
 
 ---
 
-## 🛠️ Tech Stack & Environment
-- **Core Technology**: Semantic HTML5, Vanilla JavaScript, CSS3
-- **Styling**: Tailwind CSS
-- **Target Device Profile**: Optimised for ThinkPad T14 Gen 5 AMD (Ryzen™ 7 PRO 8840U / Radeon™ 780M, 32GB RAM) running CachyOS.
-- **Localisation**: Fully bilingual support (English and Bahasa Melayu).
+## 🌐 Project Website & Portal
+
+Access our interactive web portal, research dashboards, simulation games, and exhibition materials:
+
+👉 **[https://radziaziz.github.io/med-flood/](https://radziaziz.github.io/med-flood/)**
+
+---
+
+## 👥 Research & Supervisory Team
+
+### Researcher / Lead Author
+- **Ts. Mohd Radzi bin Ab. Aziz**  
+  *PhD Candidate (Pharmacoinformatics), Professional Technologist (ICT)*  
+  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM) / Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
+
+### Supervisory Team
+- **Assoc. Prof. Dr. Hanis Hanum Zulkifly** *(Main Supervisor)*  
+  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
+- **Dr. Abdul Haniff Mohamad Yahaya** *(Co-Supervisor)*  
+  Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
+- **Assoc. Prof. Dr. Fazlin Mohd Fauzi** *(Co-Supervisor)*  
+  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
+
+---
+
+## 🏛️ Institutional Affiliations
+
+1. **Faculty of Pharmacy**, Universiti Teknologi MARA (UiTM), 42300 Puncak Alam, Selangor, Malaysia
+2. **Pharmacy Services Programme** (*Program Perkhidmatan Farmasi - PPF*), Ministry of Health Malaysia (KKM), 46350 Petaling Jaya, Selangor, Malaysia
+
+---
+
+## 🔬 Key Research Scope & Objectives
+
+During flood disasters, public healthcare facilities face supply chain disruptions alongside demand surges for chronic medications—especially cardiovascular therapies triggered by displacement, psychological stress, or lost medication supplies.
+
+This research evaluates and compares multiple state-of-the-art forecasting approaches:
+- **Gradient Boosting**: XGBoost (Extreme Gradient Boosting)
+- **Recurrent Neural Networks**: Long Short-Term Memory (LSTM)
+- **Attention Architectures**: Temporal Fusion Transformer (TFT)
+- **Foundation Models**: Zero-shot & fine-tuned time-series foundation models (e.g. Chronos)
+- **Statistical Baselines**: Exponential smoothing, moving averages, and historical shape-based curves
 
 ---
 
 ## 📂 Repository Structure
-- [**`index.html`**](file:///home/radziaziz/Projects/Planetary_Health_2026/index.html): The main entry point/portal for the Expo.
-- [**`dashboard/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/dashboard/): Interactive forecast evaluation dashboard.
-- [**`game/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/game/): Pharmacy management simulation code and assets.
-- [**`poster/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/poster/): Academic posters and materials for the expo.
-- [**`assets/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/assets/): Logos, styling assets, and shared resources.
-- [**`administrative/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/administrative/): Project organization and administrative documentation.
 
----
-
-## 🚀 Getting Started
-Simply open the main entry point in your browser to run the application locally:
-```bash
-# Open index.html
-xdg-open index.html
+```
+.
+├── showcase/               # Conference, exhibition, and public engagement materials
+│   ├── planetary-health-2026/  # Planetary Health Awareness Expo 2026 showcase
+│   └── ipnacs-ipops-2026/      # IPNACS / IPOPS 2026 conference materials
+├── publications/           # Manuscripts, abstracts, and supplementary research files
+├── poster/                 # Academic conference posters & flyers
+├── dashboard/              # Interactive model evaluation & metrics dashboards
+├── game/                   # "Disaster-Resilient Pharmacy Manager" serious simulation game
+├── assets/                 # Brand assets, logos, CSS, and interactive UI scripts
+└── README.md               # Repository documentation
 ```
 
 ---
 
-## 👤 Developer Profile
-- **Lead Developer**: Ts. Mohd Radzi bin Ab. Aziz (Professional Technologist, Pharmacoinformatics PhD Candidate)
-- **Affiliation**: Faculty of Pharmacy, Universiti Teknologi MARA (UiTM) / Program Perkhidmatan Farmasi (PPF), KKM
-- **Research Focus**: Development and Comparison of XGBoost, LSTM, and TFT for Forecasting Cardiovascular Medication Utilisation During Flood Disasters in Malaysian Public Healthcare Facilities.
+## 📊 Interactive Applications & Showcases
+
+- **Interactive Forecast Dashboard**: Compare historical consumption data against predictions generated by TFT, LSTM, XGBoost, and statistical baselines.
+- **Disaster-Resilient Pharmacy Manager**: A scenario-based simulation where users step into the role of a hospital pharmacy manager during a 2-week flood alert window to balance stock buffers, stockouts, emergency procurement costs, and patient care.
+
+---
+
+## 📄 Research Outputs & Citation
+
+This repository hosts research deliverables including:
+- Academic conference posters and abstracts
+- Interactive web dashboards and educational simulations
+- Selected open-source model pipelines and dataset schemas
+- Published manuscripts and conference slides
+
+*If you reference or use materials from this repository, please cite the project accordingly. A `CITATION.cff` will be updated upon published manuscript releases.*
+
+---
+
+## 📬 Contact & Links
+
+- **GitHub**: [github.com/radziaziz](https://github.com/radziaziz)
+- **LinkedIn**: [linkedin.com/in/radzi-aziz](https://www.linkedin.com/in/radzi-aziz/)
+- **Project Portal**: [radziaziz.github.io/med-flood](https://radziaziz.github.io/med-flood/)
+
+---
