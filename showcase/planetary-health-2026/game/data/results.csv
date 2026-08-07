@@ -1,0 +1,2 @@
+timestamp,player_name,player_email,facility_code,med_name,flood_start_date,unit_cost_myr,actual_total_ddd,stage1_pred_ddd,stage1_error_pct,stage1_cost_myr,stage1_patients_affected,stage2_pred_ddd,stage2_error_pct,stage2_cost_myr,stage2_patients_affected,chosen_model,cost_saved_vs_naive_myr,shortage_avoided_patients,waste_avoided_myr
+2026-06-22 23:22:32,Dr. Test Radzi,test@uitm.edu.my,11-01010011,Amlodipine,2023-03-01,0.03378775774375736,1400000,1300000,7.14,48147.23,7142.8,1395000,0.35,47291.5,0.0,TFT,1250.5,350.0,800.0
