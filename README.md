@@ -18,7 +18,7 @@ Access our interactive web portal, research dashboards, simulation games, and ex
 
 ### Researcher / Lead Author
 - **Ts. Mohd Radzi bin Ab. Aziz**  
-  *PhD Candidate (Pharmacoinformatics), Professional Technologist (ICT)*  
+  *PhD Candidate, Professional Technologist (ICT)*  
   Faculty of Pharmacy, Universiti Teknologi MARA (UiTM) / Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
 
 ### Supervisory Team

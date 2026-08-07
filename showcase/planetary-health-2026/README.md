@@ -59,7 +59,7 @@ python3 server.py
 
 ### Researcher / Lead Developer
 - **Ts. Mohd Radzi bin Ab. Aziz**¹˒²  
-  *PhD Candidate (Pharmacoinformatics), Professional Technologist (ICT)*
+  *PhD Candidate, Professional Technologist (ICT)*
 
 ### Supervisory Team
 - **Assoc. Prof. Dr. Hanis Hanum Zulkifly**¹ *(Co-Supervisor)*  
