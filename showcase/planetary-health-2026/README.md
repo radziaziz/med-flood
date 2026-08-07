@@ -1,50 +1,81 @@
-# Planetary Health Awareness Expo 2026: MedForecast
+# Planetary Health Awareness Expo 2026 Showcase
 
-Welcome to the **MedForecast** repository, developed for the **Planetary Health Awareness Expo 2026** by the Faculty of Pharmacy, UiTM. 
+> **Interactive Web Application, Forecast Dashboard & Simulation Game for Planetary Health Awareness Expo 2026**
 
-This project explores the impact of climate change—specifically severe flooding—on public health infrastructure in Malaysia, with a particular focus on forecasting cardiovascular medication requirements.
-
-## 📌 Project Overview
-During natural disasters like floods, public healthcare facilities face supply chain disruptions alongside surges in specific medical needs (e.g., cardiovascular therapies due to stress, displacement, or loss of existing supplies). **MedForecast** demonstrates how advanced machine learning models can anticipate these demands to safeguard patient care and reduce waste.
-
-This repository hosts a multi-component interactive local web application:
-1. **Interactive Forecast Dashboard**: Compare historical consumption data against predictive machine learning models:
-   - **Temporal Fusion Transformer (TFT)**
-   - **Long Short-Term Memory (LSTM)**
-   - **XGBoost (Extreme Gradient Boosting)**
-   - Baseline statistical models
-2. **Forecasting Simulation Game**: A gamified scenario-based simulation where you step into the shoes of a Hospital Pharmacy Manager during a flood alert to balance stock, safety buffers, emergency purchase costs, and patient coverage.
+This directory represents the **Planetary Health Awareness Expo 2026** showcase module within the **Med-Flood** (*MedForecast*) research repository.
 
 ---
 
-## 🛠️ Tech Stack & Environment
-- **Core Technology**: Semantic HTML5, Vanilla JavaScript, CSS3
-- **Styling**: Tailwind CSS
-- **Target Device Profile**: Optimised for ThinkPad T14 Gen 5 AMD (Ryzen™ 7 PRO 8840U / Radeon™ 780M, 32GB RAM) running CachyOS.
-- **Localisation**: Fully bilingual support (English and Bahasa Melayu).
+## 📌 Showcase Overview
+
+During natural disasters such as floods, public healthcare facilities experience supply chain disruptions alongside demand surges for chronic medications—particularly cardiovascular therapies driven by displacement, stress, or lost medication supplies. 
+
+This showcase demonstrates how AI-driven time-series forecasting (XGBoost, LSTM, TFT) and interactive simulations can improve disaster preparedness, drug stock management, and planetary health resilience in Malaysian public healthcare facilities.
+
+### Featured Applications:
+1. **Interactive Forecast Dashboard**: Compare historical drug dispensing trends against predictive models (Temporal Fusion Transformer, LSTM, XGBoost, and statistical baselines).
+2. **Disaster-Resilient Pharmacy Manager Game**: A scenario-based interactive simulation where users step into the role of a hospital pharmacy manager during a 2-week flood alert to balance stock buffers, stockouts, emergency procurement markups, and patient coverage.
 
 ---
 
-## 📂 Repository Structure
-- [**`index.html`**](file:///home/radziaziz/Projects/Planetary_Health_2026/index.html): The main entry point/portal for the Expo.
-- [**`dashboard/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/dashboard/): Interactive forecast evaluation dashboard.
-- [**`game/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/game/): Pharmacy management simulation code and assets.
-- [**`poster/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/poster/): Academic posters and materials for the expo.
-- [**`assets/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/assets/): Logos, styling assets, and shared resources.
-- [**`administrative/`**](file:///home/radziaziz/Projects/Planetary_Health_2026/administrative/): Project organization and administrative documentation.
+## 📂 Showcase Directory Structure
 
----
-
-## 🚀 Getting Started
-Simply open the main entry point in your browser to run the application locally:
-```bash
-# Open index.html
-xdg-open index.html
+```
+showcase/planetary-health-2026/
+├── index.html              # Main portal entry point for the Expo showcase
+├── dashboard/              # Interactive forecast evaluation dashboard
+│   └── interactive_forecast_dashboard.html
+├── game/                   # "Disaster-Resilient Pharmacy Manager" simulation game
+│   ├── index.html
+│   ├── server.py
+│   └── README.md
+├── poster/                 # Academic poster presented at the Expo
+│   └── Poster Final.pdf
+├── assets/                 # Shared logos and UI assets
+├── global_smape_reverted_clean.png  # Model comparison chart
+└── README.md               # Showcase documentation
 ```
 
 ---
 
-## 👤 Developer Profile
-- **Lead Developer**: Ts. Mohd Radzi bin Ab. Aziz (Professional Technologist, Pharmacoinformatics PhD Candidate)
-- **Affiliation**: Faculty of Pharmacy, Universiti Teknologi MARA (UiTM) / Program Perkhidmatan Farmasi (PPF), KKM
-- **Research Focus**: Development and Comparison of XGBoost, LSTM, and TFT for Forecasting Cardiovascular Medication Utilisation During Flood Disasters in Malaysian Public Healthcare Facilities.
+## 🚀 Running the Showcase Locally
+
+To launch the showcase locally on your machine:
+
+```bash
+# Open the main Expo showcase portal in your web browser
+xdg-open index.html
+```
+
+Or start the local server for the simulation game:
+```bash
+cd game
+python3 server.py
+```
+
+---
+
+## 👥 Research & Supervisory Team
+
+### Researcher / Lead Developer
+- **Ts. Mohd Radzi bin Ab. Aziz**¹˒²  
+  *PhD Candidate (Pharmacoinformatics), Professional Technologist (ICT)*
+
+### Supervisory Team
+- **Assoc. Prof. Dr. Hanis Hanum Zulkifly**¹ *(Co-Supervisor)*  
+  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
+- **Dr. Abdul Haniff Mohamad Yahaya**² *(Co-Supervisor)*  
+  Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
+- **Assoc. Prof. Dr. Fazlin Mohd Fauzi**¹ *(Main Supervisor)*  
+  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
+
+### Institutional Affiliations
+1. **Faculty of Pharmacy**, Universiti Teknologi MARA (UiTM), 42300 Puncak Alam, Selangor, Malaysia
+2. **Pharmacy Services Programme** (*Program Perkhidmatan Farmasi - PPF*), Ministry of Health Malaysia (KKM), 46350 Petaling Jaya, Selangor, Malaysia
+
+---
+
+## 🔗 Related Links
+
+- **Main Med-Flood Repository**: [med-flood Root README](../../README.md)
+- **Live Project Web Portal**: [https://radziaziz.github.io/med-flood/](https://radziaziz.github.io/med-flood/)
