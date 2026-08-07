@@ -22,12 +22,13 @@ Access our interactive web portal, research dashboards, simulation games, and ex
   Faculty of Pharmacy, Universiti Teknologi MARA (UiTM) / Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
 
 ### Supervisory Team
-- **Assoc. Prof. Dr. Hanis Hanum Zulkifly** *(Main Supervisor)*  
+- **Assoc. Prof. Dr. Hanis Hanum Zulkifly** *(Co-Supervisor)*  
   Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
 - **Dr. Abdul Haniff Mohamad Yahaya** *(Co-Supervisor)*  
   Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
-- **Assoc. Prof. Dr. Fazlin Mohd Fauzi** *(Co-Supervisor)*  
+- **Assoc. Prof. Dr. Fazlin Mohd Fauzi** *(Main Supervisor)*  
   Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
+
 
 ---
 
@@ -89,7 +90,7 @@ This repository hosts research deliverables including:
 
 ## 📬 Contact & Links
 
-- **GitHub**: [github.com/radziaziz](https://github.com/radziaziz)
+- **GitHub**: [github.com/radziaziz](https://github.com/radziaziz/med-flood)
 - **LinkedIn**: [linkedin.com/in/radzi-aziz](https://www.linkedin.com/in/radzi-aziz/)
 - **Project Portal**: [radziaziz.github.io/med-flood](https://radziaziz.github.io/med-flood/)
 

@@ -23,9 +23,9 @@ This showcase directory contains the academic presentation materials, poster, an
 
 ### Authors & Affiliations
 - **Ts. Mohd Radzi bin Ab. Aziz**¹˒² *(Presenter / Lead Author)*
-- **Assoc. Prof. Dr. Hanis Hanum Zulkifly**¹ *(Main Supervisor)*
+- **Assoc. Prof. Dr. Hanis Hanum Zulkifly**¹ *(Co-Supervisor)*
 - **Dr. Abdul Haniff Mohamad Yahaya**² *(Co-Supervisor)*
-- **Assoc. Prof. Dr. Fazlin Mohd Fauzi**¹ *(Co-Supervisor)*
+- **Assoc. Prof. Dr. Fazlin Mohd Fauzi**¹ *(Main Supervisor)*
 
 1. **Faculty of Pharmacy**, Universiti Teknologi MARA (UiTM), 42300 Puncak Alam, Selangor, Malaysia  
 2. **Pharmacy Services Programme** (*Program Perkhidmatan Farmasi - PPF*), Ministry of Health Malaysia (KKM), 46350 Petaling Jaya, Selangor, Malaysia
