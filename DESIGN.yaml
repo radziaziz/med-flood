@@ -1,0 +1,41 @@
+# Med-Flood Website Design Guidelines
+
+Style:
+  Minimalist Academic
+
+Theme:
+  Light
+  Dark
+  System
+
+Primary:
+  Blue
+
+Secondary:
+  Teal
+
+Background:
+  Neutral
+
+Effects:
+  Aurora Gradient
+  Glassmorphism
+  Soft Blur
+
+Animations:
+  Subtle only
+
+Typography:
+  Inter
+
+Corners:
+  xl
+
+Cards:
+  Glass
+
+Navigation:
+  Sticky
+
+Layout:
+  One-page

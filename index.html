@@ -1,390 +1,564 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" data-theme="system">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planetary Health Awareness Expo 2026 | UiTM</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
-    <!-- Inline theme initializer (executes immediately to prevent flash) -->
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            let isDark = false;
-            if (savedTheme === 'dark') {
-                isDark = true;
-            } else if (savedTheme === 'system') {
-                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            }
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        })();
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 50% 0%, #f8fafc 0%, #e2e8f0 100%);
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        .dark body {
-            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 100%);
-        }
-        h1, h2, h3 {
-            font-family: 'Outfit', sans-serif;
-        }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(148, 163, 184, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(148, 163, 184, 0.05);
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-        .dark .glass-panel {
-            background: rgba(15, 23, 42, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-        .text-glow {
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
-        }
-        .dark .text-glow {
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
-        }
-        .text-glow-emerald {
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-        }
-        .dark .text-glow-emerald {
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
-        }
-        .card-glow-blue:hover {
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.2);
-        }
-        .dark .card-glow-blue:hover {
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-        .card-glow-emerald:hover {
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.2);
-        }
-        .dark .card-glow-emerald:hover {
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forecasting Medication Demand During Flood Disasters | Research Portal</title>
+  <meta name="description" content="Official research website investigating machine learning, deep learning (XGBoost, LSTM, TFT), and foundation models for forecasting medication demand during flood disasters in Malaysian public healthcare facilities.">
+  <meta name="keywords" content="Pharmacoinformatics, Machine Learning, Time Series Forecasting, Flood Disasters, Medication Supply Chain, UiTM, MOH Malaysia, KKM">
+  <meta name="author" content="Ts. Mohd Radzi bin Ab. Aziz">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Forecasting Medication Demand During Flood Disasters">
+  <meta property="og:description" content="PhD research exploring AI and time-series forecasting for disaster-resilient pharmaceutical logistics in Malaysian public healthcare facilities.">
+  <meta property="og:type" content="website">
+
+  <!-- Inline theme initializer to prevent Flash of Unstyled Theme (FOUC) -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('medforecast_theme') || 'system';
+      let isDark = false;
+      if (savedTheme === 'dark') {
+        isDark = true;
+      } else if (savedTheme === 'system') {
+        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    })();
+  </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body class="h-full text-slate-800 dark:text-slate-100 flex flex-col justify-between overflow-x-hidden selection:bg-blue-500/30 selection:text-blue-200">
+<body>
 
-    <!-- Top Glow Line -->
-    <div class="w-full h-1.5 bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-500 shadow-lg shadow-blue-500/20"></div>
+  <!-- Ambient Aurora Gradient Background -->
+  <div class="aurora-bg" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
+  </div>
 
-    <!-- Header -->
-    <header class="w-full max-w-6xl mx-auto px-6 py-5 flex items-center justify-between z-10 shrink-0">
-        <div class="flex items-center space-x-3">
-            <img src="assets/uitm-logo.png" alt="UiTM Logo" class="h-10 w-auto object-contain">
-            <div>
-                <h1 class="text-sm font-extrabold tracking-wider text-slate-800 dark:text-slate-200 uppercase">MedForecast</h1>
-                <p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Planetary Health Awareness 2026</p>
-            </div>
+  <!-- Sticky Glass Navigation Header -->
+  <header class="header-nav" id="top">
+    <div class="container header-container">
+      <a href="#home" class="nav-brand" aria-label="Research Homepage">
+        <div class="nav-brand-icon">
+          <!-- Scientific Node / Time Series SVG Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
         </div>
-        
-        <div class="flex items-center space-x-3">
-            <!-- Language Selector -->
-            <button id="btn-lang" class="px-3 py-1.5 text-xs font-bold glass-panel rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors flex items-center space-x-1.5 text-slate-700 dark:text-slate-200">
-                <span>🌐</span>
-                <span id="lang-text">BM</span>
-            </button>
-            <!-- Theme Toggle -->
-            <button id="btn-theme" class="px-3 py-1.5 text-xs font-bold glass-panel rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors flex items-center space-x-1.5 text-slate-700 dark:text-slate-200">
-                <span id="theme-icon">☀️</span>
-                <span id="theme-text">Light</span>
-            </button>
-            <!-- Audio Toggle -->
-            <button id="btn-audio" class="w-9 h-9 flex items-center justify-center glass-panel rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors text-sm text-slate-700 dark:text-slate-200">
-                🔊
-            </button>
-        </div>
-    </header>
+        <span>Medication Forecasting</span>
+      </a>
 
-    <!-- Main Container -->
-    <main class="w-full max-w-5xl mx-auto px-6 flex-1 flex flex-col items-center justify-center py-6 z-10 space-y-8">
-        
-        <!-- Hero Introduction -->
-        <div class="text-center space-y-4 max-w-2xl">
-            <div class="inline-block px-3 py-1 text-[10px] font-bold bg-gradient-to-r from-blue-500/10 to-emerald-500/10 text-blue-600 dark:text-blue-300 rounded-full border border-blue-500/20 uppercase tracking-widest" data-i18n="tag_expo">
-                Planetary Health Awareness Expo 2026
-            </div>
-            <h2 class="text-4xl md:text-5xl font-black tracking-tight leading-tight text-slate-900 dark:text-slate-100" id="main-title">
-                Can We Predict <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-emerald-400 text-glow">Medicine Demand During Floods?</span>
-            </h2>
-            <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-medium" id="main-desc">
-                Using modern forecasting models to improve disaster preparedness.
-            </p>
-        </div>
+      <!-- Navigation Menu -->
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#research" class="nav-link">Research</a></li>
+          <li><a href="#showcase" class="nav-link">Showcase</a></li>
+          <li><a href="#publications" class="nav-link">Publications</a></li>
+          <li><a href="#resources" class="nav-link">Resources</a></li>
+          <li><a href="#repository" class="nav-link">Repository</a></li>
+          <li><a href="#team" class="nav-link">Team</a></li>
+        </ul>
+      </nav>
 
-        <!-- Expo Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
-            
-            <!-- Card 1: Dashboard -->
-            <a href="dashboard/interactive_forecast_dashboard.html" id="link-dashboard" class="group glass-panel p-6 rounded-3xl space-y-5 transition-all duration-300 transform hover:scale-[1.02] flex flex-col justify-between card-glow-blue cursor-pointer">
-                <div class="space-y-4">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                        📊
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors" data-i18n="card_dash_title">Explore Forecast Dashboard</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium" data-i18n="card_dash_desc">
-                            View historical cardiovascular medication consumption trends and evaluate baseline vs. machine learning predictions (TFT, LSTM, XGBoost) across Malaysian public hospitals and clinics.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Mockup Graph Representation -->
-                <div class="bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/40 rounded-2xl p-4 h-32 flex items-end space-x-1.5 relative overflow-hidden font-sans">
-                    <div class="w-full h-1/5 bg-blue-500/20 rounded-sm group-hover:h-2/5 transition-all duration-500"></div>
-                    <div class="w-full h-2/5 bg-blue-500/20 rounded-sm group-hover:h-3/5 transition-all duration-500 delay-75"></div>
-                    <div class="w-full h-3/5 bg-blue-500/20 rounded-sm group-hover:h-4/5 transition-all duration-500 delay-100"></div>
-                    <div class="w-full h-2/5 bg-blue-500/20 rounded-sm group-hover:h-3/5 transition-all duration-500 delay-75"></div>
-                    <div class="w-full h-4/5 bg-blue-500/30 rounded-sm group-hover:h-5/5 transition-all duration-500 delay-150 relative">
-                        <div class="absolute inset-x-0 top-0 h-1 bg-blue-400 shadow-lg shadow-blue-500"></div>
-                    </div>
-                    <div class="w-full h-3/5 bg-blue-500/20 rounded-sm group-hover:h-4/5 transition-all duration-500 delay-100"></div>
-                    <div class="w-full h-1/5 bg-blue-500/20 rounded-sm group-hover:h-2/5 transition-all duration-500"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-slate-950/80 to-transparent"></div>
-                    <span class="absolute bottom-3 right-4 text-[9px] font-bold uppercase tracking-widest text-blue-600/80 dark:text-blue-400/80" data-i18n="badge_visual">Data Visualization</span>
-                </div>
-            </a>
-
-            <!-- Card 2: Simulation Game -->
-            <a href="game/index.html" id="link-game" class="group glass-panel p-6 rounded-3xl space-y-5 transition-all duration-300 transform hover:scale-[1.02] flex flex-col justify-between card-glow-emerald cursor-pointer">
-                <div class="space-y-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                        🎮
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-xl font-bold text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-500 dark:group-hover:text-emerald-300 transition-colors" data-i18n="card_game_title">Play Forecasting Simulation</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium" data-i18n="card_game_desc">
-                            Act as a Hospital Pharmacy Manager. Attempt to forecast stock requirements before and during flood alerts to prevent emergency purchase markups and drug wastage.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Mockup Game Representation -->
-                <div class="bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/40 rounded-2xl p-4 h-32 flex flex-col justify-between relative overflow-hidden text-[10px] font-sans">
-                    <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800/40 pb-2">
-                        <span class="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Active Scenario</span>
-                        <span class="font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">Flood Alert</span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></div>
-                        <div class="flex-1 font-medium text-slate-600 dark:text-slate-300" data-i18n="mock_status">Emergency stock safety buffer: 5%</div>
-                    </div>
-                    <div class="flex justify-between font-mono text-[9px] text-slate-500 dark:text-slate-400 pt-1">
-                        <span>Shortage: 0 Doses</span>
-                        <span class="text-emerald-600 dark:text-emerald-400 font-bold">100% Patient Coverage</span>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-slate-950/80 to-transparent"></div>
-                    <span class="absolute bottom-3 right-4 text-[9px] font-bold uppercase tracking-widest text-emerald-600/80 dark:text-emerald-400/80" data-i18n="badge_sim">Interactive Game</span>
-                </div>
-            </a>
-
+      <!-- Navigation Controls (Theme Switcher & Mobile Menu) -->
+      <div class="nav-controls">
+        <!-- Theme Switcher Segmented Control -->
+        <div class="theme-switcher" role="radiogroup" aria-label="Color theme switcher">
+          <button type="button" class="theme-btn" data-theme-set="light" aria-label="Switch to Light Theme" title="Light Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+          <button type="button" class="theme-btn" data-theme-set="dark" aria-label="Switch to Dark Theme" title="Dark Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <button type="button" class="theme-btn active" data-theme-set="system" aria-label="Switch to System Theme" title="System Preference">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </button>
         </div>
 
-    </main>
+        <!-- Mobile Drawer Toggle -->
+        <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-    <!-- Footer -->
-    <footer class="w-full max-w-6xl mx-auto px-6 py-5 border-t border-slate-200 dark:border-slate-800/40 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-semibold shrink-0 z-10">
-        <p>© 2026 Faculty of Pharmacy, UiTM. Ts. Mohd Radzi bin Ab. Aziz. All rights reserved.</p>
-        <p class="mt-1 md:mt-0 flex items-center space-x-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 block animate-pulse"></span>
-            <span>ThinkPad T14 Local Offline Deploy v4.1</span>
+  <!-- HERO SECTION -->
+  <section class="hero-section" id="home">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <div class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+          Ongoing PhD Research Project • Pharmacoinformatics
+        </div>
+
+        <h1 class="hero-title">
+          Forecasting Medication Demand <br><span class="text-gradient">During Flood Disasters</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          An ongoing PhD research project exploring machine learning, deep learning, and foundation models to improve medicine planning and disaster preparedness in Malaysian public healthcare facilities.
         </p>
-    </footer>
 
-    <!-- Audio Helper Script -->
-    <script>
-        // Simple Web Audio Sound Generator for click effects
-        class SoundEffects {
-            constructor() {
-                this.ctx = null;
-                this.enabled = true;
-            }
-            init() {
-                if (!this.ctx) {
-                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-            }
-            playClick() {
-                if (!this.enabled) return;
-                this.init();
-                
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.08);
-                
-                gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
-                
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.08);
-            }
-        }
+        <div class="hero-actions">
+          <a href="#research" class="btn btn-primary">
+            <span>Explore Research</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="https://github.com/radziaziz/med-flood" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub Repository</span>
+          </a>
+        </div>
 
-        const sound = new SoundEffects();
+        <!-- Key Highlight Indicators -->
+        <div class="hero-highlights">
+          <div class="highlight-item">
+            <span class="highlight-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path></svg>
+            </span>
+            <span>Public Healthcare Facilities (MOH Malaysia)</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
+            </span>
+            <span>XGBoost • LSTM • TFT • Chronos-2</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+            </span>
+            <span>Hydrological & Flood Disaster Covariates</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Audio controls
-        const btnAudio = document.getElementById('btn-audio');
-        btnAudio.addEventListener('click', () => {
-            sound.enabled = !sound.enabled;
-            btnAudio.textContent = sound.enabled ? '🔊' : '🔇';
-            sound.playClick();
-        });
+  <!-- RESEARCH SECTION -->
+  <section class="section" id="research">
+    <div class="container">
+      <h2 class="section-title fade-in">Research Overview & Objectives</h2>
+      <p class="section-subtitle fade-in">
+        Investigating how artificial intelligence, deep learning architectures, and time-series foundation models can enhance disaster-resilient medication planning, emergency logistics, and stock management.
+      </p>
 
-        // Add sound to links
-        const clickables = ['link-dashboard', 'link-game', 'btn-lang', 'btn-theme'];
-        clickables.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('click', () => sound.playClick());
-            }
-        });
+      <!-- Contextual Overview Card -->
+      <div class="research-overview glass-panel fade-in">
+        <p>
+          <strong>Motivation:</strong> Flood disasters disrupt medicine supply chains and healthcare services, making it difficult to maintain adequate medication supplies. Accurate forecasting can support timely planning and improve disaster preparedness.
+        </p>
+        <p>
+          <strong>Objectives:</strong> Develop and evaluate machine learning models for forecasting cardiovascular medication utilisation during flood disasters to support evidence-based medicine inventory planning.
+        </p>
+        <p>
+          <strong>Expected Impact:</strong> Improve disaster preparedness through more accurate medication demand forecasting and support data-driven decision-making for medicine inventory management.
+        </p>
+      </div>
 
-        // Translation Dictionary
-        const i18n = {
-            en: {
-                tag_expo: "Planetary Health Awareness Expo 2026",
-                main_title: "Can We Predict <br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-emerald-400 text-glow\">Medicine Demand During Floods?</span>",
-                main_desc: "Using modern forecasting models to improve disaster preparedness.",
-                card_dash_title: "Explore Forecast Dashboard",
-                card_dash_desc: "View historical cardiovascular medication consumption trends and evaluate baseline vs. machine learning predictions (TFT, LSTM, XGBoost) across Malaysian public hospitals and clinics.",
-                card_game_title: "Play Forecasting Simulation",
-                card_game_desc: "Act as a Hospital Pharmacy Manager. Attempt to forecast stock requirements before and during flood alerts to prevent medicine shortage and wastage.",
-                badge_visual: "Data Visualization",
-                badge_sim: "Interactive Game",
-                mock_status: "Emergency stock safety buffer: 5%"
-            },
-            bm: {
-                tag_expo: "Ekspo Kesedaran Kesihatan Planet 2026",
-                main_title: "Bolehkah Kita Meramal <br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-emerald-400 text-glow-emerald\">Permintaan Ubat Semasa Banjir?</span>",
-                main_desc: "Menggunakan model ramalan moden untuk meningkatkan kesiapsiagaan bencana.",
-                card_dash_title: "Teroka Papan Pemuka Ramalan",
-                card_dash_desc: "Lihat trend penggunaan ubat kardiovaskular dan bandingkan ramalan model asas vs pembelajaran mesin (TFT, LSTM, XGBoost) di hospital dan klinik awam Malaysia.",
-                card_game_title: "Main Simulasi Ramalan",
-                card_game_desc: "Bertindak sebagai Pengurus Farmasi Hospital. Cuba ramal keperluan stok sebelum dan semasa amaran banjir untuk mengelakkan terputus bekalan dan pembaziran ubat.",
-                badge_visual: "Visualisasi Data",
-                badge_sim: "Permainan Interaktif",
-                mock_status: "Penimbal keselamatan stok kecemasan: 5%"
-            }
-        };
+      <!-- Research Objective Glass Cards -->
+      <div class="cards-grid-3">
+        <!-- RO1 Card -->
+        <article class="objective-card glass-panel fade-in">
+          <div class="card-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </div>
+          <div class="card-header-tag">Phase 1</div>
+          <h3 class="card-title">Systematic Review</h3>
+          <p class="card-description">
+            Review current evidence on machine learning approaches for forecasting medication utilisation during disasters, including commonly used data sources, models, and evaluation methods.
+          </p>
+          <div style="margin-bottom: 1.25rem;">
+            <a href="https://www.crd.york.ac.uk/PROSPERO/view/CRD42025648931" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; font-weight: 600; color: var(--color-primary); background: var(--color-primary-light); padding: 0.4rem 0.75rem; border-radius: var(--radius-md); border: 1px solid rgba(37, 99, 235, 0.2); transition: all 0.2s ease;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Registered protocol: PROSPERO CRD42025648931</span>
+            </a>
+          </div>
+          <div class="card-footer-specs">
+            <span class="spec-pill spec-pill-success">Completed</span>
+            <span class="spec-pill">Manuscript Under Peer Review</span>
+          </div>
+        </article>
 
-        let currentLang = 'en';
+        <!-- RO2 Card -->
+        <article class="objective-card glass-panel fade-in">
+          <div class="card-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </div>
+          <div class="card-header-tag">Phase 2</div>
+          <h3 class="card-title">Model Development</h3>
+          <p class="card-description">
+            Develop and compare machine learning models for forecasting cardiovascular medication utilisation using healthcare and flood-related data. The study evaluates model performance and robustness under flood conditions.
+          </p>
+          <div class="card-footer-specs">
+            <span class="spec-pill spec-pill-info">Active</span>
+          </div>
+        </article>
 
-        // Translation update
-        function updateTranslation() {
-            document.getElementById('main-title').innerHTML = i18n[currentLang].main_title;
-            document.getElementById('main-desc').textContent = i18n[currentLang].main_desc;
-            
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (i18n[currentLang][key]) {
-                    el.textContent = i18n[currentLang][key];
-                }
-            });
+        <!-- RO3 Card -->
+        <article class="objective-card glass-panel fade-in">
+          <div class="card-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="card-header-tag">Phase 3</div>
+          <h3 class="card-title">External Validation</h3>
+          <p class="card-description">
+            Assess how well the developed forecasting model performs on independent data to evaluate its generalisability and real-world applicability.
+          </p>
+          <div class="card-footer-specs">
+            <span class="spec-pill spec-pill-warning">Planned</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'BM' : 'EN';
-        }
+  <!-- LATEST SHOWCASE SECTION -->
+  <section class="section" id="showcase">
+    <div class="container">
+      <h2 class="section-title fade-in">Latest Showcase</h2>
+      <p class="section-subtitle fade-in">
+        Featured academic exhibitions, conference presentations, and scientific public engagement events.
+      </p>
 
-        // Language toggle
-        document.getElementById('btn-lang').addEventListener('click', () => {
-            currentLang = currentLang === 'en' ? 'bm' : 'en';
-            updateTranslation();
-        });
+      <div class="cards-grid-2">
+        <!-- Showcase Event 1 -->
+        <article class="showcase-card glass-panel fade-in">
+          <div class="showcase-content">
+            <div class="badge badge-teal">Exhibition Showcase</div>
+            <div class="showcase-date">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span>27 June 2026 • AEON Mall Shah Alam</span>
+            </div>
+            <h3 class="card-title">Planetary Health Awareness Expo 2026</h3>
+            <p class="card-description">
+              Showcasing interactive tools and research on medication preparedness during flood disasters to raise public awareness of healthcare resilience and disaster planning.
+            </p>
+          </div>
+          <div>
+            <a href="showcase/planetary-health-2026/" class="btn btn-secondary btn-sm">
+              <span>View Exhibition Materials</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
 
-        // Theme management
-        const themeManager = {
-            init() {
-                const savedTheme = localStorage.getItem('theme') || 'light';
-                this.applyTheme(savedTheme);
-                this.updateToggleUI(savedTheme);
-                
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                    if (localStorage.getItem('theme') === 'system') {
-                        this.applyTheme('system');
-                    }
-                });
-            },
-            applyTheme(theme) {
-                let isDark = false;
-                if (theme === 'dark') {
-                    isDark = true;
-                } else if (theme === 'system') {
-                    isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                }
-                
-                if (isDark) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            },
-            setTheme(theme) {
-                localStorage.setItem('theme', theme);
-                this.applyTheme(theme);
-                this.updateToggleUI(theme);
-            },
-            updateToggleUI(theme) {
-                const btn = document.getElementById('btn-theme');
-                if (!btn) return;
-                const icon = btn.querySelector('#theme-icon');
-                const text = btn.querySelector('#theme-text');
-                
-                if (theme === 'light') {
-                    if (icon) icon.textContent = '☀️';
-                    if (text) text.textContent = 'Light';
-                } else if (theme === 'dark') {
-                    if (icon) icon.textContent = '🌙';
-                    if (text) text.textContent = 'Dark';
-                } else {
-                    if (icon) icon.textContent = '💻';
-                    if (text) text.textContent = 'System';
-                }
-            },
-            toggleNext() {
-                const current = localStorage.getItem('theme') || 'light';
-                let next = 'light';
-                if (current === 'light') next = 'dark';
-                else if (current === 'dark') next = 'system';
-                else next = 'light';
-                
-                this.setTheme(next);
-            }
-        };
+        <!-- Showcase Event 2 -->
+        <article class="showcase-card glass-panel fade-in">
+          <div class="showcase-content">
+            <div class="badge badge-cyan">Scientific Conference</div>
+            <div class="showcase-date">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span>13–14 August 2026 • Mercure Kuala Lumpur Glenmarie</span>
+            </div>
+            <h3 class="card-title">IPNACS-IPOPS Conference 2026</h3>
+            <p class="card-description">
+              Presenting the development and evaluation of forecasting models for improving medication planning during flood disasters.
+            </p>
+          </div>
+          <div>
+            <a href="showcase/ipnacs-ipops-2026/" class="btn btn-secondary btn-sm">
+              <span>View Conference Page</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        // Initialize Theme
-        themeManager.init();
-        document.getElementById('btn-theme').addEventListener('click', () => {
-            themeManager.toggleNext();
-        });
-    </script>
+  <!-- PUBLICATIONS SECTION -->
+  <section class="section" id="publications">
+    <div class="container">
+      <h2 class="section-title fade-in">Publications & Manuscripts</h2>
+      <p class="section-subtitle fade-in">
+        Peer-reviewed journal papers, systematic reviews, and conference proceeding manuscripts.
+      </p>
+
+      <!-- Active Notice Card -->
+      <div class="publication-notice-card glass-panel fade-in">
+        <div class="notice-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <h3 class="notice-title">Publications will be added as they become available</h3>
+        <p class="notice-text">
+          Publications arising from this project are currently under preparation and peer review. This section will be updated as manuscripts become publicly available.
+        </p>
+      </div>
+
+      <!--
+        ========================================================================
+        FUTURE PUBLICATIONS TEMPLATE (Uncomment & duplicate when publications arrive)
+        ========================================================================
+        <div class="publication-list" style="margin-top: 2rem;">
+          <article class="publication-item glass-panel">
+            <h4 class="pub-title">Forecasting Cardiovascular Medication Utilization During Flood Disasters Using Deep Learning</h4>
+            <div class="pub-meta">Mohd Radzi bin Ab. Aziz, Hanis Hanum Zulkifly, Abdul Haniff Mohamad Yahaya, Fazlin Mohd Fauzi (2026). <em>Journal of Pharmacoinformatics & Disaster Medicine</em>.</div>
+            <div class="pub-actions">
+              <a href="#" class="btn btn-secondary btn-sm">PDF</a>
+              <a href="#" class="btn btn-secondary btn-sm">DOI Link</a>
+              <a href="#" class="btn btn-secondary btn-sm">BibTeX</a>
+            </div>
+          </article>
+        </div>
+      -->
+    </div>
+  </section>
+
+  <!-- INTERACTIVE RESOURCES SECTION -->
+  <section class="section" id="resources">
+    <div class="container">
+      <h2 class="section-title fade-in">Interactive Resources & Tools</h2>
+      <p class="section-subtitle fade-in">
+        Explore interactive research dashboards and educational simulation tools developed as part of this project.
+      </p>
+
+      <div class="resources-grid">
+        <!-- Resource 1: Dashboard -->
+        <article class="resource-card glass-panel fade-in">
+          <div>
+            <div class="badge">Interactive Dashboard</div>
+            <h3 class="card-title">Forecast Evaluation Dashboard</h3>
+            <p class="card-description">
+              Explore an interactive dashboard for comparing forecasting performance across different machine learning models and visualising medication demand patterns during flood events.
+            </p>
+          </div>
+          <div>
+            <a href="dashboard/" class="btn btn-primary btn-sm">
+              <span>Launch Dashboard</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Resource 2: Educational Game -->
+        <article class="resource-card glass-panel fade-in">
+          <div>
+            <div class="badge badge-teal">Simulation Game</div>
+            <h3 class="card-title">Disaster-Resilient Pharmacy Manager</h3>
+            <p class="card-description">
+              Experience a scenario-based simulation that introduces the challenges of medicine inventory planning during flood disasters. Learn how to manage medication supply chains and ensure access to essential medications.
+            </p>
+          </div>
+          <div>
+            <a href="game/" class="btn btn-secondary btn-sm">
+              <span>Play Simulation Game</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPOSITORY SECTION -->
+  <section class="section" id="repository">
+    <div class="container">
+      <div class="repo-card glass-panel fade-in">
+        <div class="repo-content-wrapper">
+          <div>
+            <div class="badge badge-cyan">Open Science Repository</div>
+            <h2 class="card-title" style="font-size: 2rem;">GitHub Project Repository</h2>
+            <p class="card-description" style="margin-bottom: 1.75rem;">
+              Our GitHub repository hosts open scientific materials, conference artifacts, dataset specifications, and model execution pipelines to support transparent, reproducible research.
+            </p>
+
+            <ul class="repo-list">
+              <li class="repo-item">
+                <div class="repo-item-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                </div>
+                <div>
+                  <div class="repo-item-title">Project Documentation & Updates</div>
+                  <div class="repo-item-desc">Comprehensive methodology changelogs, execution plans, and progress logs.</div>
+                </div>
+              </li>
+
+              <li class="repo-item">
+                <div class="repo-item-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                </div>
+                <div>
+                  <div class="repo-item-title">Conference & Exhibition Materials</div>
+                  <div class="repo-item-desc">High-resolution posters, presentation slides, and public engagement flyers.</div>
+                </div>
+              </li>
+
+              <li class="repo-item">
+                <div class="repo-item-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <div>
+                  <div class="repo-item-title">Model Code & Data Schemas</div>
+                  <div class="repo-item-desc">Selected pipeline scripts, evaluation functions, and dataset feature definitions.</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="repo-cta-box">
+            <h3 class="repo-cta-title">Explore on GitHub</h3>
+            <p class="repo-cta-desc">Access source code, track project updates, or star the repository on GitHub.</p>
+            <a href="https://github.com/radziaziz/med-flood" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>Visit Repository</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH TEAM SECTION -->
+  <section class="section" id="team">
+    <div class="container">
+      <h2 class="section-title fade-in">Research Team</h2>
+      <p class="section-subtitle fade-in">
+        A collaborative research project between Universiti Teknologi MARA and the Ministry of Health Malaysia.
+      </p>
+
+      <div class="cards-grid-4">
+        <!-- Team Member 1 -->
+        <article class="team-card glass-panel fade-in">
+          <div>
+            <div class="team-avatar-wrapper">
+              <img src="assets/radzi.png" alt="Radzi Aziz" class="team-avatar">
+            </div>
+            <div class="badge">Research Lead</div>
+            <h3 class="team-name">Ts. Mohd Radzi Ab. Aziz</h3>
+            <div class="team-affiliation">
+              PhD Candidate (Pharmacoinformatics)<br>
+              Faculty of Pharmacy<br>
+              Universiti Teknologi MARA (UiTM)
+            </div>
+          </div>
+          <div class="team-links">
+            <a href="https://github.com/radziaziz" target="_blank" rel="noopener noreferrer" class="team-link">GitHub</a>
+            <span class="team-link-divider">•</span>
+            <a href="https://www.linkedin.com/in/radzi-aziz/" target="_blank" rel="noopener noreferrer" class="team-link">LinkedIn</a>
+            <span class="team-link-divider">•</span>
+            <a href="mailto:radziaziz@gmail.com" class="team-link">Email</a>
+          </div>
+        </article>
+
+        <!-- Team Member 2 -->
+        <article class="team-card glass-panel fade-in">
+          <div>
+            <div class="team-avatar-wrapper">
+              <img src="assets/fazlin.png" alt="Assoc. Prof. Dr. Fazlin Mohd Fauzi" class="team-avatar">
+            </div>
+            <div class="badge badge-teal">Principal Supervisor</div>
+            <h3 class="team-name">Assoc. Prof. Dr. Fazlin Mohd Fauzi</h3>
+            <div class="team-affiliation">
+              Faculty of Pharmacy<br>
+              Universiti Teknologi MARA (UiTM)
+            </div>
+          </div>
+          <div class="team-links">
+            <a href="https://expert.uitm.edu.my/expert/fazlin5465" class="team-link">UiTM Profile</a>
+            <span class="team-link-divider">•</span>
+            <a href="https://scholar.google.com/citations?user=edbaoIkAAAAJ&hl=en" class="team-link">Google Scholar</a>
+          </div>
+        </article>
+
+        <!-- Team Member 3 -->
+        <article class="team-card glass-panel fade-in">
+          <div>
+            <div class="team-avatar-wrapper">
+              <img src="assets/hanis.png" alt="Assoc. Prof. Dr. Hanis Hanum Zulkifly" class="team-avatar">
+            </div>
+            <div class="badge badge-cyan">Co-Supervisor</div>
+            <h3 class="team-name">Assoc. Prof. Dr. Hanis Hanum Zulkifly</h3>
+            <div class="team-affiliation">
+              Faculty of Pharmacy<br>
+              Universiti Teknologi MARA (UiTM)
+            </div>
+          </div>
+          <div class="team-links">
+            <a href="https://expert.uitm.edu.my/expert/hanish2984" class="team-link">UiTM Profile</a>
+            <span class="team-link-divider">•</span>
+            <a href="https://scholar.google.com/citations?user=sHw6V4cAAAAJ&hl=en" class="team-link">Google Scholar</a>
+          </div>
+        </article>
+
+        <!-- Team Member 4 -->
+        <article class="team-card glass-panel fade-in">
+          <div>
+            <div class="team-avatar-wrapper">
+              <img src="assets/haniff.png" alt="Dr. Abdul Haniff Mohamad Yahaya" class="team-avatar">
+            </div>
+            <div class="badge badge-cyan">Co-Supervisor</div>
+            <h3 class="team-name">Dr. Abdul Haniff Mohamad Yahaya</h3>
+            <div class="team-affiliation">
+              Pharmacy Services Programme<br>
+              Ministry of Health Malaysia (KKM)
+            </div>
+          </div>
+          <div class="team-links">
+            <a href="https://www.linkedin.com/in/abdul-haniff-mohd-yahaya-a4b07243/" class="team-link">LinkedIn</a>
+            <span class="team-link-divider">•</span>
+            <a href="https://scholar.google.com/citations?user=e8CyZOEAAAAJ&hl=en" class="team-link">Google Scholar</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Description -->
+        <div>
+          <div class="footer-brand-title">Medication Demand Forecasting</div>
+          <p class="footer-brand-desc">
+            An ongoing PhD research initiative developing disaster-resilient time-series forecasting models for cardiovascular medication utilization in Malaysian public healthcare facilities.
+          </p>
+          <div class="footer-affiliations">
+            <strong>Faculty of Pharmacy</strong>, Universiti Teknologi MARA (UiTM)<br>
+            <strong>Pharmacy Services Programme</strong>, Ministry of Health Malaysia (KKM)
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <div class="footer-nav-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#research">Research Objectives</a></li>
+            <li><a href="#showcase">Latest Showcase</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#resources">Interactive Resources</a></li>
+            <li><a href="#repository">GitHub Repository</a></li>
+            <li><a href="#team">Research Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Pharmacoinformatics Research Project. All rights reserved.
+        </div>
+        <div>
+          Last updated: August 2026
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="assets/script.js"></script>
 </body>
 </html>
