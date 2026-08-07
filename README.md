@@ -22,12 +22,12 @@ Access our interactive web portal, research dashboards, simulation games, and ex
   Faculty of Pharmacy, Universiti Teknologi MARA (UiTM) / Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
 
 ### Supervisory Team
+- **Assoc. Prof. Dr. Fazlin Mohd Fauzi** *(Main Supervisor)*  
+  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
 - **Assoc. Prof. Dr. Hanis Hanum Zulkifly** *(Co-Supervisor)*  
   Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
 - **Dr. Abdul Haniff Mohamad Yahaya** *(Co-Supervisor)*  
   Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM)
-- **Assoc. Prof. Dr. Fazlin Mohd Fauzi** *(Main Supervisor)*  
-  Faculty of Pharmacy, Universiti Teknologi MARA (UiTM)
 
 
 ---
