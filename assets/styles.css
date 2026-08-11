@@ -1260,3 +1260,47 @@ h1, h2, h3, h4, h5, h6 {
     }
 
 }
+
+/* --------------------------------------------------------------------------
+   Accessibility Skip Link & Institutional Logos
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  z-index: 9999;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 2px solid var(--text-on-primary);
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.inst-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.inst-logo:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+

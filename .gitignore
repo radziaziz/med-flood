@@ -5,3 +5,5 @@ poster/draft/
 # Ignore Python cache
 __pycache__/
 *.pyc
+# Ignore folders
+exclude/

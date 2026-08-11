@@ -96,8 +96,10 @@
       if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
         navLinks.forEach((link) => {
           link.classList.remove('active');
+          link.removeAttribute('aria-current');
           if (link.getAttribute('href') === `#${sectionId}`) {
             link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
           }
         });
       }
