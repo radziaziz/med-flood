@@ -30,7 +30,7 @@ showcase/planetary-health-2026/
 │   ├── server.py
 │   └── README.md
 ├── poster/                 # Academic poster presented at the Expo
-│   └── Poster Final.pdf
+│   └── planetary-health-2026-poster.pdf
 ├── assets/                 # Shared logos and UI assets
 ├── global_smape_reverted_clean.png  # Model comparison chart
 └── README.md               # Showcase documentation

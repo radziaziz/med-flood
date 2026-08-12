@@ -56,7 +56,7 @@ Deep learning models, particularly TFT, demonstrated superior and more consisten
 
 ## 📁 Showcase Files
 
-- [**`Poster v1.6.pdf`**](file:///home/radziaziz/Insync/radziaziz@gmail.com/Google%20Drive/amyrad/@Rad/Project/med-flood/showcase/ipnacs-ipops-2026/Poster%20v1.6.pdf) — Academic Conference Poster presented at the conference.
+- [**`ipnacs-ipops-2026-poster.pdf`**](ipnacs-ipops-2026-poster.pdf) — Academic Conference Poster presented at the conference.
 - [**`README.md`**](file:///home/radziaziz/Insync/radziaziz@gmail.com/Google%20Drive/amyrad/@Rad/Project/med-flood/showcase/ipnacs-ipops-2026/README.md) — Documentation and abstract details for the showcase.
 
 ---
