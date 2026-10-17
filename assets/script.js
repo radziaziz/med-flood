@@ -114,7 +114,7 @@
       footer_affil: "<strong>Faculty of Pharmacy</strong>, Universiti Teknologi MARA (UiTM)<br><strong>Pharmacy Services Programme</strong>, Ministry of Health Malaysia (KKM)",
       footer_nav_title: "Navigation",
       footer_copy: "&copy; 2026 Radzi Aziz. Research materials and website content are protected by copyright.<br>Code released under the MIT License.",
-      footer_updated: "Last updated: 17 Oct 2026",
+      footer_updated: "Last updated: October 2026",
 
       // Poster page & subpages
       posters_title: "Research Posters Collection",
@@ -127,7 +127,7 @@
       nav_research: "Penyelidikan",
       nav_showcase: "Pameran",
       nav_resources: "Sumber",
-      nav_about: "Mengenai",
+      nav_about: "Perihal",
 
       hero_badge: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg> Penyelidikan PhD Sedang Berjalan • Farmakoinformatik',
       hero_title: 'Peramalan Permintaan Ubat <br><span class="text-gradient">Semasa Bencana Banjir</span>',
@@ -139,17 +139,17 @@
       hero_hl_3: "Maklumat Banjir & Hidrologi",
 
       res_title: "Penyelidikan",
-      res_subtitle: "Kajian PhD berfokus mengenai peramalan penggunaan ubat semasa bencana banjir.",
+      res_subtitle: "Kajian PhD memfokuskan peramalan penggunaan ubat semasa bencana banjir.",
       res_prob: "<strong>Isu & Masalah:</strong> Bencana banjir boleh mengganggu perkhidmatan kesihatan dan rantaian bekalan ubat, merumitkan perancangan bekalan ubat.",
       res_study: "<strong>Kajian Penyelidikan:</strong> Kajian ini mengkaji pendekatan peramalan penggunaan ubat kardiovaskular semasa bencana banjir di fasiliti penjagaan kesihatan awam Malaysia.",
       res_purpose: "<strong>Tujuan:</strong> Meneroka bagaimana peramalan dapat menyokong perancangan ubat dan kesiapsiagaan bencana yang lebih berkesan.",
 
       ro1_tag: "Bukti",
       ro1_title: "Memahami Pendekatan Sedia Ada",
-      ro1_desc: "Menilai bukti sedia ada mengenai peramalan penggunaan ubat semasa bencana serta kaedah yang digunakan dalam pelbagai persekitaran kesihatan.",
+      ro1_desc: "Menilai bukti sedia ada berkaitan peramalan penggunaan ubat semasa bencana serta kaedah yang digunakan dalam pelbagai persekitaran kesihatan.",
 
       ro2_tag: "Peramalan",
-      ro2_title: "Membangunkan Pendekatan Peramalan",
+      ro2_title: "Membangunkan Model Peramalan",
       ro2_desc: "Mengkaji model pembelajaran mesin dan pembelajaran mendalam bagi meramal penggunaan ubat semasa kejadian bencana banjir.",
 
       ro3_tag: "Pengesahan",
@@ -169,7 +169,7 @@
       sc2_badge: "Persidangan Saintifik",
       sc2_date: "13–14 Ogos 2026 • Mercure Kuala Lumpur Glenmarie",
       sc2_title: "Persidangan IPNACS-IPOPS 2026",
-      sc2_desc: "Pembentangan kajian mengenai model peramalan bagi perancangan ubat semasa bencana banjir.",
+      sc2_desc: "Pembentangan kajian berkaitan model peramalan bagi perancangan ubat semasa bencana banjir.",
 
       sc3_badge: "Pameran Ekspo",
       sc3_date: "27 Jun 2026 • AEON Mall Shah Alam",
@@ -202,7 +202,7 @@
       repo_cta_desc: "Semak bahan awam dan perkembangan projek terkini.",
       repo_cta_btn: "Layari Repositori",
 
-      about_title: "Mengenai Penyelidikan",
+      about_title: "Perihal Penyelidikan",
       about_subtitle: "Projek penyelidikan PhD kolaboratif yang menggabungkan perspektif akademik dan penjagaan kesihatan awam.",
       team_role_lead: "Penyelidik Utama",
       team_affil_lead: "Calon PhD<br>Fakulti Farmasi<br>Universiti Teknologi MARA (UiTM)",
@@ -225,7 +225,7 @@
       footer_affil: "<strong>Fakulti Farmasi</strong>, Universiti Teknologi MARA (UiTM)<br><strong>Program Perkhidmatan Farmasi</strong>, Kementerian Kesihatan Malaysia (KKM)",
       footer_nav_title: "Navigasi",
       footer_copy: "&copy; 2026 Radzi Aziz. Bahan penyelidikan dan kandungan laman web dilindungi hak cipta.<br>Kod dilepaskan di bawah Lesen MIT.",
-      footer_updated: "Terakhir dikemas kini: 17 Okt 2026",
+      footer_updated: "Terakhir dikemas kini: Oktober 2026",
 
       // Poster page & subpages
       posters_title: "Koleksi Poster Penyelidikan",
