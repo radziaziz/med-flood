@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8th IPNaCS & 11th IPoPS 2026 | Showcase</title>
+  <meta name="description" content="Showcase for IPNaCS & IPoPS 2026 - Multi-horizon forecasting of cardiovascular medication utilisation during flood disasters.">
+  <meta name="author" content="Ts. Mohd Radzi bin Ab. Aziz">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='22 12 18 12 15 21 9 3 6 12 2 12'/></svg>">
+
+  <!-- Inline theme initializer to prevent FOUC -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('medforecast_theme') || 'system';
+      let isDark = false;
+      if (savedTheme === 'dark') {
+        isDark = true;
+      } else if (savedTheme === 'system') {
+        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    })();
+  </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <style>
+    .event-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .event-meta-card {
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .event-meta-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .event-meta-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .abstract-section {
+      margin-bottom: 1.25rem;
+    }
+    .abstract-section h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .abstract-section p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+    .media-preview-container {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface-elevated);
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .media-preview-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .media-preview-container:hover img {
+      transform: scale(1.01);
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="aurora-bg" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
+  </div>
+
+  <header class="header-nav" id="top">
+    <div class="container header-container">
+      <a href="../../index.html" class="nav-brand" aria-label="Research Homepage">
+        <div class="nav-brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <span>Medication Forecasting</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-menu">
+          <li><a href="../../index.html#showcase" class="nav-link">← Back to Showcase</a></li>
+          <li><a href="../../posters/" class="nav-link">All Posters</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Dual Language Toggle (EN / MS) -->
+        <div class="lang-switcher" role="radiogroup" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang-set="en"
+                  aria-label="Switch to English" title="English">EN</button>
+          <button type="button" class="lang-btn" data-lang-set="ms"
+                  aria-label="Tukar ke Bahasa Melayu" title="Bahasa Melayu">MS</button>
+        </div>
+
+        <div class="theme-switcher" role="radiogroup" aria-label="Color theme switcher">
+          <button type="button" class="theme-btn" data-theme-set="light" aria-label="Switch to Light Theme" title="Light Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="21"></line>
+            </svg>
+          </button>
+          <button type="button" class="theme-btn" data-theme-set="dark" aria-label="Switch to Dark Theme" title="Dark Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button type="button" class="theme-btn active" data-theme-set="system" aria-label="Switch to System Theme" title="System Preference">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+
+        <!-- Header Tag & Title -->
+        <div class="fade-in" style="max-width: 900px; margin-bottom: 2rem;">
+          <div class="badge badge-cyan">Scientific Conference • 8th IPNaCS &amp; 11th IPoPS 2026</div>
+          <h1 class="hero-title" style="font-size: clamp(2rem, 4vw, 2.75rem); margin: 0.75rem 0;">
+            8th IPNaCS &amp; 11th IPoPS 2026
+          </h1>
+          <p class="section-subtitle" style="margin: 0; font-size: 1.1rem; color: var(--text-secondary);">
+            8th International Conference on Pharmacy and Health Sciences &amp; 11th International Postgraduate Conference on Pharmaceutical Sciences <br>
+            <strong style="color: var(--color-primary);">&ldquo;Connected Innovation: Digital Transformation in Wellness, Longevity and Therapy&rdquo;</strong>
+          </p>
+        </div>
+
+        <!-- Event Metadata Grid -->
+        <div class="event-meta-grid fade-in">
+          <div class="event-meta-card glass-panel">
+            <span class="event-meta-label">Dates</span>
+            <span class="event-meta-value">13–14 August 2026</span>
+          </div>
+          <div class="event-meta-card glass-panel">
+            <span class="event-meta-label">Venue</span>
+            <span class="event-meta-value">Mercure KL Glenmarie</span>
+          </div>
+          <div class="event-meta-card glass-panel">
+            <span class="event-meta-label">Presentation Format</span>
+            <span class="event-meta-value">Academic Poster Presentation</span>
+          </div>
+          <div class="event-meta-card glass-panel">
+            <span class="event-meta-label">Official Portal</span>
+            <span class="event-meta-value"><a href="https://ipnacs-ipops.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">ipnacs-ipops.com ↗</a></span>
+          </div>
+        </div>
+
+        <!-- Two Column Main Grid -->
+        <div class="cards-grid-2" style="align-items: start; margin-top: 2rem;">
+
+          <!-- Left Column: Presentation & Abstract -->
+          <article class="showcase-card glass-panel fade-in" style="height: auto;">
+            <div class="showcase-content">
+              <div class="badge">Research Presentation Details</div>
+              
+              <h2 class="card-title" style="font-size: 1.45rem; line-height: 1.35; margin: 0.75rem 0 1.25rem;">
+                Multi-Horizon Forecasting of Cardiovascular Medication Utilisation During Flood Disasters: A Comparison of XGBoost, LSTM and Temporal Fusion Transformer
+              </h2>
+
+              <!-- Authors & Supervisory -->
+              <div style="margin-bottom: 1.75rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);">
+                <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                  Ts. Mohd Radzi bin Ab. Aziz<sup>1,2</sup>, Assoc. Prof. Dr. Hanis Hanum Zulkifly<sup>1</sup>, Dr. Abdul Haniff Mohamad Yahaya<sup>2</sup>, Assoc. Prof. Dr. Fazlin Mohd Fauzi<sup>1</sup>
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;">
+                  <sup>1</sup> Faculty of Pharmacy, Universiti Teknologi MARA (UiTM), 42300 Puncak Alam, Selangor, Malaysia<br>
+                  <sup>2</sup> Pharmacy Services Programme (PPF), Ministry of Health Malaysia (KKM), 46350 Petaling Jaya, Selangor, Malaysia
+                </p>
+              </div>
+
+              <!-- Structured Abstract -->
+              <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Research Abstract</h3>
+
+              <div class="abstract-section">
+                <h4>Background</h4>
+                <p>
+                  Flood disasters disrupt healthcare delivery and pharmaceutical supply chains, threatening continuity of care for chronic conditions such as hypertension and hypercholesterolaemia. Accurate forecasting of medication utilisation across different forecast horizons is therefore important to support disaster preparedness and medication resource planning in public healthcare facilities.
+                </p>
+              </div>
+
+              <div class="abstract-section">
+                <h4>Objectives</h4>
+                <p>
+                  This study aimed to compare the forecasting performance of XGBoost, Long Short-Term Memory (LSTM), and Temporal Fusion Transformer (TFT) models for predicting cardiovascular medication utilisation across 7-, 14-, 21-, and 28-day horizons during flood disasters.
+                </p>
+              </div>
+
+              <div class="abstract-section">
+                <h4>Methods</h4>
+                <p>
+                  Daily dispensing data for amlodipine, perindopril, and simvastatin from 24 public healthcare facilities in flood-prone districts of Malaysia (2017–2022) were integrated with hydrological, meteorological, and flood-related variables. The three forecasting models were developed and evaluated using an out-of-sample 2023 test set. Performance accuracy was assessed using Symmetric Mean Absolute Percentage Error (sMAPE) and Mean Absolute Scaled Error (MASE) across overall, flood, and non-flood periods.
+                </p>
+              </div>
+
+              <div class="abstract-section">
+                <h4>Results</h4>
+                <p>
+                  All models outperformed the naïve forecasting baseline (MASE &lt; 1), indicating that cardiovascular medication utilisation could be reliably forecast across all horizons. Among the three models, LSTM and TFT consistently achieved lower forecasting errors than XGBoost, with predictive accuracy improving as the forecast horizon increased. TFT achieved the best overall performance across the 14- to 28-day horizons, with the lowest error at the 28-day horizon (<strong>sMAPE 2.09%</strong>; <strong>MASE 0.1265</strong>). Similar performance rankings were observed during flood periods, with TFT maintaining the highest forecasting accuracy under disaster conditions.
+                </p>
+              </div>
+
+              <div class="abstract-section">
+                <h4>Conclusion</h4>
+                <p>
+                  Deep learning models, particularly TFT, demonstrated superior and more consistent forecasting performance than XGBoost across multiple horizons. These findings support the application of TFT for medium- to long-term medication planning in Malaysian public healthcare facilities.
+                </p>
+              </div>
+
+              <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">Keywords</span>
+                <div class="card-footer-specs">
+                  <span class="spec-pill">Temporal Fusion Transformer</span>
+                  <span class="spec-pill">Long Short-Term Memory</span>
+                  <span class="spec-pill">XGBoost</span>
+                  <span class="spec-pill">Medication demand forecasting</span>
+                  <span class="spec-pill">Flood disaster preparedness</span>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Right Column: Poster Card -->
+          <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+
+            <!-- Conference Poster Card -->
+            <article class="showcase-card glass-panel fade-in">
+              <div class="showcase-content">
+                <div class="badge badge-cyan">Conference Poster</div>
+                <h3 class="card-title" style="margin: 0.5rem 0 1rem;">Official Conference Poster</h3>
+                <p class="card-description" style="margin-bottom: 1.25rem;">
+                  Academic poster presented at Mercure Kuala Lumpur Glenmarie for the 8th IPNaCS &amp; 11th IPoPS 2026 conference.
+                </p>
+
+                <div class="media-preview-container">
+                  <a href="ipnacs-ipops-2026-poster.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="ipnacs-ipops-2026-poster-preview.png" alt="IPNaCS & IPoPS 2026 Conference Poster Preview" loading="lazy">
+                  </a>
+                </div>
+              </div>
+              <div>
+                <a href="ipnacs-ipops-2026-poster.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  <span>Open Poster (PDF) ↗</span>
+                </a>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Radzi Aziz. Faculty of Pharmacy, UiTM &amp; Pharmacy Services Programme, KKM.
+        </div>
+        <div>
+          <a href="../../index.html#showcase">Return to Main Showcase</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/script.js"></script>
+</body>
+</html>

@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="PhD research exploring AI and time-series forecasting for disaster-resilient pharmaceutical logistics in Malaysian public healthcare facilities.">
   <meta name="twitter:image" content="assets/global_smape_reverted_clean.png">
 
-  <!-- Inline theme initializer to prevent Flash of Unstyled Theme (FOUC) -->
+  <!-- Inline theme and language initializer to prevent Flash of Unstyled Theme/Text -->
   <script>
     (function() {
       const savedTheme = localStorage.getItem('medforecast_theme') || 'system';
@@ -35,6 +35,9 @@
         isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       }
       document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+      const savedLang = localStorage.getItem('medforecast_lang') || 'en';
+      document.documentElement.setAttribute('lang', savedLang);
     })();
   </script>
 
@@ -72,15 +75,23 @@
 
       <nav aria-label="Primary Navigation">
         <ul class="nav-menu" id="nav-menu">
-          <li><a href="#home" class="nav-link active">Home</a></li>
-          <li><a href="#research" class="nav-link">Research</a></li>
-          <li><a href="#showcase" class="nav-link">Showcase</a></li>
-          <li><a href="#resources" class="nav-link">Resources</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#home" class="nav-link active" data-i18n="nav_home">Home</a></li>
+          <li><a href="#research" class="nav-link" data-i18n="nav_research">Research</a></li>
+          <li><a href="#showcase" class="nav-link" data-i18n="nav_showcase">Showcase</a></li>
+          <li><a href="#resources" class="nav-link" data-i18n="nav_resources">Resources</a></li>
+          <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
         </ul>
       </nav>
 
       <div class="nav-controls">
+        <!-- Dual Language Toggle (EN / MS) -->
+        <div class="lang-switcher" role="radiogroup" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang-set="en"
+                  aria-label="Switch to English" title="English">EN</button>
+          <button type="button" class="lang-btn" data-lang-set="ms"
+                  aria-label="Tukar ke Bahasa Melayu" title="Bahasa Melayu">MS</button>
+        </div>
+
         <div class="theme-switcher" role="radiogroup" aria-label="Color theme switcher">
           <button type="button" class="theme-btn" data-theme-set="light"
                   aria-label="Switch to Light Theme" title="Light Theme">
@@ -130,7 +141,7 @@
     <section class="hero-section" id="home">
       <div class="container">
         <div class="hero-content fade-in">
-          <div class="badge">
+          <div class="badge" data-i18n="hero_badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
@@ -139,12 +150,12 @@
             Ongoing PhD Research • Pharmacoinformatics
           </div>
 
-          <h1 class="hero-title">
+          <h1 class="hero-title" data-i18n="hero_title">
             Forecasting Medication Demand <br>
             <span class="text-gradient">During Flood Disasters</span>
           </h1>
 
-          <p class="hero-subtitle">
+          <p class="hero-subtitle" data-i18n="hero_subtitle">
             An ongoing PhD research project investigating forecasting approaches
             to support medication planning and disaster preparedness in Malaysian
             public healthcare facilities.
@@ -152,7 +163,7 @@
 
           <div class="hero-actions">
             <a href="#research" class="btn btn-primary">
-              <span>Explore Research</span>
+              <span data-i18n="hero_btn_explore">Explore Research</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -173,7 +184,7 @@
                          5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57
                          A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path>
               </svg>
-              <span>Public Repository</span>
+              <span data-i18n="hero_btn_repo">Public Repository</span>
             </a>
           </div>
 
@@ -185,7 +196,7 @@
                   <path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path>
                 </svg>
               </span>
-              <span>Malaysian Public Healthcare</span>
+              <span data-i18n="hero_hl_1">Malaysian Public Healthcare</span>
             </div>
 
             <div class="highlight-item">
@@ -200,7 +211,7 @@
                   <line x1="15" y1="20" x2="15" y2="23"></line>
                 </svg>
               </span>
-              <span>Time-Series Forecasting</span>
+              <span data-i18n="hero_hl_2">Time-Series Forecasting</span>
             </div>
 
             <div class="highlight-item">
@@ -210,7 +221,7 @@
                   <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
                 </svg>
               </span>
-              <span>Flood &amp; Hydrological Information</span>
+              <span data-i18n="hero_hl_3">Flood &amp; Hydrological Information</span>
             </div>
           </div>
         </div>
@@ -220,22 +231,22 @@
     <!-- RESEARCH -->
     <section class="section" id="research">
       <div class="container">
-        <h2 class="section-title fade-in">Research</h2>
-        <p class="section-subtitle fade-in">
+        <h2 class="section-title fade-in" data-i18n="res_title">Research</h2>
+        <p class="section-subtitle fade-in" data-i18n="res_subtitle">
           A focused PhD study on forecasting medication utilisation during flood disasters.
         </p>
 
         <div class="research-overview glass-panel fade-in">
-          <p>
+          <p data-i18n="res_prob">
             <strong>The problem:</strong> Flood disasters can disrupt healthcare services
             and medicine supply, making medication planning more difficult.
           </p>
-          <p>
+          <p data-i18n="res_study">
             <strong>The research:</strong> This study investigates forecasting approaches
             for cardiovascular medication utilisation during flood disasters in Malaysian
             public healthcare facilities.
           </p>
-          <p>
+          <p data-i18n="res_purpose">
             <strong>The purpose:</strong> To explore how forecasting can support better
             medication planning and disaster preparedness.
           </p>
@@ -250,9 +261,9 @@
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
               </svg>
             </div>
-            <div class="card-header-tag">Evidence</div>
-            <h3 class="card-title">Understanding Existing Approaches</h3>
-            <p class="card-description">
+            <div class="card-header-tag" data-i18n="ro1_tag">Evidence</div>
+            <h3 class="card-title" data-i18n="ro1_title">Understanding Existing Approaches</h3>
+            <p class="card-description" data-i18n="ro1_desc">
               Reviewing existing evidence on forecasting medication utilisation during
               disasters and the approaches used across healthcare settings.
             </p>
@@ -266,9 +277,9 @@
                 <polyline points="17 6 23 6 23 12"></polyline>
               </svg>
             </div>
-            <div class="card-header-tag">Forecasting</div>
-            <h3 class="card-title">Developing Forecasting Approaches</h3>
-            <p class="card-description">
+            <div class="card-header-tag" data-i18n="ro2_tag">Forecasting</div>
+            <h3 class="card-title" data-i18n="ro2_title">Developing Forecasting Approaches</h3>
+            <p class="card-description" data-i18n="ro2_desc">
               Investigating machine learning and deep learning approaches for forecasting
               medication utilisation during flood events.
             </p>
@@ -281,9 +292,9 @@
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
               </svg>
             </div>
-            <div class="card-header-tag">Validation</div>
-            <h3 class="card-title">Assessing Generalisability</h3>
-            <p class="card-description">
+            <div class="card-header-tag" data-i18n="ro3_tag">Validation</div>
+            <h3 class="card-title" data-i18n="ro3_title">Assessing Generalisability</h3>
+            <p class="card-description" data-i18n="ro3_desc">
               Assessing how forecasting approaches perform when applied beyond the
               original development setting.
             </p>
@@ -291,7 +302,7 @@
         </div>
 
         <div class="research-overview glass-panel fade-in" style="margin-top: 2rem;">
-          <p>
+          <p data-i18n="res_status">
             <strong>Research status:</strong> Ongoing. Results and research materials will
             be released progressively as they become suitable for public dissemination.
           </p>
@@ -302,16 +313,16 @@
     <!-- SHOWCASE -->
     <section class="section" id="showcase">
       <div class="container">
-        <h2 class="section-title fade-in">Showcase</h2>
-        <p class="section-subtitle fade-in">
+        <h2 class="section-title fade-in" data-i18n="showcase_title">Showcase</h2>
+        <p class="section-subtitle fade-in" data-i18n="showcase_subtitle">
           Selected conferences, exhibitions and public engagement activities.
         </p>
 
-        <div class="cards-grid-2">
+        <div class="cards-grid-3">
 
           <article class="showcase-card glass-panel fx-aurora fade-in">
             <div class="showcase-content">
-              <div class="badge badge-cyan">Scientific Conference</div>
+              <div class="badge badge-cyan" data-i18n="sc1_badge">National Conference</div>
               <div class="showcase-date">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -320,17 +331,16 @@
                   <line x1="8" y1="2" x2="8" y2="6"></line>
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
-                <span>13–14 August 2026 • Mercure Kuala Lumpur Glenmarie</span>
+                <span data-i18n="sc1_date">22 October 2026 • Hotel Crystal Crown, Kuala Lumpur</span>
               </div>
-              <h3 class="card-title">IPNACS-IPOPS Conference 2026</h3>
-              <p class="card-description">
-                Presentation of research on forecasting models for medication planning
-                during flood disasters.
+              <h3 class="card-title" data-i18n="sc1_title">Persidangan Pengurusan Bencana Kesihatan 2026</h3>
+              <p class="card-description" data-i18n="sc1_desc">
+                MOH Malaysia national disaster management conference presenting multi-horizon forecasting of cardiovascular medication utilisation during floods.
               </p>
             </div>
             <div>
-              <a href="showcase/ipnacs-ipops-2026/" class="btn btn-secondary btn-sm">
-                <span>Explore Event</span>
+              <a href="showcase/pengurusan-bencana-kesihatan-2026/" class="btn btn-secondary btn-sm">
+                <span data-i18n="sc_btn">Explore Event</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -342,7 +352,7 @@
 
           <article class="showcase-card glass-panel fade-in">
             <div class="showcase-content">
-              <div class="badge badge-teal">Exhibition Showcase</div>
+              <div class="badge badge-cyan" data-i18n="sc2_badge">Scientific Conference</div>
               <div class="showcase-date">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -351,17 +361,48 @@
                   <line x1="8" y1="2" x2="8" y2="6"></line>
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
-                <span>27 June 2026 • AEON Mall Shah Alam</span>
+                <span data-i18n="sc2_date">13–14 August 2026 • Mercure Kuala Lumpur Glenmarie</span>
               </div>
-              <h3 class="card-title">Planetary Health Awareness Expo 2026</h3>
-              <p class="card-description">
+              <h3 class="card-title" data-i18n="sc2_title">IPNACS-IPOPS Conference 2026</h3>
+              <p class="card-description" data-i18n="sc2_desc">
+                Presentation of research on forecasting models for medication planning
+                during flood disasters.
+              </p>
+            </div>
+            <div>
+              <a href="showcase/ipnacs-ipops-2026/" class="btn btn-secondary btn-sm">
+                <span data-i18n="sc_btn">Explore Event</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="showcase-card glass-panel fade-in">
+            <div class="showcase-content">
+              <div class="badge badge-teal" data-i18n="sc3_badge">Exhibition Showcase</div>
+              <div class="showcase-date">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span data-i18n="sc3_date">27 June 2026 • AEON Mall Shah Alam</span>
+              </div>
+              <h3 class="card-title" data-i18n="sc3_title">Planetary Health Awareness Expo 2026</h3>
+              <p class="card-description" data-i18n="sc3_desc">
                 Public engagement showcase featuring research communication materials
                 and interactive tools related to medication preparedness during floods.
               </p>
             </div>
             <div>
               <a href="showcase/planetary-health-2026/" class="btn btn-secondary btn-sm">
-                <span>Explore Event</span>
+                <span data-i18n="sc_btn">Explore Event</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -378,8 +419,8 @@
     <!-- RESOURCES -->
     <section class="section" id="resources">
       <div class="container">
-        <h2 class="section-title fade-in">Resources</h2>
-        <p class="section-subtitle fade-in">
+        <h2 class="section-title fade-in" data-i18n="resrc_title">Resources</h2>
+        <p class="section-subtitle fade-in" data-i18n="resrc_subtitle">
           Selected materials and interactive resources released for academic and public engagement.
         </p>
 
@@ -387,16 +428,16 @@
 
           <article class="resource-card glass-panel fade-in">
             <div>
-              <div class="badge">Interactive Tool</div>
-              <h3 class="card-title">Forecast Evaluation Dashboard</h3>
-              <p class="card-description">
+              <div class="badge" data-i18n="resrc1_badge">Interactive Tool</div>
+              <h3 class="card-title" data-i18n="resrc1_title">Forecast Evaluation Dashboard</h3>
+              <p class="card-description" data-i18n="resrc1_desc">
                 An interactive demonstration for exploring forecasting performance
                 and medication demand patterns.
               </p>
             </div>
             <div>
               <a href="dashboard/interactive_forecast_dashboard.html" class="btn btn-primary btn-sm">
-                <span>Launch Dashboard</span>
+                <span data-i18n="resrc1_btn">Launch Dashboard</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -408,16 +449,16 @@
 
           <article class="resource-card glass-panel fade-in">
             <div>
-              <div class="badge badge-teal">Educational Simulation</div>
-              <h3 class="card-title">Disaster-Resilient Pharmacy Manager</h3>
-              <p class="card-description">
+              <div class="badge badge-teal" data-i18n="resrc2_badge">Educational Simulation</div>
+              <h3 class="card-title" data-i18n="resrc2_title">Disaster-Resilient Pharmacy Manager</h3>
+              <p class="card-description" data-i18n="resrc2_desc">
                 A scenario-based simulation introducing the challenges of medication
                 inventory planning during flood disasters.
               </p>
             </div>
             <div>
               <a href="game/" class="btn btn-secondary btn-sm">
-                <span>Play Simulation</span>
+                <span data-i18n="resrc2_btn">Play Simulation</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -429,15 +470,15 @@
 
           <article class="resource-card glass-panel fade-in">
             <div>
-              <div class="badge badge-cyan">Academic Posters</div>
-              <h3 class="card-title">Research Posters Collection</h3>
-              <p class="card-description">
+              <div class="badge badge-cyan" data-i18n="resrc3_badge">Academic Posters</div>
+              <h3 class="card-title" data-i18n="resrc3_title">Research Posters Collection</h3>
+              <p class="card-description" data-i18n="resrc3_desc">
                 Browse and view research posters presented at scientific conferences and public exhibition showcases.
               </p>
             </div>
             <div>
               <a href="posters/" class="btn btn-secondary btn-sm">
-                <span>View Posters</span>
+                <span data-i18n="resrc3_btn">View Posters</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -452,9 +493,9 @@
         <div class="repo-card glass-panel fade-in" style="margin-top: 2rem;">
           <div class="repo-content-wrapper">
             <div>
-              <div class="badge badge-cyan">Open Science Repository</div>
-              <h2 class="card-title" style="font-size: 2rem;">Public GitHub Repository</h2>
-              <p class="card-description" style="margin-bottom: 0;">
+              <div class="badge badge-cyan" data-i18n="repo_badge">Open Science Repository</div>
+              <h2 class="card-title" style="font-size: 2rem;" data-i18n="repo_title">Public GitHub Repository</h2>
+              <p class="card-description" style="margin-bottom: 0;" data-i18n="repo_desc">
                 Selected public research materials and project artefacts are maintained
                 in the project repository. Unpublished research, private development
                 materials and research data are not included.
@@ -462,8 +503,8 @@
             </div>
 
             <div class="repo-cta-box">
-              <h3 class="repo-cta-title">Explore on GitHub</h3>
-              <p class="repo-cta-desc">Browse public materials and project updates.</p>
+              <h3 class="repo-cta-title" data-i18n="repo_cta_title">Explore on GitHub</h3>
+              <p class="repo-cta-desc" data-i18n="repo_cta_desc">Browse public materials and project updates.</p>
               <a href="https://github.com/radziaziz/med-flood"
                  target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -477,7 +518,7 @@
                            5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57
                            A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path>
                 </svg>
-                <span>Visit Repository</span>
+                <span data-i18n="repo_cta_btn">Visit Repository</span>
               </a>
             </div>
           </div>
@@ -488,8 +529,8 @@
     <!-- ABOUT / CONNECT -->
     <section class="section" id="about">
       <div class="container">
-        <h2 class="section-title fade-in">About the Research</h2>
-        <p class="section-subtitle fade-in">
+        <h2 class="section-title fade-in" data-i18n="about_title">About the Research</h2>
+        <p class="section-subtitle fade-in" data-i18n="about_subtitle">
           A collaborative PhD research project involving academic and public healthcare perspectives.
         </p>
 
@@ -500,9 +541,9 @@
               <div class="team-avatar-wrapper">
                 <img src="assets/radzi.png" alt="Ts. Mohd Radzi Ab. Aziz" class="team-avatar" width="96" height="96" loading="lazy">
               </div>
-              <div class="badge">Research Lead</div>
+              <div class="badge" data-i18n="team_role_lead">Research Lead</div>
               <h3 class="team-name">Ts. Mohd Radzi Ab. Aziz</h3>
-              <div class="team-affiliation">
+              <div class="team-affiliation" data-i18n="team_affil_lead">
                 PhD Candidate<br>
                 Faculty of Pharmacy<br>
                 Universiti Teknologi MARA (UiTM)
@@ -522,9 +563,9 @@
               <div class="team-avatar-wrapper">
                 <img src="assets/fazlin.png" alt="Assoc. Prof. Dr. Fazlin Mohd Fauzi" class="team-avatar" width="96" height="96" loading="lazy">
               </div>
-              <div class="badge badge-teal">Principal Supervisor</div>
+              <div class="badge badge-teal" data-i18n="team_role_sup1">Principal Supervisor</div>
               <h3 class="team-name">Assoc. Prof. Dr. Fazlin Mohd Fauzi</h3>
-              <div class="team-affiliation">
+              <div class="team-affiliation" data-i18n="team_affil_sup1">
                 Faculty of Pharmacy<br>
                 Universiti Teknologi MARA (UiTM)
               </div>
@@ -541,9 +582,9 @@
               <div class="team-avatar-wrapper">
                 <img src="assets/hanis.png" alt="Assoc. Prof. Dr. Hanis Hanum Zulkifly" class="team-avatar" width="96" height="96" loading="lazy">
               </div>
-              <div class="badge badge-cyan">Co-Supervisor</div>
+              <div class="badge badge-cyan" data-i18n="team_role_sup2">Co-Supervisor</div>
               <h3 class="team-name">Assoc. Prof. Dr. Hanis Hanum Zulkifly</h3>
-              <div class="team-affiliation">
+              <div class="team-affiliation" data-i18n="team_affil_sup2">
                 Faculty of Pharmacy<br>
                 Universiti Teknologi MARA (UiTM)
               </div>
@@ -560,9 +601,9 @@
               <div class="team-avatar-wrapper">
                 <img src="assets/haniff.png" alt="Dr. Abdul Haniff Mohamad Yahaya" class="team-avatar" width="96" height="96" loading="lazy">
               </div>
-              <div class="badge badge-cyan">Co-Supervisor</div>
+              <div class="badge badge-cyan" data-i18n="team_role_sup3">Co-Supervisor</div>
               <h3 class="team-name">Dr. Abdul Haniff Mohamad Yahaya</h3>
-              <div class="team-affiliation">
+              <div class="team-affiliation" data-i18n="team_affil_sup3">
                 Pharmacy Services Programme<br>
                 Ministry of Health Malaysia (KKM)
               </div>
@@ -579,18 +620,18 @@
         <div class="repo-card glass-panel fade-in" style="margin-top: 2rem;">
           <div class="repo-content-wrapper">
             <div>
-              <div class="badge badge-cyan">Get in Touch</div>
-              <h2 class="card-title" style="font-size: 2rem;">Interested in the Research?</h2>
-              <p class="card-description">
+              <div class="badge badge-cyan" data-i18n="contact_badge">Get in Touch</div>
+              <h2 class="card-title" style="font-size: 2rem;" data-i18n="contact_title">Interested in the Research?</h2>
+              <p class="card-description" data-i18n="contact_desc">
                 For research enquiries, academic discussion or potential collaboration,
                 please get in touch.
               </p>
             </div>
             <div class="repo-cta-box">
-              <h3 class="repo-cta-title">Contact Me</h3>
-              <p class="repo-cta-desc">For research enquiries and academic discussion.</p>
+              <h3 class="repo-cta-title" data-i18n="contact_box_title">Contact Me</h3>
+              <p class="repo-cta-desc" data-i18n="contact_box_desc">For research enquiries and academic discussion.</p>
               <a href="mailto:radziaziz@gmail.com" class="btn btn-primary">
-                <span>Email Me</span>
+                <span data-i18n="contact_box_btn">Email Me</span>
               </a>
             </div>
           </div>
@@ -604,8 +645,8 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand-title">Medication Demand Forecasting</div>
-          <p class="footer-brand-desc">
+          <div class="footer-brand-title" data-i18n="footer_brand_title">Medication Demand Forecasting</div>
+          <p class="footer-brand-desc" data-i18n="footer_brand_desc">
             An ongoing PhD research project investigating forecasting approaches
             for cardiovascular medication utilisation during flood disasters in
             Malaysian public healthcare facilities.
@@ -615,30 +656,32 @@
               <img src="assets/uitm-logo.png" alt="Universiti Teknologi MARA (UiTM)" class="inst-logo" width="100" height="auto" loading="lazy">
               <img src="assets/kkm-logo.png" alt="Ministry of Health Malaysia (KKM)" class="inst-logo" width="100" height="auto" loading="lazy">
             </div>
-            <strong>Faculty of Pharmacy</strong>, Universiti Teknologi MARA (UiTM)<br>
-            <strong>Pharmacy Services Programme</strong>, Ministry of Health Malaysia (KKM)
+            <span data-i18n="footer_affil">
+              <strong>Faculty of Pharmacy</strong>, Universiti Teknologi MARA (UiTM)<br>
+              <strong>Pharmacy Services Programme</strong>, Ministry of Health Malaysia (KKM)
+            </span>
           </div>
         </div>
 
         <div>
-          <div class="footer-nav-title">Navigation</div>
+          <div class="footer-nav-title" data-i18n="footer_nav_title">Navigation</div>
           <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#research">Research</a></li>
-            <li><a href="#showcase">Showcase</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#home" data-i18n="nav_home">Home</a></li>
+            <li><a href="#research" data-i18n="nav_research">Research</a></li>
+            <li><a href="#showcase" data-i18n="nav_showcase">Showcase</a></li>
+            <li><a href="#resources" data-i18n="nav_resources">Resources</a></li>
+            <li><a href="#about" data-i18n="nav_about">About</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
+        <div data-i18n="footer_copy">
           &copy; 2026 Radzi Aziz. Research materials and website content are protected by copyright.<br>
           Code released under the MIT License.
         </div>
-        <div>
-          Last updated: August 2026
+        <div data-i18n="footer_updated">
+          Last updated: 17 Oct 2026
         </div>
       </div>
     </div>

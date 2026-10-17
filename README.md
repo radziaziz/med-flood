@@ -57,8 +57,9 @@ This research evaluates and compares multiple state-of-the-art forecasting appro
 ```
 .
 ├── showcase/               # Conference, exhibition, and public engagement materials
-│   ├── planetary-health-2026/  # Planetary Health Awareness Expo 2026 showcase
-│   └── ipnacs-ipops-2026/      # IPNACS / IPOPS 2026 conference materials
+│   ├── pengurusan-bencana-kesihatan-2026/ # Persidangan Pengurusan Bencana Kesihatan 2026
+│   ├── ipnacs-ipops-2026/      # IPNACS / IPOPS 2026 conference materials
+│   └── planetary-health-2026/  # Planetary Health Awareness Expo 2026 showcase
 ├── publications/           # Manuscripts, abstracts, and supplementary research files
 ├── poster/                 # Academic conference posters & flyers
 ├── dashboard/              # Interactive model evaluation & metrics dashboards

@@ -21,6 +21,9 @@
         isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       }
       document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+      const savedLang = localStorage.getItem('medforecast_lang') || 'en';
+      document.documentElement.setAttribute('lang', savedLang);
     })();
   </script>
 
@@ -57,11 +60,19 @@
 
       <nav aria-label="Primary Navigation">
         <ul class="nav-menu">
-          <li><a href="../index.html" class="nav-link">← Back to Overview</a></li>
+          <li><a href="../index.html" class="nav-link" data-i18n="posters_back">← Back to Overview</a></li>
         </ul>
       </nav>
 
       <div class="nav-controls">
+        <!-- Dual Language Toggle (EN / MS) -->
+        <div class="lang-switcher" role="radiogroup" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang-set="en"
+                  aria-label="Switch to English" title="English">EN</button>
+          <button type="button" class="lang-btn" data-lang-set="ms"
+                  aria-label="Tukar ke Bahasa Melayu" title="Bahasa Melayu">MS</button>
+        </div>
+
         <div class="theme-switcher" role="radiogroup" aria-label="Color theme switcher">
           <button type="button" class="theme-btn" data-theme-set="light" aria-label="Switch to Light Theme" title="Light Theme">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -92,14 +103,39 @@
   <main id="main-content">
     <section class="section">
       <div class="container">
-        <h1 class="section-title fade-in">Research Posters Collection</h1>
-        <p class="section-subtitle fade-in">
+        <h1 class="section-title fade-in" data-i18n="posters_title">Research Posters Collection</h1>
+        <p class="section-subtitle fade-in" data-i18n="posters_subtitle">
           Official academic and scientific posters presented at international conferences and public exhibition showcases.
         </p>
 
-        <div class="cards-grid-2">
+        <div class="cards-grid-3">
 
-          <!-- Poster 1: IPNaCS & IPoPS 2026 -->
+          <!-- Poster 1: Persidangan Pengurusan Bencana Kesihatan 2026 -->
+          <article class="showcase-card glass-panel fx-aurora fade-in">
+            <div class="showcase-content">
+              <div class="badge badge-cyan">National Conference E-Poster</div>
+              <div class="showcase-date">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>PBK 2026 • 22 October 2026</span>
+              </div>
+              <h2 class="card-title">Persidangan Pengurusan Bencana Kesihatan 2026 E-Poster</h2>
+              <p class="card-description">
+                Official MOH Malaysia disaster management e-poster evaluating multi-horizon forecasting models (XGBoost, LSTM, and TFT) for cardiovascular medication demand during flood disruptions.
+              </p>
+            </div>
+            <div>
+              <a href="pengurusan-bencana-kesihatan-2026-poster.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                <span>Open Poster (PDF) ↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Poster 2: IPNaCS & IPoPS 2026 -->
           <article class="showcase-card glass-panel fade-in">
             <div class="showcase-content">
               <div class="badge badge-cyan">Scientific Conference Poster</div>
@@ -124,7 +160,7 @@
             </div>
           </article>
 
-          <!-- Poster 2: Planetary Health Expo 2026 -->
+          <!-- Poster 3: Planetary Health Expo 2026 -->
           <article class="showcase-card glass-panel fade-in">
             <div class="showcase-content">
               <div class="badge badge-teal">Exhibition Showcase Poster</div>
